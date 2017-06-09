@@ -14,8 +14,11 @@ endif()
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-
-# Game engine dependency
+# GameEngine dependency static library
 add_subdirectory(game-engine)
 
+# cmake modules for ARFighter
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+
+# ARFighter dynamic library
 add_subdirectory(ar-fighter)

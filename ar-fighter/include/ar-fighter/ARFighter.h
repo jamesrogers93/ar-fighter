@@ -1,6 +1,9 @@
 #ifndef _ARFIGHTER_H
 #define _ARFIGHTER_H
 
+// Game Engine
+#include <game-engine/Core/Engine/Engine.h>
+
 class ARFighter
 {
 public:
