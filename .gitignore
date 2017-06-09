@@ -1,3 +1,22 @@
+
+## CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+/build
+/build.*
+
+## macOS
+.DS_Store
+
+## C++
+
 # Prerequisites
 *.d
 
@@ -30,3 +49,11 @@
 *.exe
 *.out
 *.app
+
+# Directories
+ARM/
+ARM64/
+x64/
+x86/
+Debug/
+Release/
