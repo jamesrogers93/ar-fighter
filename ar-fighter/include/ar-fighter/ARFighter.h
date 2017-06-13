@@ -4,6 +4,8 @@
 // Game Engine
 #include <game-engine/Core/Engine/Engine.h>
 
+class SceneManager;
+
 class ARFighter
 {
 public:
@@ -25,6 +27,7 @@ private:
     ARFighter(){}
     ~ARFighter();
 
+    SceneManager *sceneManager;
 };
 
 #endif /* _ARFIGHTER_H */
