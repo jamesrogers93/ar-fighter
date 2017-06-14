@@ -14,6 +14,10 @@
 		1A38B9AE1EEFCC93009CDF0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */; };
 		1A38B9B91EEFCC93009CDF0D /* ARFighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9B81EEFCC93009CDF0D /* ARFighterTests.swift */; };
 		1A38B9C41EEFCC93009CDF0D /* ARFighterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */; };
+		1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */; };
+		1A38BA181EF00146009CDF0D /* ARFighterWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A38BA171EF00146009CDF0D /* ARFighterWrapper.mm */; };
+		1A38BA2E1EF054CB009CDF0D /* libGameEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA291EF05433009CDF0D /* libGameEngine.a */; };
+		1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA2B1EF05433009CDF0D /* libARFighter.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,34 @@
 			containerPortal = 1A38B9981EEFCC93009CDF0D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A38B99F1EEFCC93009CDF0D;
+			remoteInfo = ARFighter;
+		};
+		1A38BA281EF05433009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9539879DA2F945FC89063565;
+			remoteInfo = GameEngine;
+		};
+		1A38BA2A1EF05433009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E6A769A6A024398A96F4C39;
+			remoteInfo = ARFighter;
+		};
+		1A38BA2C1EF054C3009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EBC3F99545F49E7841E4B8B;
+			remoteInfo = GameEngine;
+		};
+		1A38BA2F1EF054D9009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F031675C18EE4ECF8171D2D9;
 			remoteInfo = ARFighter;
 		};
 /* End PBXContainerItemProxy section */
@@ -47,6 +79,13 @@
 		1A38B9BF1EEFCC93009CDF0D /* ARFighterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARFighterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFighterUITests.swift; sourceTree = "<group>"; };
 		1A38B9C51EEFCC93009CDF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FightViewController.swift; sourceTree = "<group>"; };
+		1A38B9E01EEFE342009CDF0D /* libARFighter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libARFighter.a; path = ../build.iOS/lib/Debug/libARFighter.a; sourceTree = "<group>"; };
+		1A38B9FC1EEFFDF8009CDF0D /* libGameEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameEngine.a; path = ../build.iOS/lib/Debug/libGameEngine.a; sourceTree = "<group>"; };
+		1A38BA151EF0012B009CDF0D /* ARFighterWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARFighterWrapper.h; sourceTree = "<group>"; };
+		1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARFighter-Bridging-Header.h"; sourceTree = "<group>"; };
+		1A38BA171EF00146009CDF0D /* ARFighterWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ARFighterWrapper.mm; sourceTree = "<group>"; };
+		1A38BA201EF05432009CDF0D /* Project.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Project.xcodeproj; path = ../build.iOS/Project.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A38BA2E1EF054CB009CDF0D /* libGameEngine.a in Frameworks */,
+				1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +122,8 @@
 				1A38B9B71EEFCC93009CDF0D /* ARFighterTests */,
 				1A38B9C21EEFCC93009CDF0D /* ARFighterUITests */,
 				1A38B9A11EEFCC93009CDF0D /* Products */,
+				1A38B9DF1EEFE341009CDF0D /* Frameworks */,
+				1A38B9FA1EEFFB29009CDF0D /* Library */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,10 +142,14 @@
 			children = (
 				1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */,
 				1A38B9A51EEFCC93009CDF0D /* ViewController.swift */,
+				1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */,
 				1A38B9A71EEFCC93009CDF0D /* Main.storyboard */,
 				1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */,
 				1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */,
 				1A38B9AF1EEFCC93009CDF0D /* Info.plist */,
+				1A38BA151EF0012B009CDF0D /* ARFighterWrapper.h */,
+				1A38BA171EF00146009CDF0D /* ARFighterWrapper.mm */,
+				1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */,
 			);
 			path = ARFighter;
 			sourceTree = "<group>";
@@ -125,6 +172,32 @@
 			path = ARFighterUITests;
 			sourceTree = "<group>";
 		};
+		1A38B9DF1EEFE341009CDF0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A38B9FC1EEFFDF8009CDF0D /* libGameEngine.a */,
+				1A38B9E01EEFE342009CDF0D /* libARFighter.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A38B9FA1EEFFB29009CDF0D /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1A38BA201EF05432009CDF0D /* Project.xcodeproj */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		1A38BA211EF05432009CDF0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A38BA291EF05433009CDF0D /* libGameEngine.a */,
+				1A38BA2B1EF05433009CDF0D /* libARFighter.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,6 +212,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				1A38BA2D1EF054C3009CDF0D /* PBXTargetDependency */,
+				1A38BA301EF054D9009CDF0D /* PBXTargetDependency */,
 			);
 			name = ARFighter;
 			productName = ARFighter;
@@ -194,6 +269,7 @@
 					1A38B99F1EEFCC93009CDF0D = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = B5LYDKFH6V;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					1A38B9B31EEFCC93009CDF0D = {
@@ -221,6 +297,12 @@
 			mainGroup = 1A38B9971EEFCC93009CDF0D;
 			productRefGroup = 1A38B9A11EEFCC93009CDF0D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1A38BA211EF05432009CDF0D /* Products */;
+					ProjectRef = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1A38B99F1EEFCC93009CDF0D /* ARFighter */,
@@ -229,6 +311,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1A38BA291EF05433009CDF0D /* libGameEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGameEngine.a;
+			remoteRef = 1A38BA281EF05433009CDF0D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A38BA2B1EF05433009CDF0D /* libARFighter.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libARFighter.a;
+			remoteRef = 1A38BA2A1EF05433009CDF0D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1A38B99E1EEFCC93009CDF0D /* Resources */ = {
@@ -262,8 +361,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A38BA181EF00146009CDF0D /* ARFighterWrapper.mm in Sources */,
 				1A38B9A61EEFCC93009CDF0D /* ViewController.swift in Sources */,
 				1A38B9A41EEFCC93009CDF0D /* AppDelegate.swift in Sources */,
+				1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +396,16 @@
 			isa = PBXTargetDependency;
 			target = 1A38B99F1EEFCC93009CDF0D /* ARFighter */;
 			targetProxy = 1A38B9C01EEFCC93009CDF0D /* PBXContainerItemProxy */;
+		};
+		1A38BA2D1EF054C3009CDF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GameEngine;
+			targetProxy = 1A38BA2C1EF054C3009CDF0D /* PBXContainerItemProxy */;
+		};
+		1A38BA301EF054D9009CDF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ARFighter;
+			targetProxy = 1A38BA2F1EF054D9009CDF0D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -417,11 +528,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				HEADER_SEARCH_PATHS = (
+					"../../ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine",
+				);
 				INFOPLIST_FILE = ARFighter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARFighter/ARFighter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -430,11 +549,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				HEADER_SEARCH_PATHS = (
+					"../../ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine",
+				);
 				INFOPLIST_FILE = ARFighter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARFighter/ARFighter-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -516,6 +642,7 @@
 				1A38B9CA1EEFCC93009CDF0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A38B9CB1EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighterTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +651,7 @@
 				1A38B9CD1EEFCC93009CDF0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A38B9CE1EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighterUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +660,7 @@
 				1A38B9D01EEFCC93009CDF0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

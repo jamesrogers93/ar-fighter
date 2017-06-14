@@ -2,7 +2,7 @@
 #define _ARFIGHTER_H
 
 // Game Engine
-#include <game-engine/Core/Engine/Engine.h>
+//#include <game-engine/Core/Engine/Engine.h>
 
 class SceneManager;
 
@@ -10,7 +10,7 @@ class ARFighter
 {
 public:
     
-    ARFighter& getInstance()
+    static ARFighter& getInstance()
     {
         static ARFighter instance;
         
@@ -24,8 +24,11 @@ public:
     void draw();
     
 private:
-    ARFighter(){}
-    ~ARFighter();
+    ARFighter()
+    {
+        sceneManager = 0;
+    }
+    ~ARFighter(){}
 
     SceneManager *sceneManager;
 };

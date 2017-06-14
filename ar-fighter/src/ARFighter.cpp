@@ -4,13 +4,20 @@
 #include <vector>
 #include <utility>
 
+// Game Engine
+#include <game-engine/Core/Engine/Engine.h>
+
 // GameEngine Core Modules
+#include <game-engine/Core/Modules/CoreModule.h>
 #include <game-engine/Core/Modules/Graphics/Graphics.h>
 #include <game-engine/Core/Modules/Graphics/GeometryEntity.h>
 #include <game-engine/Core/Modules/Graphics/Geometry.h>
 #include <game-engine/Core/Modules/Graphics/Material.h>
 #include <game-engine/Core/Modules/Graphics/Vertex.h>
 #include <game-engine/Core/Modules/Graphics/Shader.h>
+#include <game-engine/Core/Modules/Graphics/Shaders.h>
+
+// Game Engine Scene
 #include <game-engine/Core/Scene/SceneManager.h>
 #include <game-engine/Core/Scene/Scene.h>
 
@@ -24,10 +31,11 @@ static Scene* createScene()
     
     // But we must create a geometric object
     std::vector<Vertex3DPN> vertices;
-    vertices.push_back(Vertex3DPN(-0.5,  0.5, 0.0, 0.0, 0.0, 1.0));
-    vertices.push_back(Vertex3DPN( 0.5,  0.5, 0.0, 0.0, 0.0, 1.0));
-    vertices.push_back(Vertex3DPN( 0.5, -0.5, 0.0, 0.0, 0.0, 1.0));
-    vertices.push_back(Vertex3DPN(-0.5, -0.5, 0.0, 0.0, 0.0, 1.0));
+    const float size = 0.5;
+    vertices.push_back(Vertex3DPN( size,  size, 0.0, 0.0, 0.0, 1.0));
+    vertices.push_back(Vertex3DPN( size, -size, 0.0, 0.0, 0.0, 1.0));
+    vertices.push_back(Vertex3DPN(-size, -size, 0.0, 0.0, 0.0, 1.0));
+    vertices.push_back(Vertex3DPN(-size,  size, 0.0, 0.0, 0.0, 1.0));
     
     std::vector<unsigned int> indices;
     indices.push_back(0); indices.push_back(1); indices.push_back(3);
@@ -49,10 +57,11 @@ static Scene* createScene()
     uniformNames.push_back("diffuseSolid");   uniformNames.push_back("specularSolid");
     uniformNames.push_back("shininess");
     
-    Shader *s = Shader::loadShader("test.vert", "test.frag", vertexAttribs, uniformNames);
+    Shader *s = Shader::loadShaderFromString(basicVertex, basicFragment, vertexAttribs, uniformNames);
     
     // Put the geometry, material and shader in the graphics object
-    Graphics *gModule = Engine::getInstance().getCoreModule<Graphics>(CM_GRAPHICS);
+    //Graphics *gModule = Engine::getInstance().getCoreModule<Graphics>(CM_GRAPHICS);
+    Graphics *gModule = static_cast<Graphics*>(Engine::getInstance().getCoreModule(CM_GRAPHICS));
     gModule->addGeometry("square", g);
     gModule->addMaterial("wooden-box", m);
     gModule->addShader("basic", s);
@@ -65,7 +74,6 @@ static Scene* createScene()
 
 void ARFighter::initalise()
 {
-    
     // Get instance of the engine.
     Engine *engine = &Engine::getInstance();
     
@@ -93,12 +101,17 @@ void ARFighter::deinitalise()
 
 void ARFighter::update()
 {
-    Engine *engine = &Engine::getInstance();
+    //Engine *engine = &Engine::getInstance();
     
-    engine->updateAll();
+    //engine->updateAll();
 }
 
 void ARFighter::draw()
 {
+    Engine *engine = &Engine::getInstance();
     
+    std::vector<CoreModuleType> modules;
+    modules.push_back(CM_GRAPHICS);
+    
+    engine->updateIncluding(modules);
 }

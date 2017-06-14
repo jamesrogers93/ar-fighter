@@ -52,7 +52,11 @@ find_package (glm REQUIRED)
 include_directories(${GLM_INCLUDE_DIRS})
 
 # Make the ARFighter library
-add_library(ARFighter SHARED ${AR_FIGHTER_INC} ${AR_FIGHTER_SRC})
+if(STATIC)
+	add_library(ARFighter STATIC ${AR_FIGHTER_INC} ${AR_FIGHTER_SRC})
+else()
+	add_library(ARFighter SHARED ${AR_FIGHTER_INC} ${AR_FIGHTER_SRC})
+endif()
 
 # Macro to take the file directories of the files and add them to groups to maintain the folder structure in an IDE.
 macro(build_groups_ARFighter FILES_LIST)
