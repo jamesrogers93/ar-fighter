@@ -17,7 +17,7 @@ public:
         return instance;
     }
     
-    void initalise();
+    void initalise(const unsigned int &screenWidth, const unsigned int &screenHeight);
     void deinitalise();
     
     void update();
@@ -31,6 +31,8 @@ private:
     ~ARFighter(){}
 
     SceneManager *sceneManager;
+    
+    unsigned int screenWidth, screenHeight;
 };
 
 #endif /* _ARFIGHTER_H */

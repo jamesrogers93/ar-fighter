@@ -29,9 +29,9 @@
     //delete _instance;
 }
 
-- (void) initalise
+- (void) initalise:(unsigned int) screenWidth :(unsigned int) screenHeight
 {
-    _instance->initalise();
+    _instance->initalise(screenWidth, screenHeight);
 }
 
 - (void) deinitalise

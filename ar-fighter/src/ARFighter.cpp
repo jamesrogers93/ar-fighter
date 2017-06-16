@@ -11,6 +11,7 @@
 #include <game-engine/Core/Modules/CoreModule.h>
 #include <game-engine/Core/Modules/Graphics/Graphics.h>
 #include <game-engine/Core/Modules/Graphics/GeometryEntity.h>
+#include <game-engine/Core/Modules/Graphics/CameraEntity.h>
 #include <game-engine/Core/Modules/Graphics/Geometry.h>
 #include <game-engine/Core/Modules/Graphics/Material.h>
 #include <game-engine/Core/Modules/Graphics/Vertex.h>
@@ -21,13 +22,13 @@
 #include <game-engine/Core/Scene/SceneManager.h>
 #include <game-engine/Core/Scene/Scene.h>
 
-static Scene* createScene()
+static Scene* createScene(const unsigned int &screenWidth, const unsigned int &screenHeight)
 {
     Scene* scene = new Scene("Fight");
     
     // Create Geometry entity
     // Here we are referencing a 'square' geometric object, a 'wooden-box' material and a 'basic' shader
-    GeometryEntity* entity = new GeometryEntity("test", "square","wooden-box", "basic");
+    GeometryEntity* entity = new GeometryEntity("test", 0.0, 0.0, 0.0, "square","wooden-box", "basic");
     
     // But we must create a geometric object
     std::vector<Vertex3DPN> vertices;
@@ -53,6 +54,9 @@ static Scene* createScene()
     vertexAttribs.push_back(std::make_pair(ATTRIB_TEXCOORD, "texCoord"));
     
     std::vector<std::string> uniformNames;
+    uniformNames.push_back("projection"); uniformNames.push_back("view");
+    uniformNames.push_back("model");
+    
     uniformNames.push_back("diffuseTexture"); uniformNames.push_back("specularTexture");
     uniformNames.push_back("diffuseSolid");   uniformNames.push_back("specularSolid");
     uniformNames.push_back("shininess");
@@ -69,11 +73,23 @@ static Scene* createScene()
     // Add the graphics entity to the scene
     scene->addEntity(entity);
     
+    // Also need to add a camera entity to the scene
+    
+    CameraEntity *camEntity = new CameraEntity("myCamera", CameraEntity::perspectiveMatrix(screenWidth, screenHeight), 0.0, 0.0, -10.0);
+    Graphics::getInstance().setActiveCameraEntity("myCamera");
+    scene->addEntity(camEntity);
+    
+    // Update the scene to configure global model for each entity
+    scene->update();
+    
     return scene;
 }
 
-void ARFighter::initalise()
+void ARFighter::initalise(const unsigned int &screenWidth, const unsigned int &screenHeight)
 {
+    this->screenWidth = screenWidth;
+    this->screenHeight = screenHeight;
+    
     // Get instance of the engine.
     Engine *engine = &Engine::getInstance();
     
@@ -86,11 +102,13 @@ void ARFighter::initalise()
     // Add our scenes to the engine.
     
     // Character Selection Scene
-    this->sceneManager->addScene(createScene());
+    this->sceneManager->addScene(createScene(screenWidth, screenHeight));
     
     // Enemy Selection Scene
     
     // Fighting Scene
+    
+    
     
 }
 
@@ -101,9 +119,7 @@ void ARFighter::deinitalise()
 
 void ARFighter::update()
 {
-    //Engine *engine = &Engine::getInstance();
-    
-    //engine->updateAll();
+    SceneManager::getInstance().update();
 }
 
 void ARFighter::draw()

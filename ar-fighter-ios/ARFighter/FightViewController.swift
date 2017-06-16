@@ -47,7 +47,9 @@ class FightViewController: GLKViewController
         self.setupGL()
         
         self.game = ARFighterWrapper()
-        self.game?.initalise()
+        
+        let screenSize = UIScreen.main.bounds
+        self.game?.initalise(UInt32(screenSize.width), UInt32(screenSize.height))
     }
     
     override func didReceiveMemoryWarning()
@@ -93,9 +95,6 @@ class FightViewController: GLKViewController
     // Draw OpenGL content here
     override func glkView(_ view: GLKView, drawIn rect: CGRect)
     {
-        glClearColor(0.65, 0.65, 0.65, 1.0)
-        glClear(GLbitfield(GL_COLOR_BUFFER_BIT) | GLbitfield(GL_DEPTH_BUFFER_BIT))
-        
         self.game?.draw()
     }
 }

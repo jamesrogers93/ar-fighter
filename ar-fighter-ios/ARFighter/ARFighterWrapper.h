@@ -10,7 +10,7 @@
 
 @interface ARFighterWrapper : NSObject
 
-- (void) initalise;
+- (void) initalise:(unsigned int) screenWidth :(unsigned int) screenHeight;
 - (void) deinitalise;
 - (void) update;
 - (void) draw;
