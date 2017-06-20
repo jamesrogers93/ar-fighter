@@ -9,6 +9,8 @@
 #import "ARFighterWrapper.h"
 #import <ar-fighter/ARFighter.h>
 
+#import <string>
+
 @interface ARFighterWrapper ()
 
 @property (nonatomic, readonly) ARFighter* instance;
@@ -20,6 +22,17 @@
 - (id) init
 {
     _instance = &ARFighter::getInstance();
+    
+    NSBundle *b = [NSBundle mainBundle];
+    NSString *dir = [b resourcePath];
+    NSArray *parts = [NSArray arrayWithObjects:
+                      dir, @"assets", (void *)nil];
+    NSString *path = [NSString pathWithComponents:parts];
+    const char *cpath = [path fileSystemRepresentation];
+    std::string assetsPath(cpath);
+    
+    
+    _instance->setAssetsPath(assetsPath+"/");
     
     return self;
 }

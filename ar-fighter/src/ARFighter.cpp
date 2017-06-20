@@ -10,6 +10,7 @@
 // GameEngine Core Modules
 #include <game-engine/Core/Modules/CoreModule.h>
 #include <game-engine/Core/Modules/Graphics/Graphics.h>
+#include <game-engine/Core/Modules/Graphics/GraphicsRead.h>
 #include <game-engine/Core/Modules/Graphics/GeometryEntity.h>
 #include <game-engine/Core/Modules/Graphics/CameraEntity.h>
 #include <game-engine/Core/Modules/Graphics/Geometry.h>
@@ -22,16 +23,16 @@
 #include <game-engine/Core/Scene/SceneManager.h>
 #include <game-engine/Core/Scene/Scene.h>
 
-static Scene* createScene(const unsigned int &screenWidth, const unsigned int &screenHeight)
+Scene* ARFighter::createScene()
 {
     Scene* scene = new Scene("Fight");
     
     // Create Geometry entity
     // Here we are referencing a 'square' geometric object, a 'wooden-box' material and a 'basic' shader
-    GeometryEntity* entity = new GeometryEntity("test", 0.0, 0.0, 0.0, "square","wooden-box", "basic");
+    GeometryEntity* entity = new GeometryEntity("test", 0.0, 0.0, 0.0, "Cube","wooden-box", "basic");
     
     // But we must create a geometric object
-    std::vector<Vertex3DPN> vertices;
+    /*std::vector<Vertex3DPN> vertices;
     const float size = 0.5;
     vertices.push_back(Vertex3DPN( size,  size, 0.0, 0.0, 0.0, 1.0));
     vertices.push_back(Vertex3DPN( size, -size, 0.0, 0.0, 0.0, 1.0));
@@ -42,7 +43,9 @@ static Scene* createScene(const unsigned int &screenWidth, const unsigned int &s
     indices.push_back(0); indices.push_back(1); indices.push_back(3);
     indices.push_back(1); indices.push_back(2); indices.push_back(3);
     
-    Geometry *g = Geometry::loadGeometry(vertices, indices);
+    Geometry *g = Geometry::loadGeometry(vertices, indices);*/
+    
+    GraphicsRead::readJMPFile(this->assetsPath + "cube.jmp");
     
     // and create a material object
     Material *m = new Material(glm::vec4(1.0, 0.0, 0.0, 1.0), glm::vec4(0.0, 0.0, 1.0, 1.0));
@@ -66,7 +69,7 @@ static Scene* createScene(const unsigned int &screenWidth, const unsigned int &s
     // Put the geometry, material and shader in the graphics object
     //Graphics *gModule = Engine::getInstance().getCoreModule<Graphics>(CM_GRAPHICS);
     Graphics *gModule = static_cast<Graphics*>(Engine::getInstance().getCoreModule(CM_GRAPHICS));
-    gModule->addGeometry("square", g);
+    //gModule->addGeometry("square", g);
     gModule->addMaterial("wooden-box", m);
     gModule->addShader("basic", s);
     
@@ -75,7 +78,7 @@ static Scene* createScene(const unsigned int &screenWidth, const unsigned int &s
     
     // Also need to add a camera entity to the scene
     
-    CameraEntity *camEntity = new CameraEntity("myCamera", CameraEntity::perspectiveMatrix(screenWidth, screenHeight), 0.0, 0.0, -10.0);
+    CameraEntity *camEntity = new CameraEntity("myCamera", CameraEntity::perspectiveMatrix(this->screenWidth, this->screenHeight), 0.0, 0.0, -10.0);
     Graphics::getInstance().setActiveCameraEntity("myCamera");
     scene->addEntity(camEntity);
     
@@ -102,7 +105,7 @@ void ARFighter::initalise(const unsigned int &screenWidth, const unsigned int &s
     // Add our scenes to the engine.
     
     // Character Selection Scene
-    this->sceneManager->addScene(createScene(screenWidth, screenHeight));
+    this->sceneManager->addScene(createScene());
     
     // Enemy Selection Scene
     

@@ -1,10 +1,13 @@
 #ifndef _ARFIGHTER_H
 #define _ARFIGHTER_H
 
+#include <string>
+
 // Game Engine
 //#include <game-engine/Core/Engine/Engine.h>
 
 class SceneManager;
+class Scene;
 
 class ARFighter
 {
@@ -23,6 +26,8 @@ public:
     void update();
     void draw();
     
+    void setAssetsPath(const std::string &path) {   this->assetsPath = path;    }
+    
 private:
     ARFighter()
     {
@@ -33,6 +38,10 @@ private:
     SceneManager *sceneManager;
     
     unsigned int screenWidth, screenHeight;
+    
+    std::string assetsPath;
+    
+    Scene* createScene();
 };
 
 #endif /* _ARFIGHTER_H */

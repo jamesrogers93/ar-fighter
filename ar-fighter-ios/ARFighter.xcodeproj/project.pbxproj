@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A32F7C61EF901AD004E9BD0 /* assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
+		1A32F7C71EF901C6004E9BD0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
 		1A38B9A41EEFCC93009CDF0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */; };
 		1A38B9A61EEFCC93009CDF0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9A51EEFCC93009CDF0D /* ViewController.swift */; };
 		1A38B9A91EEFCC93009CDF0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9A71EEFCC93009CDF0D /* Main.storyboard */; };
@@ -65,7 +67,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1A3ADD311EF827DE00048E01 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				1A32F7C61EF901AD004E9BD0 /* assets in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1A32F7C51EF901AD004E9BD0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		1A38B9A01EEFCC93009CDF0D /* ARFighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARFighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A38B9A51EEFCC93009CDF0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +134,7 @@
 		1A38B9971EEFCC93009CDF0D = {
 			isa = PBXGroup;
 			children = (
+				1A32F7C51EF901AD004E9BD0 /* assets */,
 				1A38B9A21EEFCC93009CDF0D /* ARFighter */,
 				1A38B9B71EEFCC93009CDF0D /* ARFighterTests */,
 				1A38B9C21EEFCC93009CDF0D /* ARFighterUITests */,
@@ -140,6 +157,7 @@
 		1A38B9A21EEFCC93009CDF0D /* ARFighter */ = {
 			isa = PBXGroup;
 			children = (
+				1A3ADD291EF8181D00048E01 /* Assets */,
 				1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */,
 				1A38B9A51EEFCC93009CDF0D /* ViewController.swift */,
 				1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */,
@@ -198,6 +216,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1A3ADD291EF8181D00048E01 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -208,6 +233,7 @@
 				1A38B99C1EEFCC93009CDF0D /* Sources */,
 				1A38B99D1EEFCC93009CDF0D /* Frameworks */,
 				1A38B99E1EEFCC93009CDF0D /* Resources */,
+				1A3ADD311EF827DE00048E01 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -334,6 +360,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A32F7C71EF901C6004E9BD0 /* assets in Resources */,
 				1A38B9AE1EEFCC93009CDF0D /* LaunchScreen.storyboard in Resources */,
 				1A38B9AB1EEFCC93009CDF0D /* Assets.xcassets in Resources */,
 				1A38B9A91EEFCC93009CDF0D /* Main.storyboard in Resources */,
