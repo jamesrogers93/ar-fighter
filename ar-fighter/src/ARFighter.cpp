@@ -13,7 +13,8 @@
 #include <game-engine/Core/Modules/Graphics/GraphicsRead.h>
 #include <game-engine/Core/Modules/Graphics/GeometryEntity.h>
 #include <game-engine/Core/Modules/Graphics/CameraEntity.h>
-#include <game-engine/Core/Modules/Graphics/LightEntity.h>
+#include <game-engine/Core/Modules/Graphics/PointLightEntity.h>
+#include <game-engine/Core/Modules/Graphics/DirectionalLightEntity.h>
 #include <game-engine/Core/Modules/Graphics/Geometry.h>
 #include <game-engine/Core/Modules/Graphics/Material.h>
 #include <game-engine/Core/Modules/Graphics/Vertex.h>
@@ -47,7 +48,8 @@ Scene* ARFighter::createScene()
     std::vector<std::string> uniformNames;
     CameraEntity::fillUniformNames(uniformNames);
     Material::fillUniformNames(uniformNames);
-    LightEntity::fillUniformNames(uniformNames);
+    PointLightEntity::fillUniformNames(uniformNames);
+    DirectionalLightEntity::fillUniformNames(uniformNames);
     GeometryEntity::fillUniformNames(uniformNames);
     //Shader *s = Shader::loadShaderFromString(basicVertex, basicFragment, vertexAttribs, uniformNames);
     Shader *s = Shader::loadShaderFromFile(this->assetsPath + "basic.vert", this->assetsPath + "basic.frag", vertexAttribs, uniformNames);
@@ -60,13 +62,15 @@ Scene* ARFighter::createScene()
     gModule->addShader("basic", s);
     
     // Now some lights to light the scene
-    LightEntity *l1 = new LightEntity("light1", glm::vec3(5.0, 0.5, 0.0), glm::vec3(0.0, 0.0, 0.2), glm::vec3(0.0, 0.0, 0.7), glm::vec3(0.0, 0.0, 0.9), Attenuation::ATT_100);
-    LightEntity *l2 = new LightEntity("light2", glm::vec3(-2.0, 5.0, -10.0), glm::vec3(0.2,0.0,0.0), glm::vec3(0.7,0.0,0.0), glm::vec3(0.6,0.0,0.0), Attenuation::ATT_100);
+    PointLightEntity *l1 = new PointLightEntity("light1", glm::vec3(5.0, 0.5, 0.0), glm::vec3(0.0, 0.0, 0.2), glm::vec3(0.0, 0.0, 0.7), glm::vec3(0.0, 0.0, 0.9), Attenuation::ATT_100);
+    PointLightEntity *l2 = new PointLightEntity("light2", glm::vec3(-2.0, 5.0, -10.0), glm::vec3(0.2,0.0,0.0), glm::vec3(0.7,0.0,0.0), glm::vec3(0.6,0.0,0.0), Attenuation::ATT_100);
+    DirectionalLightEntity *l3 = new DirectionalLightEntity("light3", glm::normalize(glm::vec3(0.0, -5.0, 10.0)), glm::vec3(0.3,0.2,0.2), glm::vec3(0.7,0.0,0.0), glm::vec3(0.6,0.0,0.0));
     
     // Add the graphics entity and light entity to the scene
     scene->addEntity(entity);
     scene->addEntity(l1);
     scene->addEntity(l2);
+    scene->addEntity(l3);
     
     // Also need to add a camera entity to the scene
     
