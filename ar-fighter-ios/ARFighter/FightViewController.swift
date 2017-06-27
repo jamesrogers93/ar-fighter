@@ -95,6 +95,9 @@ class FightViewController: GLKViewController
     // Draw OpenGL content here
     override func glkView(_ view: GLKView, drawIn rect: CGRect)
     {
+        glClearColor(0.65, 0.65, 0.65, 1.0)
+        glClear(GLenum(GL_COLOR_BUFFER_BIT) | GLenum(GL_DEPTH_BUFFER_BIT))
+        
         self.game?.draw()
     }
 }

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/ARFighter.cpp"
-            timestampString = "520104517.974294"
+            timestampString = "520163275.026232"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "ARFighter::createScene()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/ARFighter.cpp"
-            timestampString = "520104517.974294"
+            timestampString = "520264737.024086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "ARFighter::draw()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/ARFighter.cpp"
-            timestampString = "520104517.974294"
+            timestampString = "520163275.026232"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "ARFighter::createScene()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/ARFighter.cpp"
-            timestampString = "520104517.974294"
+            timestampString = "520264737.024086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "ARFighter::initalise(const unsigned int &amp;screenWidth, const unsigned int &amp;screenHeight)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/ARFighter.cpp"
-            timestampString = "520104517.974294"
+            timestampString = "520163275.026232"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "ARFighter::createScene()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../game-engine/game-engine/src/Core/Modules/Graphics/Graphics.cpp"
-            timestampString = "520016622.569679"
+            timestampString = "520273417.993337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "Graphics::draw(GeometryEntity* entity)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../game-engine/game-engine/src/Core/Modules/Graphics/Graphics.cpp"
-            timestampString = "520016771.946207"
+            timestampString = "520273417.993337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "Graphics::draw(GeometryEntity* entity)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../game-engine/game-engine/src/Core/Modules/Graphics/Graphics.cpp"
-            timestampString = "520016920.328015"
+            timestampString = "520273417.993337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "Graphics::draw(GeometryEntity* entity)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,12 +250,140 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../game-engine/game-engine/src/Core/Modules/Graphics/Graphics.cpp"
-            timestampString = "520017076.766198"
+            timestampString = "520273417.993337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "Graphics::draw(GeometryEntity* entity)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/ARFighter.cpp"
+            timestampString = "520264737.024086"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "ARFighter::initalise(const unsigned int &amp;screenWidth, const unsigned int &amp;screenHeight)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../game-engine/game-engine/include/game-engine/Core/Modules/Graphics/CameraEntity.h"
+            timestampString = "520272819.603009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../game-engine/game-engine/src/Core/Modules/Graphics/Graphics.cpp"
+            timestampString = "520273417.993337"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "Graphics::update()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Graphics::update()"
+                  moduleName = "ARFighter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/src/Core/Modules/Graphics/Graphics.cpp"
+                  timestampString = "520263379.473481"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "115">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Graphics::update()"
+                  moduleName = "ARFighter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/src/Core/Modules/Graphics/Graphics.cpp"
+                  timestampString = "520263379.480878"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "665">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ARFighter/FightViewController.swift"
+            timestampString = "520263506.220239"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/ARFighter.cpp"
+            timestampString = "520264737.024086"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "ARFighter::update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../game-engine/game-engine/src/Core/Modules/Graphics/CameraEntity.cpp"
+            timestampString = "520263933.910876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "CameraEntity::loadToShader(Shader *shader)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

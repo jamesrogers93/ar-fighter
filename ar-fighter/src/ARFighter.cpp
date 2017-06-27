@@ -33,91 +33,10 @@ Scene* ARFighter::createScene()
     GeometryEntity* entity = new GeometryEntity("test", 0.0, 0.0, 0.0, "cube","wooden-box", "basic");
     
     // But we must create a geometric object (This automatically adds the geometry to the Graphics module)
-    //GraphicsRead::readJMPFile(this->assetsPath + "cube.jmp");
-    
-    std::vector<Vertex3DPN> vertices;
-    std::vector<unsigned int> indices;
-    indices.push_back(0); indices.push_back(1); indices.push_back(2);
-    indices.push_back(0); indices.push_back(2); indices.push_back(3); //front
-    
-    indices.push_back(4); indices.push_back(5); indices.push_back(6);
-    indices.push_back(4); indices.push_back(6); indices.push_back(7); //right
-    
-    indices.push_back(8); indices.push_back(9); indices.push_back(10);
-    indices.push_back(8); indices.push_back(10); indices.push_back(11); //back
-    
-    indices.push_back(12); indices.push_back(13); indices.push_back(14);
-    indices.push_back(12); indices.push_back(14); indices.push_back(15); //left
-    
-    indices.push_back(16); indices.push_back(17); indices.push_back(18);
-    indices.push_back(16); indices.push_back(18); indices.push_back(19); //upper
-    
-    indices.push_back(20); indices.push_back(21); indices.push_back(22);
-    indices.push_back(20); indices.push_back(22); indices.push_back(23); //bottom
-    
-    //front
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, -1.0, 1.0),
-                                    glm::vec3(0, 0, 1)));
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, -1.0, 1.0),
-                                    glm::vec3(0, 0, 1)));
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, 1.0, 1.0),
-                                    glm::vec3(0, 0, 1)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, 1.0, 1.0),
-                                    glm::vec3(0, 0, 1)));
-    
-    //right
-    vertices.push_back(Vertex3DPN(glm::vec3(1.0, 1.0, 1.0),
-                                    glm::vec3(1, 0, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(1.0, 1.0, -1.0),
-                                    glm::vec3(1, 0, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(1.0, -1.0, -1.0),
-                                    glm::vec3(1, 0, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(1.0, -1.0, 1.0),
-                                    glm::vec3(1, 0, 0)));
-    
-    //back
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, -1.0, -1.0),
-                                    glm::vec3(0, 0, -1)));
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, -1.0, -1.0),
-                                    glm::vec3(0, 0, -1)));
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, 1.0, -1.0),
-                                    glm::vec3(0, 0, -1)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, 1.0, -1.0),
-                                    glm::vec3(0, 0, -1)));
-    
-    //left
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, -1.0, -1.0),
-                                    glm::vec3(-1, 0, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, -1.0, 1.0),
-                                    glm::vec3(-1, 0, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, 1.0, 1.0),
-                                    glm::vec3(-1, 0, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, 1.0, -1.0),
-                                    glm::vec3(-1, 0, 0)));
-    
-    //upper
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, 1.0, 1.0),
-                                    glm::vec3(0, 1, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, 1.0, 1.0),
-                                    glm::vec3(0, 1, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, 1.0, -1.0),
-                                    glm::vec3(0, 1, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, 1.0, -1.0),
-                                    glm::vec3(0, 1, 0)));
-    
-    //bottom
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, -1.0, -1.0),
-                                    glm::vec3(0, -1, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, -1.0, -1.0),
-                                    glm::vec3(0, -1, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3( 1.0, -1.0, 1.0),
-                                    glm::vec3(0, -1, 0)));
-    vertices.push_back(Vertex3DPN(glm::vec3(-1.0, -1.0, 1.0),
-                                    glm::vec3(0, -1, 0)));
-    Geometry *g = Geometry::loadGeometry(vertices, indices);
-    
+    GraphicsRead::readJMPFile(this->assetsPath + "cube.jmp");
+
     // and create a material object
-    Material *m = new Material(glm::vec4(0.6, 0.2, 0.2, 1.0), glm::vec4(0.9, 0.1, 0.1, 1.0), 32);
+    Material *m = new Material(glm::vec4(0.6, 0.6, 0.6, 1.0), glm::vec4(1.0, 0.1, 0.1, 1.0), 32);
     
     // and a shader object
     std::vector<std::pair<GLint, std::string> > vertexAttribs;
@@ -136,25 +55,24 @@ Scene* ARFighter::createScene()
     // Put the geometry, material and shader in the graphics object
     //Graphics *gModule = Engine::getInstance().getCoreModule<Graphics>(CM_GRAPHICS);
     Graphics *gModule = static_cast<Graphics*>(Engine::getInstance().getCoreModule(CM_GRAPHICS));
-    gModule->addGeometry("cube", g);
+    //gModule->addGeometry("cube", g);
     gModule->addMaterial("wooden-box", m);
     gModule->addShader("basic", s);
     
     // Now some lights to light the scene
-    LightEntity *l = new LightEntity("light1", glm::vec3(0.0, 5.0, 0.0), glm::vec3(0.2), glm::vec3(0.5), glm::vec3(0.9), Attenuation::ATT_100);
+    LightEntity *l1 = new LightEntity("light1", glm::vec3(5.0, 0.5, 0.0), glm::vec3(0.0, 0.0, 0.2), glm::vec3(0.0, 0.0, 0.7), glm::vec3(0.0, 0.0, 0.9), Attenuation::ATT_100);
+    LightEntity *l2 = new LightEntity("light2", glm::vec3(-2.0, 5.0, -10.0), glm::vec3(0.2,0.0,0.0), glm::vec3(0.7,0.0,0.0), glm::vec3(0.6,0.0,0.0), Attenuation::ATT_100);
     
     // Add the graphics entity and light entity to the scene
     scene->addEntity(entity);
-    scene->addEntity(l);
+    scene->addEntity(l1);
+    scene->addEntity(l2);
     
     // Also need to add a camera entity to the scene
     
     CameraEntity *camEntity = new CameraEntity("myCamera", CameraEntity::perspectiveMatrix(this->screenWidth, this->screenHeight), 2.0, 5.0, 10.0);
     Graphics::getInstance().setActiveCameraEntity("myCamera");
     scene->addEntity(camEntity);
-    
-    // Update the scene to configure global model for each entity
-    scene->update();
     
     return scene;
 }
@@ -173,10 +91,16 @@ void ARFighter::initalise(const unsigned int &screenWidth, const unsigned int &s
     // Add the modules we want to use in this game to the engine.
     engine->addCoreModule(&Graphics::getInstance());
     
+    // Configure the graphics module.
+    Graphics::getInstance().enableBackfaceCulling();
+    
     // Add our scenes to the engine.
     
     // Character Selection Scene
     this->sceneManager->addScene(createScene());
+    
+    // Set the active scene
+    this->sceneManager->makeActiveScene("Fight");
     
     // Enemy Selection Scene
     
