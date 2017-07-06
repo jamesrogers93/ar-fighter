@@ -17,9 +17,13 @@
 		1A38B9B91EEFCC93009CDF0D /* ARFighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9B81EEFCC93009CDF0D /* ARFighterTests.swift */; };
 		1A38B9C41EEFCC93009CDF0D /* ARFighterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */; };
 		1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */; };
-		1A38BA181EF00146009CDF0D /* ARFighterWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A38BA171EF00146009CDF0D /* ARFighterWrapper.mm */; };
 		1A38BA2E1EF054CB009CDF0D /* libGameEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA291EF05433009CDF0D /* libGameEngine.a */; };
 		1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA2B1EF05433009CDF0D /* libARFighter.a */; };
+		1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */; };
+		1A988F3E1F054030008CD438 /* libKudanCV-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F3D1F054030008CD438 /* libKudanCV-iOS.a */; };
+		1A988F421F05802D008CD438 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F411F05802D008CD438 /* CoreMotion.framework */; };
+		1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F3F1F057FE8008CD438 /* AVFoundation.framework */; };
+		1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F441F05851B008CD438 /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,10 +102,14 @@
 		1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FightViewController.swift; sourceTree = "<group>"; };
 		1A38B9E01EEFE342009CDF0D /* libARFighter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libARFighter.a; path = ../build.iOS/lib/Debug/libARFighter.a; sourceTree = "<group>"; };
 		1A38B9FC1EEFFDF8009CDF0D /* libGameEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameEngine.a; path = ../build.iOS/lib/Debug/libGameEngine.a; sourceTree = "<group>"; };
-		1A38BA151EF0012B009CDF0D /* ARFighterWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARFighterWrapper.h; sourceTree = "<group>"; };
 		1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARFighter-Bridging-Header.h"; sourceTree = "<group>"; };
-		1A38BA171EF00146009CDF0D /* ARFighterWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ARFighterWrapper.mm; sourceTree = "<group>"; };
 		1A38BA201EF05432009CDF0D /* Project.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Project.xcodeproj; path = ../build.iOS/Project.xcodeproj; sourceTree = "<group>"; };
+		1A5475F31F068E8F00086E59 /* ARFighter-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ARFighter-iOS.h"; sourceTree = "<group>"; };
+		1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "ARFighter-iOS.mm"; sourceTree = "<group>"; };
+		1A988F3D1F054030008CD438 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "ARFighter/KudanCV/libKudanCV-iOS.a"; sourceTree = "<group>"; };
+		1A988F3F1F057FE8008CD438 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1A988F411F05802D008CD438 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		1A988F441F05851B008CD438 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +117,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */,
+				1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */,
+				1A988F421F05802D008CD438 /* CoreMotion.framework in Frameworks */,
+				1A988F3E1F054030008CD438 /* libKudanCV-iOS.a in Frameworks */,
 				1A38BA2E1EF054CB009CDF0D /* libGameEngine.a in Frameworks */,
 				1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */,
 			);
@@ -158,6 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				1A3ADD291EF8181D00048E01 /* Assets */,
+				1A5475F31F068E8F00086E59 /* ARFighter-iOS.h */,
+				1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */,
+				1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */,
 				1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */,
 				1A38B9A51EEFCC93009CDF0D /* ViewController.swift */,
 				1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */,
@@ -165,9 +180,6 @@
 				1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */,
 				1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */,
 				1A38B9AF1EEFCC93009CDF0D /* Info.plist */,
-				1A38BA151EF0012B009CDF0D /* ARFighterWrapper.h */,
-				1A38BA171EF00146009CDF0D /* ARFighterWrapper.mm */,
-				1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */,
 			);
 			path = ARFighter;
 			sourceTree = "<group>";
@@ -193,6 +205,10 @@
 		1A38B9DF1EEFE341009CDF0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A988F441F05851B008CD438 /* CoreMedia.framework */,
+				1A988F411F05802D008CD438 /* CoreMotion.framework */,
+				1A988F3F1F057FE8008CD438 /* AVFoundation.framework */,
+				1A988F3D1F054030008CD438 /* libKudanCV-iOS.a */,
 				1A38B9FC1EEFFDF8009CDF0D /* libGameEngine.a */,
 				1A38B9E01EEFE342009CDF0D /* libARFighter.a */,
 			);
@@ -388,7 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A38BA181EF00146009CDF0D /* ARFighterWrapper.mm in Sources */,
+				1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */,
 				1A38B9A61EEFCC93009CDF0D /* ViewController.swift in Sources */,
 				1A38B9A41EEFCC93009CDF0D /* AppDelegate.swift in Sources */,
 				1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */,
@@ -557,18 +573,27 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = (
 					"../../ar-fighter/include",
 					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
-					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter-ios/ARFighter/KudanCV",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/include",
 				);
 				INFOPLIST_FILE = ARFighter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ARFighter/KudanCV",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ARFighter/ARFighter-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -578,17 +603,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = (
 					"../../ar-fighter/include",
 					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
-					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter-ios/ARFighter/KudanCV",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/include",
 				);
 				INFOPLIST_FILE = ARFighter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ARFighter/KudanCV",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ARFighter/ARFighter-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

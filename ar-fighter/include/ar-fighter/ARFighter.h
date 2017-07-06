@@ -28,6 +28,12 @@ public:
     
     void setAssetsPath(const std::string &path) {   this->assetsPath = path;    }
     
+    // DELETE THESE
+    void pitch();
+    void yaw();
+    void roll();
+    void track();
+    
 private:
     ARFighter()
     {

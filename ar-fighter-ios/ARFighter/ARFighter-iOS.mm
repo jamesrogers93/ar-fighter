@@ -6,8 +6,9 @@
 //  Copyright © 2017 James Rogers. All rights reserved.
 //
 
-#import "ARFighterWrapper.h"
+#import "ARFighter-iOS.h"
 #import <ar-fighter/ARFighter.h>
+
 
 #import <string>
 
@@ -62,5 +63,21 @@
     _instance->draw();
 }
 
+-(void)pitch
+{
+    _instance->pitch();
+}
+-(void)yaw
+{
+    _instance->yaw();
+}
+-(void)roll
+{
+    _instance->roll();
+}
+-(void)track
+{
+    _instance->track();
+}
 @end
 

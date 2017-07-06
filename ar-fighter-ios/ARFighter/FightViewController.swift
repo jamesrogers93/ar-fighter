@@ -11,45 +11,48 @@ import OpenGLES
 
 class FightViewController: GLKViewController
 {
-    var context: EAGLContext? = nil
-    var game:   ARFighterWrapper? = nil
+    var game: ARFighterWrapper? = nil
     
     deinit
     {
-        self.tearDownGL()
         
-        if EAGLContext.current() === self.context
-        {
-            EAGLContext.setCurrent(nil)
-        }
-        
+    }
+    
+    @IBAction func pitchButton(_ sender: UIButton)
+    {
+        self.game?.pitch()
+    }
+    
+    @IBAction func yawButton(_ sender: UIButton)
+    {
+         self.game?.yaw()
+    }
+    
+    @IBAction func rollButton(_ sender: UIButton)
+    {
+         self.game?.roll()
+    }
+    
+    @IBAction func trackButton(_ sender: UIButton)
+    {
+        self.game?.track()
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        if self.context == nil
-        {
-            self.context = EAGLContext(api: .openGLES3)
-        }
-        
-        if !(self.context != nil)
-        {
-            print("Failed to create ES context")
-        }
-        
-        let view = self.view as! GLKView
-        view.context = self.context!
-        view.drawableDepthFormat = .format24
-
-        
-        self.setupGL()
-        
         self.game = ARFighterWrapper()
         
         let screenSize = UIScreen.main.bounds
-        self.game?.initalise(UInt32(screenSize.width), UInt32(screenSize.height))
+        let screenWidth = screenSize.width * UIScreen.main.scale
+        let screenHeight = screenSize.height * UIScreen.main.scale
+        
+        self.game?.initalise(UInt32(screenWidth), UInt32(screenHeight))
+        
+        let view = self.view as! GLKView
+        view.context = GLContextIOS.currentContext()
+        view.drawableDepthFormat = .format24
     }
     
     override func didReceiveMemoryWarning()
@@ -59,33 +62,9 @@ class FightViewController: GLKViewController
         if self.isViewLoaded && (self.view.window != nil)
         {
             self.view = nil
-         
-            self.tearDownGL()
-         
-            if EAGLContext.current() === self.context
-            {
-                EAGLContext.setCurrent(nil)
-            }
-            self.context = nil
-         
          }
     }
 
-    
-    func setupGL()
-    {
-        // Set current GL context
-        EAGLContext.setCurrent(self.context)
-    }
-    
-    func tearDownGL()
-    {
-        EAGLContext.setCurrent(self.context)
-    }
-    
-    // MARK: - GLKView and GLKViewController delegate methods
-    
-    
     // Update view in here
     func update()
     {

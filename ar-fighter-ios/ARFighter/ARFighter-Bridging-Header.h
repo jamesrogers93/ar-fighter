@@ -2,4 +2,5 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#include "ARFighterWrapper.h"
+#include "ARFighter-iOS.h"
+#include "game-engine/Core/Device/GLContext-iOS.h"

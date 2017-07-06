@@ -7,12 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 
 @interface ARFighterWrapper : NSObject
+
+@property (readwrite, nonatomic) GLKView *view;
 
 - (void) initalise:(unsigned int) screenWidth :(unsigned int) screenHeight;
 - (void) deinitalise;
 - (void) update;
 - (void) draw;
+
+-(void)pitch;
+-(void)yaw;
+-(void)roll;
+-(void)track;
 
 @end
