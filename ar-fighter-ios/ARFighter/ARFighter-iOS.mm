@@ -24,17 +24,6 @@
 {
     _instance = &ARFighter::getInstance();
     
-    NSBundle *b = [NSBundle mainBundle];
-    NSString *dir = [b resourcePath];
-    NSArray *parts = [NSArray arrayWithObjects:
-                      dir, @"assets", (void *)nil];
-    NSString *path = [NSString pathWithComponents:parts];
-    const char *cpath = [path fileSystemRepresentation];
-    std::string assetsPath(cpath);
-    
-    
-    _instance->setAssetsPath(assetsPath+"/");
-    
     return self;
 }
 
@@ -43,18 +32,29 @@
     //delete _instance;
 }
 
-- (void) initalise:(unsigned int) screenWidth :(unsigned int) screenHeight
+- (void) initialise:(unsigned int) screenWidth :(unsigned int) screenHeight
 {
-    _instance->initalise(screenWidth, screenHeight);
+    NSBundle *b = [NSBundle mainBundle];
+    NSString *dir = [b resourcePath];
+    NSArray *parts = [NSArray arrayWithObjects:
+                      dir, @"assets", (void *)nil];
+    NSString *path = [NSString pathWithComponents:parts];
+    const char *cpath = [path fileSystemRepresentation];
+    std::string assetsPath(cpath);
+    
+    _instance->initialise(screenWidth, screenHeight, assetsPath+"/");
 }
 
-- (void) deinitalise
+- (void) deinitialise
 {
-    _instance->deinitalise();
+    _instance->deinitialise();
 }
 
-- (void) update
+#import "game-engine/Util/TimeUtil.h"
+
+- (void) update: (double)deltaTime
 {
+    timeSinceLastUpdate = deltaTime;
     _instance->update();
 }
 
@@ -63,21 +63,15 @@
     _instance->draw();
 }
 
--(void)pitch
+-(void) setUpSettingsScene
 {
-    _instance->pitch();
+    _instance->setUpSettingsScene();
 }
--(void)yaw
+
+-(void) setUpFightScene
 {
-    _instance->yaw();
+    _instance->setUpFightScene();
 }
--(void)roll
-{
-    _instance->roll();
-}
--(void)track
-{
-    _instance->track();
-}
+
 @end
 

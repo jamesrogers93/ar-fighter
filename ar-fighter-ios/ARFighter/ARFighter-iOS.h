@@ -13,14 +13,12 @@
 
 @property (readwrite, nonatomic) GLKView *view;
 
-- (void) initalise:(unsigned int) screenWidth :(unsigned int) screenHeight;
-- (void) deinitalise;
-- (void) update;
+- (void) initialise:(unsigned int) screenWidth :(unsigned int) screenHeight;
+- (void) deinitialise;
+- (void) update: (double)deltaTime;
 - (void) draw;
 
--(void)pitch;
--(void)yaw;
--(void)roll;
--(void)track;
+-(void) setUpSettingsScene;
+-(void) setUpFightScene;
 
 @end

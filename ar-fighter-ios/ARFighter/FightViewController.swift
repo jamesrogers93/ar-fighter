@@ -15,44 +15,29 @@ class FightViewController: GLKViewController
     
     deinit
     {
+
+    }
+    
+    @IBAction func leftButton(_ sender: UIButton)
+    {
         
     }
     
-    @IBAction func pitchButton(_ sender: UIButton)
+    @IBAction func rightButton(_ sender: UIButton)
     {
-        self.game?.pitch()
+        
     }
     
-    @IBAction func yawButton(_ sender: UIButton)
+    @IBAction func punchButton(_ sender: UIButton)
     {
-         self.game?.yaw()
-    }
-    
-    @IBAction func rollButton(_ sender: UIButton)
-    {
-         self.game?.roll()
-    }
-    
-    @IBAction func trackButton(_ sender: UIButton)
-    {
-        self.game?.track()
+        
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        self.game = ARFighterWrapper()
-        
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width * UIScreen.main.scale
-        let screenHeight = screenSize.height * UIScreen.main.scale
-        
-        self.game?.initalise(UInt32(screenWidth), UInt32(screenHeight))
-        
-        let view = self.view as! GLKView
-        view.context = GLContextIOS.currentContext()
-        view.drawableDepthFormat = .format24
+
+        self.game?.setUpFightScene()
     }
     
     override func didReceiveMemoryWarning()
@@ -68,15 +53,13 @@ class FightViewController: GLKViewController
     // Update view in here
     func update()
     {
-        self.game?.update()
+        //self.timeSinceLastUpdate
+        self.game?.update(Double(self.timeSinceLastUpdate))
     }
     
     // Draw OpenGL content here
     override func glkView(_ view: GLKView, drawIn rect: CGRect)
     {
-        glClearColor(0.65, 0.65, 0.65, 1.0)
-        glClear(GLenum(GL_COLOR_BUFFER_BIT) | GLenum(GL_DEPTH_BUFFER_BIT))
-        
         self.game?.draw()
     }
 }

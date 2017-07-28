@@ -3,4 +3,4 @@
 //
 
 #include "ARFighter-iOS.h"
-#include "game-engine/Core/Device/GLContext-iOS.h"
+#include "game-engine/Core/GL/GLContext-iOS.h"

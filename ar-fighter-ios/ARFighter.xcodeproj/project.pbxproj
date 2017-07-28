@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0B3D841F29C8BE008E3D8F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B3D831F29C8BE008E3D8F /* SettingsViewController.swift */; };
+		1A2A8FB11F24BD51005932B3 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */; };
+		1A2A8FB61F24BE89005932B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A8FB51F24BE89005932B3 /* main.m */; };
 		1A32F7C61EF901AD004E9BD0 /* assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
 		1A32F7C71EF901C6004E9BD0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
-		1A38B9A41EEFCC93009CDF0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */; };
 		1A38B9A61EEFCC93009CDF0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9A51EEFCC93009CDF0D /* ViewController.swift */; };
 		1A38B9A91EEFCC93009CDF0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9A71EEFCC93009CDF0D /* Main.storyboard */; };
 		1A38B9AB1EEFCC93009CDF0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */; };
@@ -17,13 +19,13 @@
 		1A38B9B91EEFCC93009CDF0D /* ARFighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9B81EEFCC93009CDF0D /* ARFighterTests.swift */; };
 		1A38B9C41EEFCC93009CDF0D /* ARFighterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */; };
 		1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */; };
-		1A38BA2E1EF054CB009CDF0D /* libGameEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA291EF05433009CDF0D /* libGameEngine.a */; };
+		1A38BA2E1EF054CB009CDF0D /* libGameEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA291EF05433009CDF0D /* libGameEngine-ios.a */; };
 		1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA2B1EF05433009CDF0D /* libARFighter.a */; };
 		1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */; };
-		1A988F3E1F054030008CD438 /* libKudanCV-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F3D1F054030008CD438 /* libKudanCV-iOS.a */; };
 		1A988F421F05802D008CD438 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F411F05802D008CD438 /* CoreMotion.framework */; };
 		1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F3F1F057FE8008CD438 /* AVFoundation.framework */; };
 		1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F441F05851B008CD438 /* CoreMedia.framework */; };
+		1AE3ABF01F10FBA60010E2C0 /* libKudanCV-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,9 +87,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A0B3D831F29C8BE008E3D8F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1A2A8FAF1F24BD51005932B3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1A2A8FB51F24BE89005932B3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1A32F7C51EF901AD004E9BD0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		1A38B9A01EEFCC93009CDF0D /* ARFighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARFighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A38B9A51EEFCC93009CDF0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1A38B9A81EEFCC93009CDF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +115,9 @@
 		1A988F3F1F057FE8008CD438 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1A988F411F05802D008CD438 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1A988F441F05851B008CD438 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1AE3ABE91F10F9AE0010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "../game-engine/external/KudanCV/libKudanCV-iOS.a"; sourceTree = "<group>"; };
+		1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKudanCV-iOS.a"; sourceTree = "<group>"; };
+		1AE3ABED1F10FA600010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "../libKudanCV-iOS.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,11 +125,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AE3ABF01F10FBA60010E2C0 /* libKudanCV-iOS.a in Frameworks */,
 				1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */,
 				1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */,
 				1A988F421F05802D008CD438 /* CoreMotion.framework in Frameworks */,
-				1A988F3E1F054030008CD438 /* libKudanCV-iOS.a in Frameworks */,
-				1A38BA2E1EF054CB009CDF0D /* libGameEngine.a in Frameworks */,
+				1A38BA2E1EF054CB009CDF0D /* libGameEngine-ios.a in Frameworks */,
 				1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,11 +178,14 @@
 			isa = PBXGroup;
 			children = (
 				1A3ADD291EF8181D00048E01 /* Assets */,
+				1A2A8FAF1F24BD51005932B3 /* AppDelegate.h */,
+				1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */,
 				1A5475F31F068E8F00086E59 /* ARFighter-iOS.h */,
 				1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */,
 				1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */,
-				1A38B9A31EEFCC93009CDF0D /* AppDelegate.swift */,
+				1A2A8FB51F24BE89005932B3 /* main.m */,
 				1A38B9A51EEFCC93009CDF0D /* ViewController.swift */,
+				1A0B3D831F29C8BE008E3D8F /* SettingsViewController.swift */,
 				1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */,
 				1A38B9A71EEFCC93009CDF0D /* Main.storyboard */,
 				1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */,
@@ -205,6 +216,9 @@
 		1A38B9DF1EEFE341009CDF0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AE3ABED1F10FA600010E2C0 /* libKudanCV-iOS.a */,
+				1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */,
+				1AE3ABE91F10F9AE0010E2C0 /* libKudanCV-iOS.a */,
 				1A988F441F05851B008CD438 /* CoreMedia.framework */,
 				1A988F411F05802D008CD438 /* CoreMotion.framework */,
 				1A988F3F1F057FE8008CD438 /* AVFoundation.framework */,
@@ -226,7 +240,7 @@
 		1A38BA211EF05432009CDF0D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A38BA291EF05433009CDF0D /* libGameEngine.a */,
+				1A38BA291EF05433009CDF0D /* libGameEngine-ios.a */,
 				1A38BA2B1EF05433009CDF0D /* libARFighter.a */,
 			);
 			name = Products;
@@ -355,10 +369,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1A38BA291EF05433009CDF0D /* libGameEngine.a */ = {
+		1A38BA291EF05433009CDF0D /* libGameEngine-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libGameEngine.a;
+			path = "libGameEngine-ios.a";
 			remoteRef = 1A38BA281EF05433009CDF0D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -404,10 +418,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A2A8FB61F24BE89005932B3 /* main.m in Sources */,
 				1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */,
 				1A38B9A61EEFCC93009CDF0D /* ViewController.swift in Sources */,
-				1A38B9A41EEFCC93009CDF0D /* AppDelegate.swift in Sources */,
 				1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */,
+				1A2A8FB11F24BD51005932B3 /* AppDelegate.mm in Sources */,
+				1A0B3D841F29C8BE008E3D8F /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,15 +594,15 @@
 				HEADER_SEARCH_PATHS = (
 					"../../ar-fighter/include",
 					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
-					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter-ios/ARFighter/KudanCV",
 					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/external/KudanCV",
 				);
 				INFOPLIST_FILE = ARFighter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ARFighter/KudanCV",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -608,15 +624,15 @@
 				HEADER_SEARCH_PATHS = (
 					"../../ar-fighter/include",
 					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
-					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter-ios/ARFighter/KudanCV",
 					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/external/KudanCV",
 				);
 				INFOPLIST_FILE = ARFighter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ARFighter/KudanCV",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
 				PRODUCT_NAME = "$(TARGET_NAME)";

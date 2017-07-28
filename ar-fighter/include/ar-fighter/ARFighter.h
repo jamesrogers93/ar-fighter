@@ -20,19 +20,17 @@ public:
         return instance;
     }
     
-    void initalise(const unsigned int &screenWidth, const unsigned int &screenHeight);
-    void deinitalise();
+    void initialise(const unsigned int &screenWidth, const unsigned int &screenHeight, const std::string &assetsPath);
+    void deinitialise();
     
     void update();
     void draw();
     
-    void setAssetsPath(const std::string &path) {   this->assetsPath = path;    }
+    void setUpSettingsScene();
+    void setUpFightScene();
     
-    // DELETE THESE
-    void pitch();
-    void yaw();
-    void roll();
-    void track();
+    
+    //void setAssetsPath(const std::string &path) {   this->assetsPath = path;    }
     
 private:
     ARFighter()
@@ -45,9 +43,9 @@ private:
     
     unsigned int screenWidth, screenHeight;
     
-    std::string assetsPath;
+    //std::string assetsPath;
     
-    Scene* createScene();
+    Scene* createSettingsScene();
 };
 
 #endif /* _ARFIGHTER_H */
