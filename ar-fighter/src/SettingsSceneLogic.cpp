@@ -34,10 +34,27 @@
 
 #include <game-engine/GameObject.h>
 
+#include "ar-fighter/Game_Objects/Y_Bot.h"
+YBot *test;
+
+static unsigned int counter = 0;
 void SettingsSceneLogic::update()
 {
     // Update Animation module
     Engine::getInstance().update(CoreModuleType::CM_ANIMATION, false);
+    
+    /*std::cout << counter << std::endl;
+    if(counter == 300)
+    {
+        //test->getAnimator()->switchAnimation("y_bot_walk_x");
+        
+        test->getAnimator()->getAnimationController1()->setReverse(false);
+        test->getAnimator()->getAnimationController2()->setReverse(false);
+    }
+    else
+    {
+        counter++;
+    }*/
 }
 
 void SettingsSceneLogic::draw()
@@ -54,7 +71,6 @@ void SettingsSceneLogic::draw()
     engine->update(CoreModuleType::CM_GRAPHICS);
 }
 
-#include <fstream>
 void SettingsSceneLogic::initialise()
 {
 
@@ -62,124 +78,13 @@ void SettingsSceneLogic::initialise()
     AnimationModule *aModule = static_cast<AnimationModule*>(Engine::getInstance().getCoreModule(CoreModuleType::CM_ANIMATION));
     
     
+    YBot *yBot = new YBot();
+    yBot->initialise();
+    //yBot->translate(-150.0, 0.0, 0.0);
+    mScene->addEntity(yBot);
     
-    // Y_Bot
-    
-    //
-    // IMPORTING ASSETS
-    //
-    
-    // Load in stuff for the character
-    
-    // Skeleton
-    EntityImporter entityImporterYBot;
-    entityImporterYBot.ImportAsynchronously(System::assetsPath + "entites/Y_Bot/Y_Bot_Skeleton.jmpEntity");
-    
-    // Properties
-    PropertyImporter propertyImporterYBot1;
-    propertyImporterYBot1.ImportAsynchronously(System::assetsPath + "properties/Y_Bot/Y_Bot_Surface.jmpProperty");
-    
-    PropertyImporter propertyImporterYBot2;
-    propertyImporterYBot2.ImportAsynchronously(System::assetsPath + "properties/Y_Bot/Y_Bot_Joints.jmpProperty");
-    
-    // Materials
-    MaterialImporter materialImporterYBot1;
-    materialImporterYBot1.ImportAsynchronously(System::assetsPath + "materials/Y_Bot/Y_Bot_Surface.jmpMat");
-    
-    MaterialImporter materialImporterYBot2;
-    materialImporterYBot2.ImportAsynchronously(System::assetsPath + "materials/Y_Bot/Y_Bot_Joints.jmpMat");
-    
-    // Meshes
-    MeshImporter meshImporterYBot1;
-    meshImporterYBot1.ImportAsynchronously(System::assetsPath + "meshes/Y_Bot/Y_Bot_Surface.jmpMesh");
-    
-    MeshImporter meshImporterYBot2;
-    meshImporterYBot2.ImportAsynchronously(System::assetsPath + "meshes/Y_Bot/Y_Bot_Joints.jmpMesh");
-    
-    // Animations
-    AnimationImporter animationImporterYBot1;
-    animationImporterYBot1.ImportAsynchronously(System::assetsPath + "animations/Y_Bot/Y_Bot_neutral_idle.jmpAnimation");
-    
-    AnimationImporter animationImporterYBot2;
-    animationImporterYBot2.ImportAsynchronously(System::assetsPath + "animations/Y_Bot/Y_Bot_punch.jmpAnimation");
-    
-    // Wait till all assets are loaded in
-    entityImporterYBot.join();
-    propertyImporterYBot1.join();
-    propertyImporterYBot2.join();
-    materialImporterYBot1.join();
-    materialImporterYBot2.join();
-    meshImporterYBot1.join();
-    meshImporterYBot2.join();
-    animationImporterYBot1.join();
-    animationImporterYBot2.join();
-    
-    
-    
-    //
-    // ANIMATIONS
-    //
-    
-    // Add animations to the animation module
-    aModule->addAnimation(animationImporterYBot1.getImportedObject()->getName(), animationImporterYBot1.getImportedObject());
-    aModule->addAnimation(animationImporterYBot2.getImportedObject()->getName(), animationImporterYBot2.getImportedObject());
-    
-    
-    
-    
-    //
-    // CHARACTER OBJECT
-    //
-    
-    // Create animatable mesh properties
-    AnimatableMeshProperty *meshPropertyYBot1 = (AnimatableMeshProperty*)propertyImporterYBot1.getImportedObject();
-    meshPropertyYBot1->setShaderKey("basic");   // Set shader key
-    meshPropertyYBot1->linkJoints(entityImporterYBot.getImportedObject()); // Link to imported skeleton
-    
-    AnimatableMeshProperty *meshPropertyYBot2 = (AnimatableMeshProperty*)propertyImporterYBot2.getImportedObject();
-    meshPropertyYBot2->setShaderKey("basic");
-    meshPropertyYBot2->linkJoints(entityImporterYBot.getImportedObject());
-    
-    // Create animator property
-    AnimatorProperty *animatorPropertyYBot1 = new AnimatorProperty("player_animator", (JointEntity*)entityImporterYBot.getImportedObject());
-    animatorPropertyYBot1->play("y_bot_neutral_idle", true, 1.0f, false);
-    
-    // Create the game object, character
-    GameObject *character = new GameObject("player");
-    character->translate(-150.0, 0.0, 0.0);
-    //character->scale(0.02, 0.02, 0.02);
-    character->addChild(entityImporterYBot.getImportedObject()); // Add joint entity to the game object
-    character->addProperty(propertyImporterYBot1.getImportedObject()); // Add mesh property to the game object
-    character->addProperty(propertyImporterYBot2.getImportedObject()); // Add mesh property to the game object
-    character->addProperty(animatorPropertyYBot1);                      // Add animator property to the game object
-    mScene->addEntity(character);
-    
-    
-    //
-    // MESHES
-    //
-    
-    // Add the meshes to the graphics module
-    MeshGL *meshGLYBot1 = MeshGL::loadMeshGL(meshImporterYBot1.getImportedObject()->getVertices(),
-                                         meshImporterYBot1.getImportedObject()->getIndices());
-    MeshGL *meshGLYBot2 = MeshGL::loadMeshGL(meshImporterYBot2.getImportedObject()->getVertices(),
-                                         meshImporterYBot2.getImportedObject()->getIndices());
-    
-    gModule->addMesh(meshImporterYBot1.getImportedObject()->getName(), meshGLYBot1);
-    gModule->addMesh(meshImporterYBot2.getImportedObject()->getName(), meshGLYBot2);
-    
-    
-    
-    
-    
-    //
-    // MATERIALS
-    //
-    
-    // Add the materials to the graphics module
-    gModule->addMaterial(materialImporterYBot1.getImportedObject()->getName(), materialImporterYBot1.getImportedObject());
-    gModule->addMaterial(materialImporterYBot2.getImportedObject()->getName(), materialImporterYBot2.getImportedObject());
-    
+    yBot->walk();
+    test = yBot;
     
     
     // X_Bot
@@ -261,7 +166,7 @@ void SettingsSceneLogic::initialise()
     
     // Create animator property
     AnimatorProperty *animatorPropertyXBot1 = new AnimatorProperty("opponent_animator", (JointEntity*)entityImporterXBot.getImportedObject());
-    animatorPropertyXBot1->play("x_bot_neutral_idle", true, 1.0f, false);
+    //animatorPropertyXBot1->play(AnimatorProperty::ANIMATOR_1, "x_bot_neutral_idle", true, 1.0f, false);
     
     // Create the game object, character
     GameObject *opponent = new GameObject("opponent");
