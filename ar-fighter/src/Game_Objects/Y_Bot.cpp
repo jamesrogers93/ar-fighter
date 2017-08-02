@@ -26,26 +26,47 @@
 #include <game-engine/Modules/Graphics/MeshImporter.h>
 #include <game-engine/Modules/Animation/AnimationImporter.h>
 
-void YBot::walk()
+// STD
+#include <math.h>
+
+// GLM
+#include <glm/glm.hpp>
+
+void YBot::walk(const float &x, const float &z)
 {
+    
     if(mAnimator != NULL)
     {
-        //mAnimator->play(AnimatorProperty::ANIMATOR_1, "y_bot_walk_z", true, 1.0f, false);
         
-        mAnimator->getAnimationController1()->setAnimation("y_bot_walk_z+");
+        // We need to workout the values to give the animation controllers based on the direction
+        bool xReverse = x < 0.0;
+        bool zReverse = z < 0.0;
+    
+        //We will use this as the speed of the animation
+        float length = glm::length(glm::vec2(x, z));
+        
+        // Now we need to workout the alphas
+        // Normalise alphas to sum of 1
+        float alphaA = fabs(x);
+        float alphaB = fabs(z);
+        float sum = alphaA + alphaB;
+        alphaA = alphaA / sum;
+        alphaB = alphaB / sum;
+        
+        mAnimator->getAnimationController1()->setAnimation("y_bot_walk_x+");
         mAnimator->getAnimationController1()->setLoop(true);
-        mAnimator->getAnimationController1()->setSpeed(1.0f);
-        mAnimator->getAnimationController1()->setReverse(false);
+        mAnimator->getAnimationController1()->setSpeed(length);
+        mAnimator->getAnimationController1()->setReverse(xReverse);
         mAnimator->getAnimationController1()->resetElapsedTime();
-        mAnimator->getAnimationController1()->setAlpha(0.2);
+        mAnimator->getAnimationController1()->setAlpha(alphaA);
         mAnimator->getAnimationController1()->play();
         
-        mAnimator->getAnimationController2()->setAnimation("y_bot_walk_x+");
+        mAnimator->getAnimationController2()->setAnimation("y_bot_walk_z+");
         mAnimator->getAnimationController2()->setLoop(true);
-        mAnimator->getAnimationController2()->setSpeed(1.0f);
-        mAnimator->getAnimationController2()->setReverse(true);
+        mAnimator->getAnimationController2()->setSpeed(length);
+        mAnimator->getAnimationController2()->setReverse(zReverse);
         mAnimator->getAnimationController2()->resetElapsedTime();
-        mAnimator->getAnimationController2()->setAlpha(0.8);
+        mAnimator->getAnimationController2()->setAlpha(alphaB);
         mAnimator->getAnimationController2()->play();
     }
 }

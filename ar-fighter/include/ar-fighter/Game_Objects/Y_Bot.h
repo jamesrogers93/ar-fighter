@@ -12,7 +12,7 @@ public:
     
     void initialise();
   
-    void walk();
+    void walk(const float &x, const float &z);
 };
 
 #endif /* _YBOT_H */

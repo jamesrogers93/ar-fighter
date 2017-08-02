@@ -83,7 +83,7 @@ void SettingsSceneLogic::initialise()
     //yBot->translate(-150.0, 0.0, 0.0);
     mScene->addEntity(yBot);
     
-    yBot->walk();
+    yBot->walk(1.0, 1.0);
     test = yBot;
     
     
