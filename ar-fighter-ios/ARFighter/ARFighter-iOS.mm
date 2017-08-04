@@ -63,6 +63,21 @@
     _instance->draw();
 }
 
+- (void) touchDown:(float) x :(float) y
+{
+    _instance->touchDown(x, y);
+}
+
+- (void) touchMove:(float) x :(float) y
+{
+    _instance->touchMove(x, y);
+}
+
+- (void) touchUp:(float) x :(float) y
+{
+    _instance->touchUp(x, y);
+}
+
 -(void) setUpSettingsScene
 {
     _instance->setUpSettingsScene();

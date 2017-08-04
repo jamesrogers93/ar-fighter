@@ -26,6 +26,10 @@ public:
     void update();
     void draw();
     
+    void touchDown(const float &x, const float &y);
+    void touchMove(const float &x, const float &y);
+    void touchUp(const float &x, const float &y);
+    
     void setUpSettingsScene();
     void setUpFightScene();
     

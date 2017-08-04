@@ -20,6 +20,7 @@ public:
     virtual void initialise() = 0;
     
     virtual void walk(const float &x, const float &z){}
+    virtual void idle() {}
     
     AnimatorProperty* getAnimator() { return mAnimator; }
     

@@ -17,6 +17,9 @@
 - (void) deinitialise;
 - (void) update: (double)deltaTime;
 - (void) draw;
+- (void) touchDown:(float) x :(float) y;
+- (void) touchMove:(float) x :(float) y;
+- (void) touchUp:(float) x :(float) y;
 
 -(void) setUpSettingsScene;
 -(void) setUpFightScene;

@@ -32,9 +32,14 @@
 #include <game-engine/Modules/Graphics/MaterialImporter.h>
 #include <game-engine/Modules/Graphics/MeshImporter.h>
 
+// Game Engine GUI
+#include <game-engine/Modules/GUI/GUI.h>
+#include <game-engine/Modules/GUI/GUIAnalog.h>
+
 #include <game-engine/GameObject.h>
 
 #include "ar-fighter/Game_Objects/Y_Bot.h"
+#include "ar-fighter/Game_Objects/X_Bot.h"
 YBot *test;
 
 static unsigned int counter = 0;
@@ -69,6 +74,9 @@ void SettingsSceneLogic::draw()
     
     // Update Graphics second
     engine->update(CoreModuleType::CM_GRAPHICS);
+
+    // Update the GUI
+    engine->update(CoreModuleType::CM_GUI);
 }
 
 void SettingsSceneLogic::initialise()
@@ -80,14 +88,35 @@ void SettingsSceneLogic::initialise()
     
     YBot *yBot = new YBot();
     yBot->initialise();
-    //yBot->translate(-150.0, 0.0, 0.0);
+    yBot->translate(-150.0, 0.0, 0.0);
     mScene->addEntity(yBot);
     
-    yBot->walk(1.0, 1.0);
+    //yBot->walk(1.0, 1.0);
+    yBot->idle();
     test = yBot;
     
     
+    // DELETE
+    GUIAnalog *guiProperty = new GUIAnalog("Analog", 200.0f, 150.0f, glm::vec2(300.0, 300.0));
+    guiProperty->setColour(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f));
+    guiProperty->setDrawOnTouched(0.0, (float)System::screenWidth / 2.0f, (float)System::screenHeight, 0.0);
+    
+    test->addProperty(guiProperty);
+    
+    
+    
+    
+    
     // X_Bot
+    XBot *xBot = new XBot();
+    xBot->initialise();
+    xBot->translate(150.0, 0.0, 0.0);
+    mScene->addEntity(xBot);
+    
+    //yBot->walk(1.0, 1.0);
+    xBot->idle();
+    
+    /*// X_Bot
     
     //
     // IMPORTING ASSETS
@@ -124,8 +153,8 @@ void SettingsSceneLogic::initialise()
     AnimationImporter animationImporterXBot1;
     animationImporterXBot1.ImportAsynchronously(System::assetsPath + "animations/X_Bot/X_Bot_neutral_idle.jmpAnimation");
     
-    /*AnimationImporter animationImporterXBot2;
-    animationImporterXBot2.ImportAsynchronously(System::assetsPath + "animations/X_Bot/punch.jmpAnimation");*/
+    /AnimationImporter animationImporterXBot2;
+    //animationImporterXBot2.ImportAsynchronously(System::assetsPath + "animations/X_Bot/punch.jmpAnimation");
     
     // Wait till all assets are loaded in
     entityImporterXBot.join();
@@ -201,7 +230,7 @@ void SettingsSceneLogic::initialise()
     
     // Add the materials to the graphics module
     gModule->addMaterial(materialImporterXBot1.getImportedObject()->getName(), materialImporterXBot1.getImportedObject());
-    gModule->addMaterial(materialImporterXBot2.getImportedObject()->getName(), materialImporterXBot2.getImportedObject());
+    gModule->addMaterial(materialImporterXBot2.getImportedObject()->getName(), materialImporterXBot2.getImportedObject());*/
     
     
     

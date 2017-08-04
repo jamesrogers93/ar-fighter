@@ -71,6 +71,21 @@ void YBot::walk(const float &x, const float &z)
     }
 }
 
+void YBot::idle()
+{
+    if(mAnimator != NULL)
+    {
+        mAnimator->getAnimationController1()->setAnimation("y_bot_neutral_idle");
+        mAnimator->getAnimationController1()->setLoop(true);
+        mAnimator->getAnimationController1()->setSpeed(1.0f);
+        mAnimator->getAnimationController1()->setReverse(false);
+        mAnimator->getAnimationController1()->resetElapsedTime();
+        mAnimator->getAnimationController1()->play();
+        
+        mAnimator->getAnimationController2()->stop();
+    }
+}
+
 void YBot::initialise()
 {
     
@@ -132,7 +147,10 @@ void YBot::initialise()
     animationImporterYBot1.join();
     animationImporterYBot2.join();
     
+    AnimationImporter animationImporterYBot3;
+    animationImporterYBot3.ImportAsynchronously(System::assetsPath + "animations/Y_Bot/Y_Bot_neutral_idle.jmpAnimation");
     
+    animationImporterYBot3.join();
     
     //
     // ANIMATIONS
@@ -141,7 +159,7 @@ void YBot::initialise()
     // Add animations to the animation module
     aModule->addAnimation(animationImporterYBot1.getImportedObject()->getName(), animationImporterYBot1.getImportedObject());
     aModule->addAnimation(animationImporterYBot2.getImportedObject()->getName(), animationImporterYBot2.getImportedObject());
-    //aModule->addAnimation(animationImporterYBot3.getImportedObject()->getName(), animationImporterYBot3.getImportedObject());
+    aModule->addAnimation(animationImporterYBot3.getImportedObject()->getName(), animationImporterYBot3.getImportedObject());
     //aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject());
     
     
@@ -161,7 +179,7 @@ void YBot::initialise()
     meshPropertyYBot2->linkJoints(entityImporterYBot.getImportedObject());
     
     // Create animator property
-    AnimatorProperty *animatorPropertyYBot1 = new AnimatorProperty("player_animator", (JointEntity*)entityImporterYBot.getImportedObject());
+    AnimatorProperty *animatorPropertyYBot1 = new AnimatorProperty("y_bot_animator", (JointEntity*)entityImporterYBot.getImportedObject());
     mAnimator = animatorPropertyYBot1;
     
     // Create the game object, character

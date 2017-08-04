@@ -44,6 +44,9 @@
 #include <game-engine/Modules/Animation/Animation.h>
 #include <game-engine/Modules/Animation/AnimationImporter.h>
 
+// Game Engine GUI Module
+#include <game-engine/Modules/GUI/GUI.h>
+
 // Game Engine Scene
 #include <game-engine/Scene/SceneManager.h>
 #include <game-engine/Scene/Scene.h>
@@ -145,6 +148,7 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     engine->addCoreModule(&Graphics::getInstance());
     engine->addCoreModule(&AR::getInstance());
     engine->addCoreModule(&AnimationModule::getInstance());
+    engine->addCoreModule(&GUI::getInstance());
     
     // Configure the graphics module.
     Graphics::getInstance().initialise();
@@ -152,6 +156,9 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     
     // Configure the ar module
     AR::getInstance().initialise();
+    
+    // Configure GUI module
+    GUI::getInstance().initialise();
     
     // Add our scenes to the engine.
     
@@ -190,6 +197,21 @@ void ARFighter::update()
 void ARFighter::draw()
 {
     SceneManager::getInstance().draw();
+}
+
+void ARFighter::touchDown(const float &x, const float &y)
+{
+    GUI::getInstance().touchDown(x, y);
+}
+
+void ARFighter::touchMove(const float &x, const float &y)
+{
+    GUI::getInstance().touchMove(x, y);
+}
+
+void ARFighter::touchUp(const float &x, const float &y)
+{
+    GUI::getInstance().touchUp(x, y);
 }
 
 /*void ARFighter::pitch()
