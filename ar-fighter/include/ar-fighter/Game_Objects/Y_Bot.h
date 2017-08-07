@@ -10,10 +10,10 @@ public:
     {
     }
     
-    void initialise();
+    //void initialise();
   
-    void walk(const float &x, const float &z);
-    void idle();
+    //void walk(const float &x, const float &z);
+    //void idle();
 };
 
 #endif /* _YBOT_H */

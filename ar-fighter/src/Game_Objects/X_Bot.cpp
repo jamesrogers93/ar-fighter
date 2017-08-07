@@ -32,7 +32,7 @@
 // GLM
 #include <glm/glm.hpp>
 
-void XBot::walk(const float &x, const float &z)
+/*void XBot::walk(const float &x, const float &z)
 {
     
     if(mAnimator != NULL)
@@ -69,9 +69,9 @@ void XBot::walk(const float &x, const float &z)
         mAnimator->getAnimationController2()->setAlpha(alphaB);
         mAnimator->getAnimationController2()->play();
     }
-}
+}*/
 
-void XBot::idle()
+/*void XBot::idle()
 {
     if(mAnimator != NULL)
     {
@@ -84,9 +84,9 @@ void XBot::idle()
         
         mAnimator->getAnimationController2()->stop();
     }
-}
+}*/
 
-void XBot::initialise()
+/*void XBot::initialise()
 {
     
     Graphics *gModule = static_cast<Graphics*>(Engine::getInstance().getCoreModule(CoreModuleType::CM_GRAPHICS));
@@ -218,4 +218,4 @@ void XBot::initialise()
     // Add the materials to the graphics module
     gModule->addMaterial(materialImporterXBot1.getImportedObject()->getName(), materialImporterXBot1.getImportedObject());
     gModule->addMaterial(materialImporterXBot2.getImportedObject()->getName(), materialImporterXBot2.getImportedObject());
-}
+}*/

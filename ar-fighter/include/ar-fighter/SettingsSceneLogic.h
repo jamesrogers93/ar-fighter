@@ -5,9 +5,15 @@
 
 #include "game-engine/Core/Engine/Engine.h"
 
+#include "ar-fighter/Game_Objects/Character.h"
+
 class SettingsSceneLogic : public SceneLogic
 {
 public:
+    
+    Character *player;
+    Character *opponent;
+    
     SettingsSceneLogic(Scene *scene) : SceneLogic(scene)
     {
         

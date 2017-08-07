@@ -38,7 +38,7 @@ class SettingsViewController: GLKViewController
         if let touch = touches.first
         {
             let location = convertTouch(touch.location(in: self.view))
-            print("Touch Began Location x: \(location.x) y: \(location.y)")
+            //print("Touch Began Location x: \(location.x) y: \(location.y)")
             
             game?.touchDown(Float(location.x), Float(location.y));
         }
@@ -49,7 +49,7 @@ class SettingsViewController: GLKViewController
         if let touch = touches.first
         {
             let location = convertTouch(touch.location(in: self.view))
-            print("Touch Moved Location x: \(location.x) y: \(location.y)")
+            //print("Touch Moved Location x: \(location.x) y: \(location.y)")
             
             game?.touchMove(Float(location.x), Float(location.y));
         }
@@ -60,7 +60,7 @@ class SettingsViewController: GLKViewController
         if let touch = touches.first
         {
             let location = convertTouch(touch.location(in: self.view))
-            print("Touch End Location x: \(location.x) y: \(location.y)")
+            //print("Touch End Location x: \(location.x) y: \(location.y)")
             
             game?.touchUp(Float(location.x), Float(location.y));
         }
@@ -129,13 +129,14 @@ class SettingsViewController: GLKViewController
         
         if let destinationViewController = segue.destination as? FightViewController
         {
-            
             // initialise the fight game view controller opengl context and pass the sharegroup to it
             let view = destinationViewController.view as! GLKView
             view.context =  GLContextIOS.currentContext()
             view.drawableDepthFormat = .format24
             
             destinationViewController.game = self.game;
+            
+            destinationViewController.setUpGame()
         }
     }
     

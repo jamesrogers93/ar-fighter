@@ -53,35 +53,6 @@
                     <view key="view" contentMode="scaleToFill" id="Iay-pf-GSP" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfM-aw-348">
-                                <rect key="frame" x="601" y="325" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration" label="YAW"/>
-                                <state key="normal" title="Punch"/>
-                                <connections>
-                                    <action selector="pitchButton:" destination="ewn-wQ-HXt" eventType="touchDown" id="BKi-fF-H3Z"/>
-                                    <action selector="pitchButton:" destination="ewn-wQ-HXt" eventType="touchUpInside" id="QGY-cS-ZsA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSp-uh-NOw">
-                                <rect key="frame" x="12" y="325" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Left"/>
-                                <connections>
-                                    <action selector="trackButton:" destination="ewn-wQ-HXt" eventType="touchUpInside" id="Ojw-we-8Vq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGo-ho-mAi">
-                                <rect key="frame" x="73" y="325" width="36" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Right"/>
-                                <connections>
-                                    <action selector="rollButton:" destination="ewn-wQ-HXt" eventType="touchDown" id="U6H-Lu-d8I"/>
-                                    <action selector="rollButton:" destination="ewn-wQ-HXt" eventType="touchUpInside" id="f2d-N7-mqk"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>

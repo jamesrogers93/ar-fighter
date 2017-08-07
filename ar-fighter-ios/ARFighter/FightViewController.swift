@@ -18,26 +18,11 @@ class FightViewController: GLKViewController
 
     }
     
-    @IBAction func leftButton(_ sender: UIButton)
-    {
-        
-    }
-    
-    @IBAction func rightButton(_ sender: UIButton)
-    {
-        
-    }
-    
-    @IBAction func punchButton(_ sender: UIButton)
-    {
-        
-    }
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        self.game?.setUpFightScene()
+        
     }
     
     override func didReceiveMemoryWarning()
@@ -48,6 +33,11 @@ class FightViewController: GLKViewController
         {
             self.view = nil
          }
+    }
+    
+    func setUpGame()
+    {
+        self.game?.setUpFightScene()
     }
 
     // Update view in here

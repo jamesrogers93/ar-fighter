@@ -33,7 +33,6 @@ public:
     void setUpSettingsScene();
     void setUpFightScene();
     
-    
     //void setAssetsPath(const std::string &path) {   this->assetsPath = path;    }
     
 private:

@@ -14,21 +14,31 @@ class AnimatableMeshProperty;
 class Character : public GameObject
 {
 public:
-    Character(const std::string &name) : GameObject(name), mAnimator(NULL)
+    
+    enum CharacterState { IDLE, WALKING, PUNCHING};
+    CharacterState state;
+    
+    Character(const std::string &name) : GameObject(name), mAnimator(NULL), state(IDLE)
     {}
     
-    virtual void initialise() = 0;
+    virtual void initialise();
     
-    virtual void walk(const float &x, const float &z){}
-    virtual void idle() {}
+    virtual void walk(const float &x, const float &z);
+    virtual void idle();// {}
+    virtual void punch();
     
     AnimatorProperty* getAnimator() { return mAnimator; }
+    
+    void update();
     
 protected:
     
     // Handles to the properties
     AnimatorProperty *mAnimator;
 
+    
+    glm::vec3 walkTranslation;
+    
 };
 
 #endif /* _CHARACTER_H */

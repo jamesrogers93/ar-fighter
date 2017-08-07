@@ -8,6 +8,8 @@
 
 #include <game-engine/Modules/CoreModule.h>
 
+// Game Engine Util
+#include <game-engine/Util/TimeUtil.h>
 // Game Engine Graphics
 #include <game-engine/Modules/Graphics/Graphics.h>
 #include <game-engine/Modules/Graphics/AnimatableMeshProperty.h>
@@ -32,7 +34,7 @@
 // GLM
 #include <glm/glm.hpp>
 
-void YBot::walk(const float &x, const float &z)
+/*void YBot::walk(const float &x, const float &z)
 {
     
     if(mAnimator != NULL)
@@ -42,7 +44,7 @@ void YBot::walk(const float &x, const float &z)
         bool xReverse = x < 0.0;
         bool zReverse = z < 0.0;
     
-        //We will use this as the speed of the animation
+        // We will use this as the speed of the animation
         float length = glm::length(glm::vec2(x, z));
         
         // Now we need to workout the alphas
@@ -57,7 +59,7 @@ void YBot::walk(const float &x, const float &z)
         mAnimator->getAnimationController1()->setLoop(true);
         mAnimator->getAnimationController1()->setSpeed(length);
         mAnimator->getAnimationController1()->setReverse(xReverse);
-        mAnimator->getAnimationController1()->resetElapsedTime();
+        //mAnimator->getAnimationController1()->resetElapsedTime();
         mAnimator->getAnimationController1()->setAlpha(alphaA);
         mAnimator->getAnimationController1()->play();
         
@@ -65,13 +67,36 @@ void YBot::walk(const float &x, const float &z)
         mAnimator->getAnimationController2()->setLoop(true);
         mAnimator->getAnimationController2()->setSpeed(length);
         mAnimator->getAnimationController2()->setReverse(zReverse);
-        mAnimator->getAnimationController2()->resetElapsedTime();
+        //mAnimator->getAnimationController2()->resetElapsedTime();
         mAnimator->getAnimationController2()->setAlpha(alphaB);
         mAnimator->getAnimationController2()->play();
+        
+        
+        // Now translate character
+        
+        // Get normalised direction of player movement
+        glm::vec3 direction = glm::normalize(glm::vec3(x, 0.0, z));
+        
+        // Get the translation distance
+        glm::vec3 t = glm::vec3(20.0f, 0.0f, 50.0);
+        
+        // Multiply by direction to translate in direction of walking direction
+        t *= direction;
+        
+        // Multiply by length (speed) to account for slower walking speeds
+        t *= length;
+        
+        walkTranslation = t;
+        
+        // Set the state
+        state = WALKING;
+        
+        // Finally translate
+        //translate(t);
     }
-}
+}*/
 
-void YBot::idle()
+/*void YBot::idle()
 {
     if(mAnimator != NULL)
     {
@@ -83,10 +108,12 @@ void YBot::idle()
         mAnimator->getAnimationController1()->play();
         
         mAnimator->getAnimationController2()->stop();
+        
+        state = IDLE;
     }
-}
+}*/
 
-void YBot::initialise()
+/*void YBot::initialise()
 {
     
     Graphics *gModule = static_cast<Graphics*>(Engine::getInstance().getCoreModule(CoreModuleType::CM_GRAPHICS));
@@ -218,4 +245,4 @@ void YBot::initialise()
     // Add the materials to the graphics module
     gModule->addMaterial(materialImporterYBot1.getImportedObject()->getName(), materialImporterYBot1.getImportedObject());
     gModule->addMaterial(materialImporterYBot2.getImportedObject()->getName(), materialImporterYBot2.getImportedObject());
-}
+}*/

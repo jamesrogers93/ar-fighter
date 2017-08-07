@@ -64,36 +64,9 @@
 #include "ar-fighter/SettingsSceneLogic.h"
 
 
-Entity *TEST;
-AREntity *TESTTRACK;
-
-Scene* simpleCameraScene()
-{
-    Scene* scene = new Scene("simple_camera");
-    
-    /*AREntity *arEntity = new AREntity("backcamera");
-    arEntity->translate(0.0, 0.0, 500.0);
-    scene->addEntity(arEntity);
-    arEntity->initialise();
-    arEntity->startCapture();
-    CameraCapture::getInstance().addDelegate(arEntity);
-    AR::getInstance().setActiveAREntity("backcamera");*/
-    
-    return scene;
-}
-
-Scene* ARFighter::createSettingsScene()
-{
-    Scene* scene = new Scene("settings");
-    
-    
-    
-    return scene;
-}
-
 void ARFighter::setUpSettingsScene()
 {
-    Scene *scene = createSettingsScene();
+    Scene *scene = new Scene("settings");
     
     // Create Scene Logic class
     SettingsSceneLogic *sceneLogic = new SettingsSceneLogic(scene);
@@ -113,7 +86,14 @@ void ARFighter::setUpFightScene()
     // But we do need to give the scene a new logic controller
     
     FightSceneLogic *sceneLogic = new FightSceneLogic(scene);
+    
+    // Pass some settings from settings scene logic to the fight game scene logic
+    SettingsSceneLogic * settingSceneLogic = (SettingsSceneLogic*)scene->getSceneLogic();
+    sceneLogic->player = settingSceneLogic->player;
+    sceneLogic->opponent = settingSceneLogic->opponent;
+    
     sceneLogic->initialise();
+    scene->setSceneLogic(sceneLogic);
     
 }
 
@@ -129,11 +109,11 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     GLContext::getInstance().makeCurrentContext();
     
     // Initialise Camera
-    //CameraCapture::getInstance().setResolution(CameraCapture::RES_640x480);
-    //CameraCapture::getInstance().initialise();
+    CameraCapture::getInstance().setResolution(CameraCapture::RES_640x480);
+    CameraCapture::getInstance().initialise();
     
     // Initialise Gyroscope
-    //Gyroscope::getInstance().initialise();
+    Gyroscope::getInstance().initialise();
     
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
@@ -153,6 +133,7 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     // Configure the graphics module.
     Graphics::getInstance().initialise();
     Graphics::getInstance().enableBackfaceCulling();
+    Graphics::getInstance().enableBlend();
     
     // Configure the ar module
     AR::getInstance().initialise();
