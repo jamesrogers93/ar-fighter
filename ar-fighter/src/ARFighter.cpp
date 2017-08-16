@@ -44,6 +44,9 @@
 #include <game-engine/Modules/Animation/Animation.h>
 #include <game-engine/Modules/Animation/AnimationImporter.h>
 
+// Game Engine Physics Module
+#include <game-engine/Modules/Physics/Physics.h>
+
 // Game Engine GUI Module
 #include <game-engine/Modules/GUI/GUI.h>
 
@@ -128,6 +131,7 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     engine->addCoreModule(&Graphics::getInstance());
     engine->addCoreModule(&AR::getInstance());
     engine->addCoreModule(&AnimationModule::getInstance());
+    engine->addCoreModule(&Physics::getInstance());
     engine->addCoreModule(&GUI::getInstance());
     
     // Configure the graphics module.
@@ -137,6 +141,9 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     
     // Configure the ar module
     AR::getInstance().initialise();
+    
+    // Configure physics module
+    Physics::getInstance().initialise();
     
     // Configure GUI module
     GUI::getInstance().initialise();

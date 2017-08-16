@@ -6,7 +6,7 @@
 class YBot : public Character
 {
 public:
-    YBot() : Character("y_bot")
+    YBot(unsigned short collisionMask, unsigned short collidesWithMask) : Character("y_bot", collisionMask, collidesWithMask)
     {
     }
     

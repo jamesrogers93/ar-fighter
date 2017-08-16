@@ -43,6 +43,46 @@ void SettingsSceneLogic::update()
     Engine::getInstance().update(CoreModuleType::CM_ANIMATION, false);
 }
 
+MeshGL* createSphere(const float &radius)
+{
+    int lats = 40;
+    int longs = 40;
+    int i, j;
+    std::vector<VertexP> vertices;
+    std::vector<GLuint> indices;
+    int indicator = 0;
+    for(i = 0; i <= lats; i++) {
+        double lat0 = glm::pi<double>() * (-0.5 + (double) (i - 1) / lats);
+        double z0  = sin(lat0);
+        double zr0 =  cos(lat0);
+        
+        double lat1 = glm::pi<double>() * (-0.5 + (double) i / lats);
+        double z1 = sin(lat1);
+        double zr1 = cos(lat1);
+        
+        for(j = 0; j <= longs; j++) {
+            double lng = 2 * glm::pi<double>() * (double) (j - 1) / longs;
+            double x = cos(lng);
+            double y = sin(lng);
+            
+            VertexP v1;
+            v1.position = glm::vec3(x * zr0 * radius, y * zr0 * radius, z0 * radius);
+            vertices.push_back(v1);
+            indices.push_back(indicator);
+            indicator++;
+            
+            VertexP v2;
+            v2.position = glm::vec3(x * zr1 * radius, y * zr1 * radius, z1 * radius);
+            vertices.push_back(v2);
+            indices.push_back(indicator);
+            indicator++;
+        }
+        indices.push_back(GL_PRIMITIVE_RESTART_FIXED_INDEX);
+    }
+    
+    return MeshGL::loadMeshGL(vertices, indices);
+}
+
 void SettingsSceneLogic::draw()
 {
     jmpGLClearColour(0.65, 0.65, 0.65, 1.0);
@@ -64,8 +104,12 @@ void SettingsSceneLogic::initialise()
 {
     Graphics *gModule = static_cast<Graphics*>(Engine::getInstance().getCoreModule(CoreModuleType::CM_GRAPHICS));
     
+    
+    unsigned short yBotMask = 1;
+    unsigned short xBotMask = 2;
+    
     // YBot
-    YBot *yBot = new YBot();
+    YBot *yBot = new YBot(yBotMask, xBotMask);
     yBot->initialise();
     yBot->translate(-150.0, 0.0, 0.0);
     mScene->addEntity(yBot);
@@ -73,7 +117,7 @@ void SettingsSceneLogic::initialise()
     player = yBot;
     
     // X_Bot
-    XBot *xBot = new XBot();
+    XBot *xBot = new XBot(xBotMask, yBotMask);
     xBot->initialise();
     xBot->translate(150.0, 0.0, 0.0);
     mScene->addEntity(xBot);
@@ -85,6 +129,7 @@ void SettingsSceneLogic::initialise()
     // SHADER
     //
     
+    // Shader 1
     // Add a shader object to the graphics module
     std::vector<std::pair<GLint, std::string> > vertexAttribs;
     vertexAttribs.push_back(std::make_pair(ATTRIB_POSITION, "position"));
@@ -100,8 +145,30 @@ void SettingsSceneLogic::initialise()
     DirectionalLightProperty::fillUniformNames(uniformNames);
     AnimatableMeshProperty::fillUniformNames(uniformNames);
     //Shader *s = Shader::loadShaderFromFile(this->assetsPath + "shaders/basic.vert", this->assetsPath + "shaders/basic.frag", vertexAttribs, uniformNames);
-    Shader *s = Shader::loadShaderFromFile(System::assetsPath + "shaders/animatable.vert", System::assetsPath + "shaders/basic.frag", vertexAttribs, uniformNames);
-    gModule->addShader("basic", s);
+    Shader *s1 = Shader::loadShaderFromFile(System::assetsPath + "shaders/animatable.vert", System::assetsPath + "shaders/lighting.frag", vertexAttribs, uniformNames);
+    s1->setHasLighting(true);
+    s1->setHasCamera(true);
+    gModule->addShader("lighting", s1);
+    
+    
+    // Shader 2
+    vertexAttribs.clear();
+    vertexAttribs.push_back(std::make_pair(ATTRIB_POSITION, "position"));
+    
+    uniformNames.clear();
+    CameraEntity::fillUniformNames(uniformNames);
+    Material::fillUniformNames(uniformNames);
+    MeshProperty::fillUniformNames(uniformNames);
+
+    Shader *s2 = Shader::loadShaderFromFile(System::assetsPath + "shaders/basic.vert", System::assetsPath + "shaders/basic.frag", vertexAttribs, uniformNames);
+    s2->setHasLighting(false);
+    s2->setHasCamera(true);
+    gModule->addShader("basic", s2);
+    
+    //
+    //  Mesh
+    //
+    gModule->addMesh("sphere", createSphere(1.0f));
     
     
     //
@@ -114,25 +181,7 @@ void SettingsSceneLogic::initialise()
     sun->addProperty(light);
     mScene->addEntity(sun);
     
-    
-    
-    
-    //
-    // AR
-    //
-    
-    // Create and add an AR entity
-    /*AREntity *arEntity = new AREntity("backcamera");
-     arEntity->translate(0.0, 0.0, 500.0);
-     scene->addEntity(arEntity);
-     arEntity->initialise();
-     arEntity->startCapture();
-     CameraCapture::getInstance().addDelegate(arEntity);
-     AR::getInstance().setActiveAREntity("backcamera");*/
-    
-    
-    
-    
+
     //
     // CAMERA
     //

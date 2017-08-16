@@ -25,6 +25,8 @@
 		1A988F421F05802D008CD438 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F411F05802D008CD438 /* CoreMotion.framework */; };
 		1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F3F1F057FE8008CD438 /* AVFoundation.framework */; };
 		1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F441F05851B008CD438 /* CoreMedia.framework */; };
+		1AB84F3A1F3DC7C700808FBD /* libBulletCollision_xcode4_x64_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB84EB21F3DB98500808FBD /* libBulletCollision_xcode4_x64_debug.a */; };
+		1AB84F3B1F3DC7C700808FBD /* libLinearMath_xcode4_x64_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB84EB41F3DB98500808FBD /* libLinearMath_xcode4_x64_debug.a */; };
 		1AE3ABF01F10FBA60010E2C0 /* libKudanCV-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +117,16 @@
 		1A988F3F1F057FE8008CD438 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1A988F411F05802D008CD438 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1A988F441F05851B008CD438 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1AB84E9D1F3DB07B00808FBD /* libBulletCollision_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_x64_release.a; sourceTree = "<group>"; };
+		1AB84EA21F3DB09E00808FBD /* libBulletCollision_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_x64_debug.a; sourceTree = "<group>"; };
+		1AB84EA41F3DB23900808FBD /* libBulletCollision_xcode4_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_xcode4_x64_release.a; sourceTree = "<group>"; };
+		1AB84EA51F3DB23900808FBD /* libBulletDynamics_xcode4_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletDynamics_xcode4_x64_release.a; sourceTree = "<group>"; };
+		1AB84EA61F3DB23900808FBD /* libLinearMath_xcode4_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath_xcode4_x64_release.a; sourceTree = "<group>"; };
+		1AB84EAB1F3DB40100808FBD /* libBulletDynamics_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletDynamics_x64_release.a; sourceTree = "<group>"; };
+		1AB84EAC1F3DB40100808FBD /* libLinearMath_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath_x64_release.a; sourceTree = "<group>"; };
+		1AB84EB21F3DB98500808FBD /* libBulletCollision_xcode4_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_xcode4_x64_debug.a; sourceTree = "<group>"; };
+		1AB84EB31F3DB98500808FBD /* libBulletDynamics_xcode4_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletDynamics_xcode4_x64_debug.a; sourceTree = "<group>"; };
+		1AB84EB41F3DB98500808FBD /* libLinearMath_xcode4_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath_xcode4_x64_debug.a; sourceTree = "<group>"; };
 		1AE3ABE91F10F9AE0010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "../game-engine/external/KudanCV/libKudanCV-iOS.a"; sourceTree = "<group>"; };
 		1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKudanCV-iOS.a"; sourceTree = "<group>"; };
 		1AE3ABED1F10FA600010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "../libKudanCV-iOS.a"; sourceTree = "<group>"; };
@@ -125,6 +137,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AB84F3A1F3DC7C700808FBD /* libBulletCollision_xcode4_x64_debug.a in Frameworks */,
+				1AB84F3B1F3DC7C700808FBD /* libLinearMath_xcode4_x64_debug.a in Frameworks */,
 				1AE3ABF01F10FBA60010E2C0 /* libKudanCV-iOS.a in Frameworks */,
 				1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */,
 				1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */,
@@ -216,6 +230,16 @@
 		1A38B9DF1EEFE341009CDF0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AB84EB21F3DB98500808FBD /* libBulletCollision_xcode4_x64_debug.a */,
+				1AB84EB31F3DB98500808FBD /* libBulletDynamics_xcode4_x64_debug.a */,
+				1AB84EB41F3DB98500808FBD /* libLinearMath_xcode4_x64_debug.a */,
+				1AB84EAB1F3DB40100808FBD /* libBulletDynamics_x64_release.a */,
+				1AB84EAC1F3DB40100808FBD /* libLinearMath_x64_release.a */,
+				1AB84EA41F3DB23900808FBD /* libBulletCollision_xcode4_x64_release.a */,
+				1AB84EA51F3DB23900808FBD /* libBulletDynamics_xcode4_x64_release.a */,
+				1AB84EA61F3DB23900808FBD /* libLinearMath_xcode4_x64_release.a */,
+				1AB84EA21F3DB09E00808FBD /* libBulletCollision_x64_debug.a */,
+				1AB84E9D1F3DB07B00808FBD /* libBulletCollision_x64_release.a */,
 				1AE3ABED1F10FA600010E2C0 /* libKudanCV-iOS.a */,
 				1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */,
 				1AE3ABE91F10F9AE0010E2C0 /* libKudanCV-iOS.a */,

@@ -20,6 +20,11 @@
 #include <game-engine/Modules/Animation/AnimationModule.h>
 #include <game-engine/Modules/Animation/AnimatorProperty.h>
 #include <game-engine/Modules/Animation/Animation.h>
+#include <game-engine/Modules/Animation/JointEntity.h>
+
+// Game Engine Physics
+#include  <game-engine/Modules/Physics/PhysicsProperty.h>
+#include  <game-engine/Modules/Physics/PhysicsSphere.h>
 
 // Game Engine Importers
 #include <game-engine/Entity/EntityImporter.h>
@@ -33,6 +38,20 @@
 
 // GLM
 #include <glm/glm.hpp>
+
+// Bullet
+#include <btBulletCollisionCommon.h>
+
+Character::Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask) : GameObject(name), mAnimator(NULL), state(IDLE), collisionMask(collisionMask), collidesWithMask(collidesWithMask)
+{
+    /*physicsMeshMap =
+    {
+        {name + "_head", headPhysicsMeshProperty},
+        {name + "_torso", torsoPhysicsMeshProperty},
+        {name + "_lefthand", leftHandPhysicsMeshProperty},
+        {name + "_righthand", rightHandPhysicsMeshProperty}
+    };*/
+}
 
 void Character::walk(const float &x, const float &z)
 {
@@ -117,7 +136,7 @@ void Character::punch()
 {
     if(mAnimator != NULL)
     {
-        mAnimator->getAnimationController1()->setAnimation(name + "punch");
+        mAnimator->getAnimationController1()->setAnimation(name + "_punch_1");
         mAnimator->getAnimationController1()->setLoop(false);
         mAnimator->getAnimationController1()->setSpeed(1.0f);
         mAnimator->getAnimationController1()->setReverse(false);
@@ -127,6 +146,22 @@ void Character::punch()
         mAnimator->getAnimationController2()->stop();
         
         state = PUNCHING;
+    }
+}
+
+void Character::kick()
+{
+    if(mAnimator != NULL)
+    {
+        
+    }
+}
+
+void Character::block()
+{
+    if(mAnimator != NULL)
+    {
+        
     }
 }
 
@@ -194,7 +229,11 @@ void Character::initialise()
     AnimationImporter animationImporterYBot3;
     animationImporterYBot3.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_neutral_idle.jmpAnimation");
     
+    AnimationImporter animationImporterYBot4;
+    animationImporterYBot4.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_punch_1.jmpAnimation");
+
     animationImporterYBot3.join();
+    animationImporterYBot4.join();
     
     //
     // ANIMATIONS
@@ -204,6 +243,7 @@ void Character::initialise()
     aModule->addAnimation(animationImporterYBot1.getImportedObject()->getName(), animationImporterYBot1.getImportedObject());
     aModule->addAnimation(animationImporterYBot2.getImportedObject()->getName(), animationImporterYBot2.getImportedObject());
     aModule->addAnimation(animationImporterYBot3.getImportedObject()->getName(), animationImporterYBot3.getImportedObject());
+    aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject());
     //aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject());
     
     
@@ -215,12 +255,12 @@ void Character::initialise()
     
     // Create animatable mesh properties
     AnimatableMeshProperty *meshPropertyYBot1 = (AnimatableMeshProperty*)propertyImporterYBot1.getImportedObject();
-    meshPropertyYBot1->setShaderKey("basic");   // Set shader key
-    meshPropertyYBot1->linkJoints(entityImporterYBot.getImportedObject()); // Link to imported skeleton
+    meshPropertyYBot1->setShaderKey("lighting");   // Set shader key
+    meshPropertyYBot1->linkJoints((JointEntity*)entityImporterYBot.getImportedObject()); // Link to imported skeleton
     
     AnimatableMeshProperty *meshPropertyYBot2 = (AnimatableMeshProperty*)propertyImporterYBot2.getImportedObject();
-    meshPropertyYBot2->setShaderKey("basic");
-    meshPropertyYBot2->linkJoints(entityImporterYBot.getImportedObject());
+    meshPropertyYBot2->setShaderKey("lighting");
+    meshPropertyYBot2->linkJoints((JointEntity*)entityImporterYBot.getImportedObject());
     
     // Create animator property
     AnimatorProperty *animatorPropertyYBot1 = new AnimatorProperty(name + "_animator", (JointEntity*)entityImporterYBot.getImportedObject());
@@ -262,6 +302,177 @@ void Character::initialise()
     // Add the materials to the graphics module
     gModule->addMaterial(materialImporterYBot1.getImportedObject()->getName(), materialImporterYBot1.getImportedObject());
     gModule->addMaterial(materialImporterYBot2.getImportedObject()->getName(), materialImporterYBot2.getImportedObject());
+    
+    
+    
+    
+    //
+    // Now set up some physics related properties
+    //
+    const float handPhysicsObjSize = 8;
+    
+    // Physics collision callbacks
+    std::function<void(PhysicsProperty*, PhysicsProperty*, btManifoldPoint*)> bodyCallback = std::bind(&Character::bodyCollisionCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    
+    std::function<void(PhysicsProperty*, PhysicsProperty*, btManifoldPoint*)> headCallback = std::bind(&Character::headCollisionCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    
+    std::function<void(PhysicsProperty*, PhysicsProperty*, btManifoldPoint*)> torsoCallback = std::bind(&Character::torsoCollisionCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    
+    std::function<void(PhysicsProperty*, PhysicsProperty*, btManifoldPoint*)> fistCallback = std::bind(&Character::fistCollisionCallback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    
+    std::function<void(PhysicsProperty*)> beforeCollisionCallback = std::bind(&Character::beforeCollisionCallback, this, std::placeholders::_1);
+    
+    // Get the entites we want to attach the physics stuff to
+    
+    // Body
+    // Get hips entity
+    JointEntity* hipsParent = (JointEntity*)getDescendant(name + "_hips");
+    GameObject *hips = new GameObject(name + "_hips_physics");
+    hips->scale(glm::vec3(40.0f));
+    hipsParent->addChild(hips);
+    
+    // Create and configure physics
+    PhysicsShape *bodyShape = new PhysicsSphere(40.0f);
+    PhysicsProperty *bodyPhysicsProperty = new PhysicsProperty(name + "_body", bodyShape);
+    bodyPhysicsProperty->setCollisionCallback(bodyCallback);
+    bodyPhysicsProperty->setBeforeCollisionTestCallback(beforeCollisionCallback);
+    bodyPhysicsProperty->setCollisionFlags(bodyPhysicsProperty->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+    //bodyPhysicsProperty->setMask(collisionMask, collidesWithMask);
+    bodyPhysicsProperty->setMask(4, 4);
+    hips->addProperty(bodyPhysicsProperty);
+    
+    // Create and configure graphical mesh
+    bodyPhysicsMeshProperty = new MeshProperty(name + "_body");
+    bodyPhysicsMeshProperty->setMaterialKey("no_collision");
+    bodyPhysicsMeshProperty->setMeshKey("sphere");
+    bodyPhysicsMeshProperty->setShaderKey("basic");
+    bodyPhysicsMeshProperty->setDrawMode(GL_LINES);
+    hips->addProperty(bodyPhysicsMeshProperty);
+    physicsMeshMap[name + "_body"] = bodyPhysicsMeshProperty;
+    
+    // HEAD
+    // Get head entity
+    JointEntity* headParent = (JointEntity*)getDescendant(name + "_head");
+    GameObject *head = new GameObject(name + "_head_physics");
+    glm::vec3 t = glm::vec3(0.8f * headParent->getLocalBindTransform()[3]);
+    head->translate(t);
+    head->scale(glm::vec3(14.0f));
+    headParent->addChild(head);
+    
+    // Create and configure physics
+    PhysicsShape *headShape = new PhysicsSphere(14.0f);
+    PhysicsProperty *headPhysicsProperty = new PhysicsProperty(name + "_head", headShape);
+    headPhysicsProperty->setCollisionCallback(headCallback);
+    headPhysicsProperty->setBeforeCollisionTestCallback(beforeCollisionCallback);
+    headPhysicsProperty->setCollisionFlags(headPhysicsProperty->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+    headPhysicsProperty->setMask(collisionMask, collidesWithMask);
+    head->addProperty(headPhysicsProperty);
+    
+    // Create and configure graphical mesh
+    headPhysicsMeshProperty = new MeshProperty(name + "_head");
+    headPhysicsMeshProperty->setMaterialKey("no_collision");
+    headPhysicsMeshProperty->setMeshKey("sphere");
+    headPhysicsMeshProperty->setShaderKey("basic");
+    headPhysicsMeshProperty->setDrawMode(GL_LINES);
+    head->addProperty(headPhysicsMeshProperty);
+    physicsMeshMap[name + "_head"] = headPhysicsMeshProperty;
+    
+    // Torso
+    // Get spine entity
+    JointEntity* spineParent = (JointEntity*)getDescendant(name + "_spine2");
+    GameObject *torso = new GameObject(name + "_torso_physics");
+    //glm::vec3 t = glm::vec3(0.8f * spineParent->getLocalBindTransform()[3]);
+    //torso->translate(t);
+    torso->scale(glm::vec3(18.0f));
+    spineParent->addChild(torso);
+    
+    // Create and configure physics
+    PhysicsShape *torsoShape = new PhysicsSphere(18.0f);
+    PhysicsProperty *torsoPhysicsProperty = new PhysicsProperty(name + "_torso", torsoShape);
+    torsoPhysicsProperty->setCollisionCallback(torsoCallback);
+    torsoPhysicsProperty->setBeforeCollisionTestCallback(beforeCollisionCallback);
+    torsoPhysicsProperty->setCollisionFlags(torsoPhysicsProperty->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+    torsoPhysicsProperty->setMask(collisionMask, collidesWithMask);
+    torso->addProperty(torsoPhysicsProperty);
+    
+    // Create and configure graphical mesh
+    torsoPhysicsMeshProperty = new MeshProperty(name + "_torso");
+    torsoPhysicsMeshProperty->setMaterialKey("no_collision");
+    torsoPhysicsMeshProperty->setMeshKey("sphere");
+    torsoPhysicsMeshProperty->setShaderKey("basic");
+    torsoPhysicsMeshProperty->setDrawMode(GL_LINES);
+    torso->addProperty(torsoPhysicsMeshProperty);
+    physicsMeshMap[name + "_torso"] = torsoPhysicsMeshProperty;
+    
+    // LEFT HAND
+    // Get left hand entity
+    JointEntity* leftHandParent = (JointEntity*)getDescendant(name + "_lefthand");
+    JointEntity* leftHandFinger = (JointEntity*)getDescendant(name + "_lefthandmiddle1");
+    GameObject *leftHand = new GameObject(name + "_lefthand_physics");
+     t = glm::vec3(0.5f * leftHandFinger->getLocalBindTransform()[3]);
+    leftHand->translate(t);
+    leftHand->scale(glm::vec3(handPhysicsObjSize));
+    leftHandParent->addChild(leftHand);
+    
+    // Create and configure physics
+    PhysicsShape *leftHandShape = new PhysicsSphere(handPhysicsObjSize);
+    PhysicsProperty *leftHandPhysicsProperty = new PhysicsProperty(name + "_lefthand", leftHandShape);
+    leftHandPhysicsProperty->setCollisionCallback(fistCallback);
+    leftHandPhysicsProperty->setBeforeCollisionTestCallback(beforeCollisionCallback);
+    leftHandPhysicsProperty->setCollisionFlags(leftHandPhysicsProperty->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+    leftHandPhysicsProperty->setMask(collisionMask, collidesWithMask);
+    leftHand->addProperty(leftHandPhysicsProperty);
+    
+    // Create and configure graphical mesh
+    leftHandPhysicsMeshProperty = new MeshProperty(name + "_lefthand");
+    leftHandPhysicsMeshProperty->setMaterialKey("no_collision");
+    leftHandPhysicsMeshProperty->setMeshKey("sphere");
+    leftHandPhysicsMeshProperty->setShaderKey("basic");
+    leftHandPhysicsMeshProperty->setDrawMode(GL_LINES);
+    leftHand->addProperty(leftHandPhysicsMeshProperty);
+    physicsMeshMap[name + "_lefthand"] = leftHandPhysicsMeshProperty;
+    
+    // RIGHT HAND
+    // Get right hand entity
+    JointEntity* rightHandParent = (JointEntity*)getDescendant(name + "_righthand");
+    JointEntity* rightHandFinger = (JointEntity*)getDescendant(name + "_righthandmiddle1");
+    GameObject *rightHand = new GameObject(name + "_righthand_physics");
+    t = glm::vec3(0.5f * rightHandFinger->getLocalBindTransform()[3]);
+    rightHand->translate(t);
+    rightHand->scale(glm::vec3(handPhysicsObjSize));
+    rightHandParent->addChild(rightHand);
+    
+    // Create and configure physics
+    PhysicsShape *rightHandShape = new PhysicsSphere(handPhysicsObjSize);
+    PhysicsProperty *rightHandPhysicsProperty = new PhysicsProperty(name + "_righthand", rightHandShape);
+    rightHandPhysicsProperty->setCollisionCallback(fistCallback);
+    rightHandPhysicsProperty->setBeforeCollisionTestCallback(beforeCollisionCallback);
+    rightHandPhysicsProperty->setCollisionFlags(rightHandPhysicsProperty->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+    rightHandPhysicsProperty->setMask(collisionMask, collidesWithMask);
+    rightHand->addProperty(rightHandPhysicsProperty);
+    
+    // Create and configure graphical mesh
+    rightHandPhysicsMeshProperty = new MeshProperty(name + "_righthand");
+    rightHandPhysicsMeshProperty->setMaterialKey("no_collision");
+    rightHandPhysicsMeshProperty->setMeshKey("sphere");
+    rightHandPhysicsMeshProperty->setShaderKey("basic");
+    rightHandPhysicsMeshProperty->setDrawMode(GL_LINES);
+    rightHand->addProperty(rightHandPhysicsMeshProperty);
+    physicsMeshMap[name + "_righthand"] = rightHandPhysicsMeshProperty;
+    
+    // Create the materials needed and add them to the graphics module
+    Material *noCollisionMaterial = new Material("no_collision", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), 1.0f);
+    Material *yesCollisionMaterial = new Material("yes_collision", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), 1.0f);
+    
+    if(!gModule->addMaterial(noCollisionMaterial->getName(), noCollisionMaterial))
+    {
+        delete noCollisionMaterial;
+    }
+    if(!gModule->addMaterial(yesCollisionMaterial->getName(), yesCollisionMaterial))
+    {
+        delete yesCollisionMaterial;
+    }
+    
 }
 
 void Character::update()
@@ -269,6 +480,159 @@ void Character::update()
     if(state == WALKING)
     {
         glm::vec3 t = (float)timeSinceLastUpdate * walkTranslation;
-        translate(t);
+        translateLocalAxis(t);
+    }
+}
+
+void Character::beforeCollisionCallback(PhysicsProperty *obj)
+{
+    auto it = physicsMeshMap.find(obj->getName());
+    
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            it->second->setMaterialKey("no_collision");
+            it->second->linkMaterialPtr();
+        }
+    }
+    
+}
+
+void Character::bodyCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB, btManifoldPoint* cp)
+{
+    /*static std::string bodyStr = "body";
+    
+    if (obA->getName().find(bodyStr) != std::string::npos && obB->getName().find(bodyStr) != std::string::npos)
+    {
+        std::cout << "Body collided!" << std::endl;
+    }
+    else
+    {
+        return;
+    }*/
+    
+    std::cout << "Body collided!" << std::endl;
+    
+    // Resolve the collision
+    MeshProperty *meshProp;
+    bool which = false;
+    
+    auto it = physicsMeshMap.find(obA->getName());
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            meshProp = it->second;
+            which = true;
+        }
+    }
+    
+    it = physicsMeshMap.find(obB->getName());
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            meshProp = it->second;
+            which = false;
+        }
+    }
+    
+    if(meshProp != NULL)
+    {
+        meshProp->setMaterialKey("yes_collision");
+        meshProp->linkMaterialPtr();
+        
+        //btVector3 ptA = cp->getPositionWorldOnA();
+        //btVector3 ptB = cp->getPositionWorldOnB();
+        double ptdist = cp->getDistance();
+        
+        std::cout << ptdist << std::endl;
+        
+        //glm::vec3 A = glm::vec3(ptA.x(), ptA.y(), ptA.z());
+        //glm::vec3 B = glm::vec3(ptB.x(), ptB.y(), ptB.z());
+        
+        translateLocalAxis(0.0, 0.0, ptdist * 0.5f);
+    }
+}
+
+void Character::headCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB, btManifoldPoint* contactPoint)
+{
+    std::cout << "Head collided!" << std::endl;
+ 
+    auto it = physicsMeshMap.find(obA->getName());
+    
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            it->second->setMaterialKey("yes_collision");
+            it->second->linkMaterialPtr();
+        }
+    }
+    
+    it = physicsMeshMap.find(obB->getName());
+    
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            it->second->setMaterialKey("yes_collision");
+            it->second->linkMaterialPtr();
+        }
+    }
+}
+
+void Character::torsoCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB, btManifoldPoint* contactPoint)
+{
+    std::cout << "Torso collided!" << std::endl;
+    
+    auto it = physicsMeshMap.find(obA->getName());
+    
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            it->second->setMaterialKey("yes_collision");
+            it->second->linkMaterialPtr();
+        }
+    }
+    
+    it = physicsMeshMap.find(obB->getName());
+    
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            it->second->setMaterialKey("yes_collision");
+            it->second->linkMaterialPtr();
+        }
+    }
+}
+
+void Character::fistCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB, btManifoldPoint* contactPoint)
+{
+    std::cout << "Fist collided!" << std::endl;
+    
+    auto it = physicsMeshMap.find(obA->getName());
+    
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            it->second->setMaterialKey("yes_collision");
+            it->second->linkMaterialPtr();
+        }
+    }
+    
+    it = physicsMeshMap.find(obB->getName());
+    
+    if(it != physicsMeshMap.end())
+    {
+        if(it->second != NULL)
+        {
+            it->second->setMaterialKey("yes_collision");
+            it->second->linkMaterialPtr();
+        }
     }
 }

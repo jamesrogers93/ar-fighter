@@ -37,19 +37,33 @@ if(IOS OR  ANDROID)
 	#include_directories("${OPENGLES_INCLUDE_DIR}")
 	list(APPEND ARFIGHTER_LIBRARIES
             ${OPENGLES_LIBRARIES}
-        )
+		)
+
 else()
 	# Include OpenGL
 	find_package(OpenGL REQUIRED)
 	include_directories("${OPENGL_INCLUDE_DIR}")
 	list(APPEND ARFIGHTER_LIBRARIES
     	    ${OPENGL_LIBRARY}
-        )
+		)
+		
+	# Include Bullet Physics
+	find_package (BULLET REQUIRED)
+	include_directories(${BULLET_INCLUDE_DIRS})
+	list(APPEND PLATFORM_LIBRARIES
+    	${BULLET_LIBRARIES}
+	)
 endif()
 
 # Include GLM (same for all platforms)
 find_package (glm REQUIRED)
 include_directories(${GLM_INCLUDE_DIRS})
+
+# AR Module Stuff (Only for IOS)
+if(IOS)
+	# Bullet Physics
+	include_directories("${CMAKE_CURRENT_LIST_DIR}/../game-engine/external/bullet3/src/")
+endif()
 
 # Make the ARFighter library
 if(STATIC)

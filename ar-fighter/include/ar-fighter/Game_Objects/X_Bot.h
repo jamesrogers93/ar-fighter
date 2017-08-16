@@ -6,7 +6,7 @@
 class XBot : public Character
 {
 public:
-    XBot() : Character("x_bot")
+    XBot(unsigned short collisionMask, unsigned short collidesWithMask) : Character("x_bot", collisionMask, collidesWithMask)
     {
     }
     
