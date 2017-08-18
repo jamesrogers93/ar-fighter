@@ -21,7 +21,4 @@
 - (void) touchMove:(float) x :(float) y;
 - (void) touchUp:(float) x :(float) y;
 
--(void) setUpSettingsScene;
--(void) setUpFightScene;
-
 @end

@@ -63,42 +63,50 @@
 #include <game-engine/GameObject.h>
 
 // ARFighter Scene Logic
+#include "ar-fighter/MainMenuSceneLogic.h"
 #include "ar-fighter/FightSceneLogic.h"
 #include "ar-fighter/SettingsSceneLogic.h"
 
-
-void ARFighter::setUpSettingsScene()
+MeshGL* createSphere(const float &radius)
 {
-    Scene *scene = new Scene("settings");
+    int lats = 40;
+    int longs = 40;
+    int i, j;
+    std::vector<VertexP> vertices;
+    std::vector<GLuint> indices;
+    int indicator = 0;
+    for(i = 0; i <= lats; i++) {
+        double lat0 = glm::pi<double>() * (-0.5 + (double) (i - 1) / lats);
+        double z0  = sin(lat0);
+        double zr0 =  cos(lat0);
+        
+        double lat1 = glm::pi<double>() * (-0.5 + (double) i / lats);
+        double z1 = sin(lat1);
+        double zr1 = cos(lat1);
+        
+        for(j = 0; j <= longs; j++) {
+            double lng = 2 * glm::pi<double>() * (double) (j - 1) / longs;
+            double x = cos(lng);
+            double y = sin(lng);
+            
+            VertexP v1;
+            v1.position = glm::vec3(x * zr0 * radius, y * zr0 * radius, z0 * radius);
+            vertices.push_back(v1);
+            indices.push_back(indicator);
+            indicator++;
+            
+            VertexP v2;
+            v2.position = glm::vec3(x * zr1 * radius, y * zr1 * radius, z1 * radius);
+            vertices.push_back(v2);
+            indices.push_back(indicator);
+            indicator++;
+        }
+        indices.push_back(GL_PRIMITIVE_RESTART_FIXED_INDEX);
+    }
     
-    // Create Scene Logic class
-    SettingsSceneLogic *sceneLogic = new SettingsSceneLogic(scene);
-    sceneLogic->initialise();
-    scene->setSceneLogic(sceneLogic);
-    
-    this->sceneManager->addScene(scene);
-    this->sceneManager->makeActiveScene("settings");
+    return MeshGL::loadMeshGL(vertices, indices);
 }
 
-void ARFighter::setUpFightScene()
-{
-    // No need to setup a new scene as we will use the stuff in the settings one.
-    
-    Scene *scene = this->sceneManager->getScene("settings");
-    
-    // But we do need to give the scene a new logic controller
-    
-    FightSceneLogic *sceneLogic = new FightSceneLogic(scene);
-    
-    // Pass some settings from settings scene logic to the fight game scene logic
-    SettingsSceneLogic * settingSceneLogic = (SettingsSceneLogic*)scene->getSceneLogic();
-    sceneLogic->player = settingSceneLogic->player;
-    sceneLogic->opponent = settingSceneLogic->opponent;
-    
-    sceneLogic->initialise();
-    scene->setSceneLogic(sceneLogic);
-    
-}
 
 void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &screenHeight, const std::string &assetsPath)
 {
@@ -148,28 +156,74 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     // Configure GUI module
     GUI::getInstance().initialise();
     
-    // Add our scenes to the engine.
+    // Add some stuff to the engine
+    //
+    // SHADER
+    //
     
-    // Character Selection Scene
-   // this->sceneManager->addScene(createScene());
+    // Shader 1
+    // Add a shader object to the graphics module
+    std::vector<std::pair<GLint, std::string> > vertexAttribs;
+    vertexAttribs.push_back(std::make_pair(ATTRIB_POSITION, "position"));
+    vertexAttribs.push_back(std::make_pair(ATTRIB_NORMAL, "normal"));
+    vertexAttribs.push_back(std::make_pair(ATTRIB_UV0, "uv0"));
+    vertexAttribs.push_back(std::make_pair(ATTRIB_JOINT_ID, "joint_id"));
+    vertexAttribs.push_back(std::make_pair(ATTRIB_JOINT_WEIGHT, "joint_weight"));
     
-    // Simple camera scene
-    //this->sceneManager->addScene(simpleCameraScene());
-    
-    // Set the active scene
-    //this->sceneManager->makeActiveScene("fight");
-    
-    //AR::getInstance().setActiveAREntity("backcamera");
-    
-    // Enemy Selection Scene
-    
-    // Fighting Scene
-
-    
+    std::vector<std::string> uniformNames;
+    CameraEntity::fillUniformNames(uniformNames);
+    Material::fillUniformNames(uniformNames);
+    PointLightProperty::fillUniformNames(uniformNames);
+    DirectionalLightProperty::fillUniformNames(uniformNames);
+    AnimatableMeshProperty::fillUniformNames(uniformNames);
+    //Shader *s = Shader::loadShaderFromFile(this->assetsPath + "shaders/basic.vert", this->assetsPath + "shaders/basic.frag", vertexAttribs, uniformNames);
+    Shader *s1 = Shader::loadShaderFromFile(System::assetsPath + "shaders/animatable.vert", System::assetsPath + "shaders/lighting.frag", vertexAttribs, uniformNames);
+    s1->setHasLighting(true);
+    s1->setHasCamera(true);
+    Graphics::getInstance().addShader("lighting", s1);
     
     
+    // Shader 2
+    vertexAttribs.clear();
+    vertexAttribs.push_back(std::make_pair(ATTRIB_POSITION, "position"));
     
-    //dispatchQueue.initialise("Test Queue");
+    uniformNames.clear();
+    CameraEntity::fillUniformNames(uniformNames);
+    Material::fillUniformNames(uniformNames);
+    MeshProperty::fillUniformNames(uniformNames);
+    
+    Shader *s2 = Shader::loadShaderFromFile(System::assetsPath + "shaders/basic.vert", System::assetsPath + "shaders/basic.frag", vertexAttribs, uniformNames);
+    s2->setHasLighting(false);
+    s2->setHasCamera(true);
+    Graphics::getInstance().addShader("basic", s2);
+    
+    //
+    //  Mesh
+    //
+    Graphics::getInstance().addMesh("sphere", createSphere(1.0f));
+    
+    
+    // Set up the scenes that will be used
+    Scene *scene = new Scene("main-menu");
+    MainMenuSceneLogic *mainMenuSceneLogic = new MainMenuSceneLogic(scene);
+    scene->setSceneLogic(mainMenuSceneLogic);
+    this->sceneManager->addScene(scene);
+    
+    scene = new Scene("settings");
+    SettingsSceneLogic *settingsSceneLogic = new SettingsSceneLogic(scene);
+    scene->setSceneLogic(settingsSceneLogic);
+    this->sceneManager->addScene(scene);
+    
+    scene = new Scene("play");
+    FightSceneLogic *fightSceneLogic = new FightSceneLogic(scene);
+    scene->setSceneLogic(fightSceneLogic);
+    this->sceneManager->addScene(scene);
+    
+    // Initalise the main menu scene
+    scene = this->sceneManager->getScene("main-menu");
+    scene->initialise();
+    this->sceneManager->makeActiveScene("main-menu");
+    
 }
 
 void ARFighter::deinitialise()

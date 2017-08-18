@@ -9,15 +9,20 @@
 
 // Game Engine Scene
 #include "game-engine/Scene/Scene.h"
+#include "game-engine/Scene/SceneManager.h"
 
 // Game Engine Graphics
 #include <game-engine/Modules/Graphics/Graphics.h>
 #include <game-engine/Modules/Graphics/CameraEntity.h>
+#include <game-engine/Modules/Graphics/DirectionalLightProperty.h>
 
 // Game Engine AR Module
 #include <game-engine/Modules/AR/AR.h>
 #include <game-engine/Modules/AR/AREntity.h>
 #include <game-engine/Modules/AR/ARTracker.h>
+
+// Game Engine Physics
+#include <game-engine/Modules/Physics/Physics.h>
 
 // Game Engine GUI
 #include <game-engine/Modules/GUI/GUI.h>
@@ -30,10 +35,37 @@
 
 #include "ar-fighter/Game_Objects/Character.h"
 #include "ar-fighter/Game_Objects/Y_Bot.h"
+#include "ar-fighter/Game_Objects/X_Bot.h"
 
 // Game Engine Util
 #include "game-engine/Util/TimeUtil.h"
 #include "game-engine/Util/TextureUtil.h"
+
+FightSceneLogic::FightSceneLogic(Scene *scene)
+    :SceneLogic(scene),
+    state(GameState::PROMPT_TRACKER),
+    player(NULL),
+    opponent(NULL),
+    arHandler(NULL),
+    trackStartUI(NULL),
+    trackConfirmUI(NULL),
+    playCharacterInfoUI(NULL),
+    playControlUI(NULL),
+    pauseUI(NULL),
+    countdown3UI(NULL),
+    countdown2UI(NULL),
+    countdown1UI(NULL),
+    countdownFightUI(NULL),
+    playerWalkController(NULL),
+    playerHealthBar(NULL),
+    opponentHealthBar(NULL),
+    playerPortrait(NULL),
+    opponentPortrait(NULL),
+    pauseButton(NULL),
+    resumeButton(NULL)
+{
+    
+}
 
 void FightSceneLogic::initialise()
 {
@@ -61,10 +93,68 @@ void FightSceneLogic::initialiseGame()
 
 void FightSceneLogic::initialiseScene()
 {
+    unsigned short playerMask = 1;
+    unsigned short opponentMask = 2;
+    
+    if(playerName == "y_bot")
+    {
+        // YBot
+        YBot *yBot = new YBot(playerMask, opponentMask);
+        yBot->initialise();
+        yBot->initialisePhysics();
+        yBot->translate(-150.0, 0.0, 0.0);
+        mScene->addEntity(yBot);
+        yBot->idle();
+        player = yBot;
+    }
+    else if(playerName == "x_bot")
+    {
+        // X_Bot
+        XBot *xBot = new XBot(playerMask, opponentMask);
+        xBot->initialise();
+        xBot->initialisePhysics();
+        xBot->translate(150.0, 0.0, 0.0);
+        mScene->addEntity(xBot);
+        xBot->idle();
+        player = xBot;
+    }
+    
+    
+    if(opponentName == "y_bot")
+    {
+        // YBot
+        YBot *yBot = new YBot(opponentMask, playerMask);
+        yBot->initialise();
+        yBot->initialisePhysics();
+        yBot->translate(-150.0, 0.0, 0.0);
+        mScene->addEntity(yBot);
+        yBot->idle();
+        opponent = yBot;
+    }
+    else if(opponentName == "x_bot")
+    {
+        // X_Bot
+        XBot *xBot = new XBot(opponentMask, playerMask);
+        xBot->initialise();
+        xBot->initialisePhysics();
+        xBot->translate(150.0, 0.0, 0.0);
+        mScene->addEntity(xBot);
+        xBot->idle();
+        opponent = xBot;
+    }
+    
+    // Add callback functions to characters when punched
+    
+    player->setPunchedCallback(std::bind(&FightSceneLogic::playerPunched, this));
+    opponent->setPunchedCallback(std::bind(&FightSceneLogic::opponentPunched, this));
+    
     // Here we will add other stuff to the scene
     
     
-    // We need to add an AR node to the scene and make the camera it's child
+    //
+    // AR
+    //
+    
     AREntity *arEntity = new AREntity("backcamera");
     arEntity->translate(0.0, 0.0, 300.0);
     this->mScene->addEntity(arEntity);
@@ -74,7 +164,12 @@ void FightSceneLogic::initialiseScene()
     AR::getInstance().setActiveAREntity("backcamera");
     arHandler = arEntity;
     
-    this->mScene->removeEntity("glcamera");
+    //this->mScene->removeEntity("glcamera");
+    
+    
+    //
+    // CAMERA
+    //
     
     CameraEntity *camEntity = new CameraEntity("glCamera", CameraEntity::perspectiveMatrix(System::screenWidth, System::screenHeight, 47.0));
     //camEntity->translate(0.0, 100.0, 300.0);
@@ -82,11 +177,31 @@ void FightSceneLogic::initialiseScene()
     Graphics::getInstance().setActiveCameraEntity("glCamera");
     arEntity->addChild(camEntity);
     
+    //
+    // LIGHT
+    //
+    
+    // Add a light to the scene
+    GameObject *sun = new GameObject("sun");
+    DirectionalLightProperty *light = new DirectionalLightProperty("light", glm::normalize(glm::vec3(0.0, -5.0, 10.0)), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.6, 0.6, 0.6), glm::vec3(0.8, 0.8, 0.8));
+    sun->addProperty(light);
+    mScene->addEntity(sun);
+    
     
     // We need 2 game objects to house gui stuff for the tracking inisalising state, and the game playing state
     this->trackStartUI = new GameObject("track-start-ui");
     this->trackConfirmUI = new GameObject("track-confirm-ui");
-    this->playingUI = new GameObject("playing-ui");
+    this->playCharacterInfoUI = new GameObject("play-character-info-ui");
+    this->playControlUI = new GameObject("play-control-ui");
+    this->pauseUI = new GameObject("pause-ui");
+    
+    mScene->addEntity(trackStartUI);
+    mScene->addEntity(trackConfirmUI);
+    mScene->addEntity(playCharacterInfoUI);
+    mScene->addEntity(playControlUI);
+    mScene->addEntity(pauseUI);
+    
+    
     
     // Some vars to help with ui layout
     float halfScreen = (float)System::screenWidth / 2.0f;
@@ -105,7 +220,7 @@ void FightSceneLogic::initialiseScene()
         aRTrackButton->isTouchable = true;
         std::function<void(void)> arCallbackFunc = std::bind(&FightSceneLogic::trackStart, this);
         aRTrackButton->setCallbackOnTouchUp(arCallbackFunc);
-        glm::vec2 bounds(300.0f, 126.6f);
+        glm::vec2 bounds(500.0f, 100.f);
         GUIRectangle *guiRectangle = new GUIRectangle(bounds);
         guiRectangle->translateOW(glm::vec2(((float)System::screenWidth / 2.0f), 100.0f));
         //guiRectangle->setColourUp(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
@@ -114,7 +229,7 @@ void FightSceneLogic::initialiseScene()
     
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
         
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -124,6 +239,30 @@ void FightSceneLogic::initialiseScene()
     
         aRTrackButton->addShape(guiRectangle);
         trackStartUI->addProperty(aRTrackButton);
+    }
+    
+    // Countdown 3
+    {
+        GUIProperty *guiButton = new GUIProperty("ar-indicator");
+        
+        glm::vec2 bounds(300.0f, 300.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.5f, (float)System::screenHeight*0.5f));
+        
+        Texture *texture = Texture::loadFromFile("textures/ar-indicator.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        trackStartUI->addProperty(guiButton);
     }
     
     ///// For trackConfirmUI
@@ -144,7 +283,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -172,7 +311,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -217,7 +356,7 @@ void FightSceneLogic::initialiseScene()
             
             if(texture != NULL)
             {
-                GLTexture glTexture = GLTexture::loadFromData(*texture);
+                GLTexture *glTexture = GLTexture::loadFromData(*texture);
                 
                 guiRectangle->setMapUp(glTexture);
                 guiRectangle->setMapDown(glTexture);
@@ -226,7 +365,7 @@ void FightSceneLogic::initialiseScene()
             }
             
             playerPortrait->addShape(guiRectangle);
-            playingUI->addProperty(playerPortrait);
+            playCharacterInfoUI->addProperty(playerPortrait);
         
         }
         
@@ -241,10 +380,10 @@ void FightSceneLogic::initialiseScene()
                                                            )
                                                  );
 
-            playerHealthBar->setColourUp(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-            playerHealthBar->setProgression(0.25f);
+            playerHealthBar->setColourUp(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), player->getColourTheme());
+            playerHealthBar->setProgression(1.0f);
             
-            playingUI->addProperty(playerHealthBar);
+            playCharacterInfoUI->addProperty(playerHealthBar);
         }
         
         // Opponent portrait
@@ -264,7 +403,7 @@ void FightSceneLogic::initialiseScene()
             
             if(texture != NULL)
             {
-                GLTexture glTexture = GLTexture::loadFromData(*texture);
+                GLTexture *glTexture = GLTexture::loadFromData(*texture);
                 
                 guiRectangle->setMapUp(glTexture);
                 guiRectangle->setMapDown(glTexture);
@@ -273,7 +412,7 @@ void FightSceneLogic::initialiseScene()
             }
             
             opponentPortrait->addShape(guiRectangle);
-            playingUI->addProperty(opponentPortrait);
+            playCharacterInfoUI->addProperty(opponentPortrait);
             
         }
         
@@ -287,12 +426,13 @@ void FightSceneLogic::initialiseScene()
                                                              )
                                                    );
             
-            opponentHealthBar->setColourUp(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+            opponentHealthBar->setColourUp(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), opponent->getColourTheme());
             opponentHealthBar->setReverse(true);
-            opponentHealthBar->setProgression(0.25f);
+            opponentHealthBar->setProgression(1.0f);
             
-            playingUI->addProperty(opponentHealthBar);
+            playCharacterInfoUI->addProperty(opponentHealthBar);
         }
+
     }
     
     // Analog to control player movement
@@ -307,7 +447,7 @@ void FightSceneLogic::initialiseScene()
         std::function<void(void)> walkUpFunc = std::bind(&FightSceneLogic::walkAnalogUp, this);
         playerAnalogControl->setCallbackOnTouchMove(walkMoveFunc);
         playerAnalogControl->setCallbackOnTouchUp(walkUpFunc);
-        playingUI->addProperty(playerAnalogControl);
+        playControlUI->addProperty(playerAnalogControl);
         playerWalkController = playerAnalogControl;
     }
     
@@ -327,7 +467,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -336,7 +476,7 @@ void FightSceneLogic::initialiseScene()
         }
         
         guiButtonPunch->addShape(guiRectangle);
-        playingUI->addProperty(guiButtonPunch);
+        playControlUI->addProperty(guiButtonPunch);
     }
     
     // Player kick button
@@ -355,7 +495,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -364,7 +504,7 @@ void FightSceneLogic::initialiseScene()
         }
         
         guiButton->addShape(guiRectangle);
-        playingUI->addProperty(guiButton);
+        playControlUI->addProperty(guiButton);
     }
     
     // Player block button
@@ -383,7 +523,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -392,7 +532,35 @@ void FightSceneLogic::initialiseScene()
         }
         
         guiButton->addShape(guiRectangle);
-        playingUI->addProperty(guiButton);
+        playControlUI->addProperty(guiButton);
+    }
+    
+    // Pause button
+    {
+        pauseButton = new GUIProperty("pause-control");
+        
+        pauseButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&FightSceneLogic::pause, this);
+        pauseButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(200.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth - 150.0f), (float)System::screenHeight * 0.5f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_pause.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        pauseButton->addShape(guiRectangle);
+        playControlUI->addProperty(pauseButton);
     }
     
     
@@ -401,6 +569,12 @@ void FightSceneLogic::initialiseScene()
     countdown2UI = new GameObject("countdown-2");
     countdown1UI = new GameObject("countdown-1");
     countdownFightUI = new GameObject("countdown-fight");
+    
+    mScene->addEntity(countdown3UI);
+    mScene->addEntity(countdown2UI);
+    mScene->addEntity(countdown1UI);
+    mScene->addEntity(countdownFightUI);
+    
     
     // Countdown 3
     {
@@ -414,7 +588,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -438,7 +612,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -462,7 +636,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -486,7 +660,7 @@ void FightSceneLogic::initialiseScene()
         
         if(texture != NULL)
         {
-            GLTexture glTexture = GLTexture::loadFromData(*texture);
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
             
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
@@ -498,11 +672,148 @@ void FightSceneLogic::initialiseScene()
         countdownFightUI->addProperty(guiButton);
     }
     
-    // Prepare the tracking and playing state game objects
-    mScene->prepare(trackStartUI);
-    mScene->prepare(trackConfirmUI);
-    mScene->prepare(playingUI);
+    //// For pause UI
     
+    
+    // retrack button
+    {
+        GUIProperty *guiButton = new GUIProperty("retrack-control");
+        
+        guiButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&FightSceneLogic::retrack, this);
+        guiButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(500.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), (float)System::screenHeight * 0.5f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_re-track.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        pauseUI->addProperty(guiButton);
+    }
+    
+    // quit button
+    {
+        GUIProperty *guiButton = new GUIProperty("quit-control");
+        
+        guiButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&FightSceneLogic::quit, this);
+        guiButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(500.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) - (bounds.y) - 50.0f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_quit.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        pauseUI->addProperty(guiButton);
+    }
+    
+    // Resume button
+    {
+        resumeButton = new GUIProperty("resume-control");
+        
+        resumeButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&FightSceneLogic::resume, this);
+        resumeButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(500.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) - (bounds.y) - 200.0f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_resume.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        resumeButton->addShape(guiRectangle);
+        pauseUI->addProperty(resumeButton);
+    }
+    
+    // Pause text
+    {
+        GUIProperty *guiButton = new GUIProperty("paused-text");
+        
+        glm::vec2 bounds(807.0f, 137.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.5f, (float)System::screenHeight*0.75f));
+        
+        Texture *texture = Texture::loadFromFile("textures/paused.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        pauseUI->addProperty(guiButton);
+    }
+    
+    
+    // Prepare the tracking and playing state game objects
+   // mScene->prepare(trackStartUI);
+    //mScene->prepare(trackConfirmUI);
+    //mScene->prepare(playCharacterInfoUI);
+    //mScene->prepare(playControlUI);
+    
+}
+
+void FightSceneLogic::deinitialise()
+{
+    state = GameState::PROMPT_TRACKER;
+    player = NULL;
+    opponent = NULL;
+    arHandler = NULL;
+    trackStartUI = NULL;
+    trackConfirmUI = NULL;
+    playCharacterInfoUI = NULL;
+    playControlUI = NULL;
+    pauseUI = NULL;
+    countdown3UI = NULL;
+    countdown2UI = NULL;
+    countdown1UI = NULL;
+    countdownFightUI = NULL;
+    playerWalkController = NULL;
+    playerHealthBar = NULL;
+    opponentHealthBar = NULL;
+    playerPortrait = NULL;
+    opponentPortrait = NULL;
+    pauseButton = NULL;
+    resumeButton = NULL;
 }
 
 void FightSceneLogic::update()
@@ -528,7 +839,8 @@ void FightSceneLogic::update()
     else if(state == GameState::STARTED_TRACKER)
     {
         // Enable these in scene
-        mScene->prepare(playingUI);
+        mScene->prepare(playCharacterInfoUI);
+        mScene->prepare(playControlUI);
         
         // Disable these in scene
         mScene->unPrepare(trackConfirmUI);
@@ -543,8 +855,14 @@ void FightSceneLogic::update()
         // Disable these in scene
         mScene->unPrepare(player);
         mScene->unPrepare(opponent);
-        mScene->unPrepare(playingUI);
+        mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(playControlUI);
         mScene->unPrepare(trackConfirmUI);
+        mScene->unPrepare(pauseUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
         
         state = GameState::PROMPTING_TRACKER;
     }
@@ -558,6 +876,49 @@ void FightSceneLogic::update()
         {
             gameplay();
         }
+    }
+    else if (state == GameState::PAUSING)
+    {
+        // Enable these in scene
+        mScene->prepare(pauseUI);
+        
+        // Disable these in scene
+        //mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(playControlUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
+        
+        state = GameState::PAUSED;
+    }
+    else if (state == GameState::RESUMING)
+    {
+        // Enable these in scene
+        //mScene->prepare(playCharacterInfoUI);
+        mScene->prepare(playControlUI);
+        
+        // Disable these in scene
+        mScene->unPrepare(pauseUI);
+        
+        state = GameState::PLAYING;
+    }
+    else if(state == GameState::QUIT)
+    {
+        // Set up the next scene
+        Scene *scene = SceneManager::getInstance().getScene("main-menu");
+        
+        Physics *p = &Physics::getInstance();
+        mScene->deinitialise();
+        
+        //Graphics *g = &Graphics::getInstance();
+        //GUI *gu = &GUI::getInstance();
+        //AR *a = &AR::getInstance();
+        
+        
+        scene->initialise();
+        SceneManager::getInstance().makeActiveScene("main-menu");
+        return;
     }
     
     // Check to see if we're not tracking and not prompting user to track
@@ -653,6 +1014,38 @@ void FightSceneLogic::countDown()
     
 }
 
+void FightSceneLogic::playerPunched()
+{
+    std::cout << "Player punched!" << std::endl;
+    
+    if(opponent->getCanDealDamage())
+    {
+        // Update health
+        player->takeDamage(opponent->getDamageInflict());
+    
+        // Update health progress bar
+        playerHealthBar->setProgression(player->getHealth() / player->getMaxHealth());
+        
+        opponent->damageDealt();
+    }
+}
+
+void FightSceneLogic::opponentPunched()
+{
+    std::cout << "Opponent punched!" << std::endl;
+    
+    if(player->getCanDealDamage())
+    {
+        // Update health
+        opponent->takeDamage(player->getDamageInflict());
+    
+        // Update health progress bar
+        opponentHealthBar->setProgression(opponent->getHealth() / opponent->getMaxHealth());
+        
+        player->damageDealt();
+    }
+}
+
 void FightSceneLogic::draw()
 {
     jmpGLClearColour(0.65, 0.65, 0.65, 1.0);
@@ -668,6 +1061,41 @@ void FightSceneLogic::draw()
     
     // Update the GUI
     engine->update(CoreModuleType::CM_GUI);
+}
+
+void FightSceneLogic::pause()
+{
+    if(state == GameState::PLAYING)
+    {
+        std::cout << "Paused!" << std::endl;
+        state = GameState::PAUSING;
+    }
+}
+
+void FightSceneLogic::resume()
+{
+    if(state == GameState::PAUSED)
+    {
+        std::cout << "Resuming!" << std::endl;
+        state = GameState::RESUMING;
+    }
+}
+
+void FightSceneLogic::quit()
+{
+    if(state == GameState::PAUSED)
+    {
+        std::cout << "QUIT!" << std::endl;
+        state = GameState::QUIT;
+    }
+}
+
+void FightSceneLogic::retrack()
+{
+    if(state == GameState::PAUSED)
+    {
+        state = GameState::PROMPT_TRACKER;
+    }
 }
 
 void FightSceneLogic::walkAnalogMove()

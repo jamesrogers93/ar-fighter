@@ -78,15 +78,5 @@
     _instance->touchUp(x, y);
 }
 
--(void) setUpSettingsScene
-{
-    _instance->setUpSettingsScene();
-}
-
--(void) setUpFightScene
-{
-    _instance->setUpFightScene();
-}
-
 @end
 

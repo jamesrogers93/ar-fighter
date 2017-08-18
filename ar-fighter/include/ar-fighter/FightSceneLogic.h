@@ -16,9 +16,11 @@ class FightSceneLogic : public SceneLogic
 {
 public:
     
-    enum class GameState { PROMPT_TRACKER, PROMPTING_TRACKER, STARTED_TRACKER, PROMPT_TRACK_CONFIRM, PROMPTING_TRACK_CONFIRM, PLAYING};
+    enum class GameState { PROMPT_TRACKER, PROMPTING_TRACKER, STARTED_TRACKER, PROMPT_TRACK_CONFIRM, PROMPTING_TRACK_CONFIRM, PLAYING, PAUSING, PAUSED, RESUMING, QUIT};
     GameState state;
     
+    std::string playerName;
+    std::string opponentName;
     Character *player;
     Character *opponent;
     AREntity *arHandler;
@@ -26,7 +28,9 @@ public:
     // To house GUI stuff
     GameObject *trackStartUI;
     GameObject *trackConfirmUI;
-    GameObject *playingUI;
+    GameObject *playCharacterInfoUI;
+    GameObject *playControlUI;
+    GameObject *pauseUI;
     
     // Countdown GUI
     GameObject *countdown3UI;
@@ -45,25 +49,30 @@ public:
     GUIProperty *playerPortrait;
     GUIProperty *opponentPortrait;
     
+    // Pause button
+    GUIProperty *pauseButton;
+    GUIProperty *resumeButton;
+    
     // Gameplay vars
     bool countDownFlag;
     double timeElapsed;
     
-    FightSceneLogic(Scene *scene) : SceneLogic(scene), state(GameState::PROMPT_TRACKER)
-    {
-    }
+    FightSceneLogic(Scene *scene);
     
-    void initialise();
     void initialiseScene();
     void initialiseGame();
-    void update();
-    void draw();
     
     // Gameplay functions
     void countDown();
     void gameplay();
+    void playerPunched();
+    void opponentPunched();
     
     // Gameplay control functions
+    void pause();
+    void resume();
+    void quit();
+    void retrack();
     void walkAnalogMove();
     void walkAnalogUp();
     void punchButtonUp();
@@ -72,6 +81,14 @@ public:
     void trackStart();
     void trackConfirmYes();
     void trackConfirmNo();
+    
+    
+protected:
+    void initialise();
+    void deinitialise();
+    void update();
+    void draw();
+    
 };
 
 #endif /* _FIGHTSCENELOGIC_H */

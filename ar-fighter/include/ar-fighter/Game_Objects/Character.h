@@ -25,9 +25,10 @@ public:
     enum CharacterState { IDLE, WALKING, PUNCHING};
     CharacterState state;
     
-    Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask);
+    Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask, const glm::vec4 &colourTheme);
     
     virtual void initialise();
+    virtual void initialisePhysics();
     
     virtual void walk(const float &x, const float &z);
     virtual void idle();// {}
@@ -45,9 +46,30 @@ public:
     
     AnimatorProperty* getAnimator() { return mAnimator; }
     
+    
+    void setPunchedCallback(std::function<void()> func) { mPunchedCallback = func; }
+    void punchCallback() { mPunchedCallback(); }
+    
     void update();
     
+    
+    const float& getMaxHealth() { return maxHealth; }
+    const float& getHealth() { return health; }
+    const float& getDamageInflict() { return damageInflict; }
+    const bool& getCanDealDamage() { return canDealDamage; }
+    const glm::vec4& getColourTheme() { return mThemeColour; }
+    
+    void takeDamage(const float &damage) { health -= damage; if( health < 0) health = 0; }
+    void damageDealt() { canDealDamage = false; }
+    
 protected:
+    
+    // Player properties
+    float maxHealth = 100.0f;
+    float health = maxHealth;
+    float damageInflict = 1.0f;
+    bool canDealDamage = false;
+    glm::vec4 mThemeColour;
     
     // Handles to the properties
     AnimatorProperty *mAnimator;
@@ -65,6 +87,9 @@ protected:
 
     
     glm::vec3 walkTranslation;
+    
+    // ACtion callbacks
+    std::function<void()> mPunchedCallback;
     
 };
 

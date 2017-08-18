@@ -42,7 +42,13 @@
 // Bullet
 #include <btBulletCollisionCommon.h>
 
-Character::Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask) : GameObject(name), mAnimator(NULL), state(IDLE), collisionMask(collisionMask), collidesWithMask(collidesWithMask)
+Character::Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask, const glm::vec4 &colourTheme)
+    : GameObject(name),
+    mAnimator(NULL),
+    state(IDLE),
+    collisionMask(collisionMask),
+    collidesWithMask(collidesWithMask),
+    mThemeColour(colourTheme)
 {
     /*physicsMeshMap =
     {
@@ -146,6 +152,7 @@ void Character::punch()
         mAnimator->getAnimationController2()->stop();
         
         state = PUNCHING;
+        canDealDamage = true;
     }
 }
 
@@ -240,10 +247,22 @@ void Character::initialise()
     //
     
     // Add animations to the animation module
-    aModule->addAnimation(animationImporterYBot1.getImportedObject()->getName(), animationImporterYBot1.getImportedObject());
-    aModule->addAnimation(animationImporterYBot2.getImportedObject()->getName(), animationImporterYBot2.getImportedObject());
-    aModule->addAnimation(animationImporterYBot3.getImportedObject()->getName(), animationImporterYBot3.getImportedObject());
-    aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject());
+    if(!aModule->addAnimation(animationImporterYBot1.getImportedObject()->getName(), animationImporterYBot1.getImportedObject()))
+    {
+        delete animationImporterYBot1.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot2.getImportedObject()->getName(), animationImporterYBot2.getImportedObject()))
+    {
+        delete animationImporterYBot2.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot3.getImportedObject()->getName(), animationImporterYBot3.getImportedObject()))
+    {
+        delete animationImporterYBot3.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject()))
+    {
+        delete animationImporterYBot4.getImportedObject();
+    }
     //aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject());
     
     
@@ -288,10 +307,18 @@ void Character::initialise()
     MeshGL *meshGLYBot2 = MeshGL::loadMeshGL(meshImporterYBot2.getImportedObject()->getVertices(),
                                              meshImporterYBot2.getImportedObject()->getIndices());
     
-    gModule->addMesh(meshImporterYBot1.getImportedObject()->getName(), meshGLYBot1);
-    gModule->addMesh(meshImporterYBot2.getImportedObject()->getName(), meshGLYBot2);
+    if(!gModule->addMesh(meshImporterYBot1.getImportedObject()->getName(), meshGLYBot1))
+    {
+        delete meshGLYBot1;
+    }
     
+    if(!gModule->addMesh(meshImporterYBot2.getImportedObject()->getName(), meshGLYBot2))
+    {
+        delete meshGLYBot2;
+    }
     
+    delete meshImporterYBot1.getImportedObject();
+    delete meshImporterYBot2.getImportedObject();
     
     
     
@@ -300,12 +327,21 @@ void Character::initialise()
     //
     
     // Add the materials to the graphics module
-    gModule->addMaterial(materialImporterYBot1.getImportedObject()->getName(), materialImporterYBot1.getImportedObject());
-    gModule->addMaterial(materialImporterYBot2.getImportedObject()->getName(), materialImporterYBot2.getImportedObject());
+    if(!gModule->addMaterial(materialImporterYBot1.getImportedObject()->getName(), materialImporterYBot1.getImportedObject()))
+    {
+        delete materialImporterYBot1.getImportedObject();
+    }
     
+    if(!gModule->addMaterial(materialImporterYBot2.getImportedObject()->getName(), materialImporterYBot2.getImportedObject()))
+    {
+        delete materialImporterYBot2.getImportedObject();
+    }
     
-    
-    
+}
+
+
+void Character::initialisePhysics()
+{
     //
     // Now set up some physics related properties
     //
@@ -464,11 +500,11 @@ void Character::initialise()
     Material *noCollisionMaterial = new Material("no_collision", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), 1.0f);
     Material *yesCollisionMaterial = new Material("yes_collision", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), 1.0f);
     
-    if(!gModule->addMaterial(noCollisionMaterial->getName(), noCollisionMaterial))
+    if(!Graphics::getInstance().addMaterial(noCollisionMaterial->getName(), noCollisionMaterial))
     {
         delete noCollisionMaterial;
     }
-    if(!gModule->addMaterial(yesCollisionMaterial->getName(), yesCollisionMaterial))
+    if(!Graphics::getInstance().addMaterial(yesCollisionMaterial->getName(), yesCollisionMaterial))
     {
         delete yesCollisionMaterial;
     }
@@ -608,6 +644,9 @@ void Character::torsoCollisionCallback(PhysicsProperty *obA, PhysicsProperty *ob
             it->second->linkMaterialPtr();
         }
     }
+    
+    // execute punched callback
+    punchCallback();
 }
 
 void Character::fistCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB, btManifoldPoint* contactPoint)

@@ -1,69 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eKQ-mT-HJF">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ARFighter" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XsE-21-fhA">
-                                <rect key="frame" x="304.5" y="163" width="57" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                    <segue destination="eKQ-mT-HJF" kind="presentation" id="Y9a-pN-eAB"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="XsE-21-fhA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B9I-fn-vaO"/>
-                            <constraint firstItem="XsE-21-fhA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SJH-qL-iHI"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="51" y="372"/>
-        </scene>
-        <!--Fight View Controller-->
-        <scene sceneID="43q-Bn-2Go">
-            <objects>
-                <viewController id="ewn-wQ-HXt" customClass="FightViewController" customModule="ARFighter" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="KgR-Fz-UXS"/>
-                        <viewControllerLayoutGuide type="bottom" id="EIr-6J-GXU"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Iay-pf-GSP" customClass="GLKView">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I5J-eA-BJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1396" y="372"/>
-        </scene>
-        <!--Settings View Controller-->
         <scene sceneID="XWU-Iy-xYx">
             <objects>
-                <viewController id="eKQ-mT-HJF" customClass="SettingsViewController" customModule="ARFighter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eKQ-mT-HJF" customClass="ViewController" customModule="ARFighter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s6R-0M-cNy"/>
                         <viewControllerLayoutGuide type="bottom" id="BcP-M2-oZD"/>
@@ -71,72 +20,8 @@
                     <view key="view" contentMode="scaleToFill" id="Hea-w9-tan" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6v0-Ou-Ttu">
-                                <rect key="frame" x="301" y="60" width="64" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWJ-ry-TMu">
-                                <rect key="frame" x="110" y="60" width="47" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hS0-E1-CZL">
-                                <rect key="frame" x="495" y="60" width="77" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZP5-78-yfU">
-                                <rect key="frame" x="318" y="325" width="30" height="30"/>
-                                <state key="normal" title="play"/>
-                                <connections>
-                                    <segue destination="ewn-wQ-HXt" kind="presentation" id="JB3-Pc-VNa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3p-Sc-tis">
-                                <rect key="frame" x="317" y="132.5" width="33" height="30"/>
-                                <state key="normal" title="Easy"/>
-                                <connections>
-                                    <action selector="easyButton:" destination="eKQ-mT-HJF" eventType="touchUpInside" id="PM7-ZH-XKV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mh-qX-yYX">
-                                <rect key="frame" x="306" y="172.5" width="55" height="30"/>
-                                <state key="normal" title="Medium"/>
-                                <connections>
-                                    <action selector="mediumButton:" destination="eKQ-mT-HJF" eventType="touchUpInside" id="vov-Kh-Ly2"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYO-r8-T18">
-                                <rect key="frame" x="316" y="212.5" width="34" height="30"/>
-                                <state key="normal" title="Hard"/>
-                                <connections>
-                                    <action selector="hardButton:" destination="eKQ-mT-HJF" eventType="touchUpInside" id="cOy-VF-frg"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="BcP-M2-oZD" firstAttribute="top" secondItem="ZP5-78-yfU" secondAttribute="bottom" constant="20" id="94C-6K-JWb"/>
-                            <constraint firstItem="0mh-qX-yYX" firstAttribute="centerX" secondItem="Hea-w9-tan" secondAttribute="centerX" id="D7p-vk-ulg"/>
-                            <constraint firstItem="6v0-Ou-Ttu" firstAttribute="top" secondItem="s6R-0M-cNy" secondAttribute="bottom" constant="40" id="Hnw-Al-ynr"/>
-                            <constraint firstItem="SWJ-ry-TMu" firstAttribute="centerX" secondItem="Hea-w9-tan" secondAttribute="centerX" multiplier="0.4" id="Jlw-VA-Ydh"/>
-                            <constraint firstItem="O3p-Sc-tis" firstAttribute="centerY" secondItem="Hea-w9-tan" secondAttribute="centerY" constant="-40" id="Khr-jj-ILq"/>
-                            <constraint firstItem="SWJ-ry-TMu" firstAttribute="top" secondItem="s6R-0M-cNy" secondAttribute="bottom" constant="40" id="Muv-52-yiA"/>
-                            <constraint firstItem="hS0-E1-CZL" firstAttribute="centerX" secondItem="Hea-w9-tan" secondAttribute="centerX" multiplier="1.6" id="RwQ-Oo-a33"/>
-                            <constraint firstItem="hS0-E1-CZL" firstAttribute="top" secondItem="s6R-0M-cNy" secondAttribute="bottom" constant="40" id="Sbr-wY-rya"/>
-                            <constraint firstItem="0mh-qX-yYX" firstAttribute="centerY" secondItem="Hea-w9-tan" secondAttribute="centerY" id="Vpj-4i-K5F"/>
-                            <constraint firstItem="6v0-Ou-Ttu" firstAttribute="centerX" secondItem="Hea-w9-tan" secondAttribute="centerX" id="Vqw-o2-zLX"/>
-                            <constraint firstItem="ZP5-78-yfU" firstAttribute="centerX" secondItem="Hea-w9-tan" secondAttribute="centerX" id="bJP-Me-XaN"/>
-                            <constraint firstItem="zYO-r8-T18" firstAttribute="centerX" secondItem="Hea-w9-tan" secondAttribute="centerX" id="bW3-0T-vrr"/>
-                            <constraint firstItem="zYO-r8-T18" firstAttribute="centerY" secondItem="Hea-w9-tan" secondAttribute="centerY" constant="40" id="hiB-oa-JlO"/>
-                            <constraint firstItem="O3p-Sc-tis" firstAttribute="centerX" secondItem="Hea-w9-tan" secondAttribute="centerX" id="nT9-ia-9DR"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ana-68-CH0" userLabel="First Responder" sceneMemberID="firstResponder"/>

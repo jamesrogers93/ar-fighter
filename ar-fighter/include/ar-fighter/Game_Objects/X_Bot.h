@@ -6,7 +6,7 @@
 class XBot : public Character
 {
 public:
-    XBot(unsigned short collisionMask, unsigned short collidesWithMask) : Character("x_bot", collisionMask, collidesWithMask)
+    XBot(unsigned short collisionMask, unsigned short collidesWithMask) : Character("x_bot", collisionMask, collidesWithMask, glm::vec4(138.0f/255.0f, 62.0f/255.0f, 53.0f/255.0f, 1.0f))
     {
     }
     

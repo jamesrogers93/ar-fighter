@@ -1,6 +1,7 @@
 #include "ar-fighter/SettingsSceneLogic.h"
 
 #include "game-engine/Scene/Scene.h"
+#include "game-engine/Scene/SceneManager.h"
 
 // Game Engine Core
 #include "game-engine/Core/GL/GL.h"
@@ -26,6 +27,11 @@
 #include <game-engine/Modules/Animation/Animation.h>
 #include <game-engine/Modules/Animation/AnimationImporter.h>
 
+// Game Engine GUI
+#include <game-engine/Modules/GUI/GUI.h>
+#include <game-engine/Modules/GUI/GUIProperty.h>
+#include <game-engine/Modules/GUI/GUIRectangle.h>
+
 // Game Engine Importers
 #include <game-engine/Entity/EntityImporter.h>
 #include <game-engine/Entity/PropertyImporter.h>
@@ -37,50 +43,40 @@
 #include "ar-fighter/Game_Objects/Y_Bot.h"
 #include "ar-fighter/Game_Objects/X_Bot.h"
 
+#include "ar-fighter/FightSceneLogic.h"
+
+SettingsSceneLogic::SettingsSceneLogic(Scene *scene)
+    : SceneLogic(scene),
+    state(GameState::UNINITIALISED),
+    player(NULL),
+    opponent(NULL),
+    settingsUI(NULL)
+{
+    
+}
+
 void SettingsSceneLogic::update()
 {
     // Update Animation module
     Engine::getInstance().update(CoreModuleType::CM_ANIMATION, false);
-}
-
-MeshGL* createSphere(const float &radius)
-{
-    int lats = 40;
-    int longs = 40;
-    int i, j;
-    std::vector<VertexP> vertices;
-    std::vector<GLuint> indices;
-    int indicator = 0;
-    for(i = 0; i <= lats; i++) {
-        double lat0 = glm::pi<double>() * (-0.5 + (double) (i - 1) / lats);
-        double z0  = sin(lat0);
-        double zr0 =  cos(lat0);
-        
-        double lat1 = glm::pi<double>() * (-0.5 + (double) i / lats);
-        double z1 = sin(lat1);
-        double zr1 = cos(lat1);
-        
-        for(j = 0; j <= longs; j++) {
-            double lng = 2 * glm::pi<double>() * (double) (j - 1) / longs;
-            double x = cos(lng);
-            double y = sin(lng);
-            
-            VertexP v1;
-            v1.position = glm::vec3(x * zr0 * radius, y * zr0 * radius, z0 * radius);
-            vertices.push_back(v1);
-            indices.push_back(indicator);
-            indicator++;
-            
-            VertexP v2;
-            v2.position = glm::vec3(x * zr1 * radius, y * zr1 * radius, z1 * radius);
-            vertices.push_back(v2);
-            indices.push_back(indicator);
-            indicator++;
-        }
-        indices.push_back(GL_PRIMITIVE_RESTART_FIXED_INDEX);
-    }
     
-    return MeshGL::loadMeshGL(vertices, indices);
+    if(state == GameState::PLAY)
+    {
+        // Set up the next scene
+        Scene *scene = SceneManager::getInstance().getScene("play");
+        
+        // Pass some settings from settings scene logic to the fight game scene logic
+        FightSceneLogic *fightSceneLogic = (FightSceneLogic*)scene->getSceneLogic();
+        fightSceneLogic->playerName = player->getName();
+        fightSceneLogic->opponentName = opponent->getName();
+        
+        mScene->deinitialise();
+        
+        Graphics *g = &Graphics::getInstance();
+        
+        scene->initialise();
+        SceneManager::getInstance().makeActiveScene("play");
+    }
 }
 
 void SettingsSceneLogic::draw()
@@ -102,14 +98,11 @@ void SettingsSceneLogic::draw()
 
 void SettingsSceneLogic::initialise()
 {
-    Graphics *gModule = static_cast<Graphics*>(Engine::getInstance().getCoreModule(CoreModuleType::CM_GRAPHICS));
-    
-    
-    unsigned short yBotMask = 1;
-    unsigned short xBotMask = 2;
+    unsigned short playerMask = 1;
+    unsigned short opponentMask = 2;
     
     // YBot
-    YBot *yBot = new YBot(yBotMask, xBotMask);
+    YBot *yBot = new YBot(playerMask, opponentMask);
     yBot->initialise();
     yBot->translate(-150.0, 0.0, 0.0);
     mScene->addEntity(yBot);
@@ -117,59 +110,116 @@ void SettingsSceneLogic::initialise()
     player = yBot;
     
     // X_Bot
-    XBot *xBot = new XBot(xBotMask, yBotMask);
+    XBot *xBot = new XBot(opponentMask, playerMask);
     xBot->initialise();
     xBot->translate(150.0, 0.0, 0.0);
     mScene->addEntity(xBot);
     xBot->idle();
     opponent = xBot;
     
+    // To house UI elements
+    this->settingsUI = new GameObject("settings-ui");
+    mScene->addEntity(settingsUI);
     
-    //
-    // SHADER
-    //
+    // Play button
+    {
+        GUIProperty *guiButton = new GUIProperty("player-block-control");
+        
+        guiButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&SettingsSceneLogic::playButton, this);
+        guiButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(200.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), 100.0f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_play.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        settingsUI->addProperty(guiButton);
+    }
     
-    // Shader 1
-    // Add a shader object to the graphics module
-    std::vector<std::pair<GLint, std::string> > vertexAttribs;
-    vertexAttribs.push_back(std::make_pair(ATTRIB_POSITION, "position"));
-    vertexAttribs.push_back(std::make_pair(ATTRIB_NORMAL, "normal"));
-    vertexAttribs.push_back(std::make_pair(ATTRIB_UV0, "uv0"));
-    vertexAttribs.push_back(std::make_pair(ATTRIB_JOINT_ID, "joint_id"));
-    vertexAttribs.push_back(std::make_pair(ATTRIB_JOINT_WEIGHT, "joint_weight"));
+    // Settings text
+    {
+        GUIProperty *guiButton = new GUIProperty("settings-text");
+        
+        glm::vec2 bounds(965.0f, 137.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.5f, (float)System::screenHeight-150.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/settings.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        settingsUI->addProperty(guiButton);
+    }
     
-    std::vector<std::string> uniformNames;
-    CameraEntity::fillUniformNames(uniformNames);
-    Material::fillUniformNames(uniformNames);
-    PointLightProperty::fillUniformNames(uniformNames);
-    DirectionalLightProperty::fillUniformNames(uniformNames);
-    AnimatableMeshProperty::fillUniformNames(uniformNames);
-    //Shader *s = Shader::loadShaderFromFile(this->assetsPath + "shaders/basic.vert", this->assetsPath + "shaders/basic.frag", vertexAttribs, uniformNames);
-    Shader *s1 = Shader::loadShaderFromFile(System::assetsPath + "shaders/animatable.vert", System::assetsPath + "shaders/lighting.frag", vertexAttribs, uniformNames);
-    s1->setHasLighting(true);
-    s1->setHasCamera(true);
-    gModule->addShader("lighting", s1);
+    // Player text
+    {
+        GUIProperty *guiButton = new GUIProperty("player-text");
+        
+        glm::vec2 bounds(404.0f, 70.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.25f, (float)System::screenHeight-350.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/player.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        settingsUI->addProperty(guiButton);
+    }
     
-    
-    // Shader 2
-    vertexAttribs.clear();
-    vertexAttribs.push_back(std::make_pair(ATTRIB_POSITION, "position"));
-    
-    uniformNames.clear();
-    CameraEntity::fillUniformNames(uniformNames);
-    Material::fillUniformNames(uniformNames);
-    MeshProperty::fillUniformNames(uniformNames);
-
-    Shader *s2 = Shader::loadShaderFromFile(System::assetsPath + "shaders/basic.vert", System::assetsPath + "shaders/basic.frag", vertexAttribs, uniformNames);
-    s2->setHasLighting(false);
-    s2->setHasCamera(true);
-    gModule->addShader("basic", s2);
-    
-    //
-    //  Mesh
-    //
-    gModule->addMesh("sphere", createSphere(1.0f));
-    
+    // Opponent text
+    {
+        GUIProperty *guiButton = new GUIProperty("opponent-text");
+        
+        glm::vec2 bounds(533.0f, 70.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.75f, (float)System::screenHeight-350.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/opponent.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        settingsUI->addProperty(guiButton);
+    }
     
     //
     // LIGHT
@@ -193,4 +243,25 @@ void SettingsSceneLogic::initialise()
     Graphics::getInstance().setActiveCameraEntity("glCamera");
     //arEntity->addChild(camEntity);
     mScene->addEntity(camEntity);
+    
+    state = GameState::INITIALISED;
+}
+
+void SettingsSceneLogic::deinitialise()
+{
+    state = GameState::UNINITIALISED;
+    player = NULL;
+    opponent = NULL;
+    settingsUI = NULL;
+}
+
+void SettingsSceneLogic::playButton()
+{
+    std::cout << "Play!" << std::endl;
+    
+    state = GameState::PLAY;
+    
+    // No need to setup a new scene as we will use the scene in this one.
+    
+    /**/
 }

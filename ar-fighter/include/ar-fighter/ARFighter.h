@@ -8,6 +8,9 @@
 
 class SceneManager;
 class Scene;
+class MainMenuSceneLogic;
+class SettingsSceneLogic;
+class FightSceneLogic;
 
 class ARFighter
 {
@@ -30,9 +33,6 @@ public:
     void touchMove(const float &x, const float &y);
     void touchUp(const float &x, const float &y);
     
-    void setUpSettingsScene();
-    void setUpFightScene();
-    
     //void setAssetsPath(const std::string &path) {   this->assetsPath = path;    }
     
 private:
@@ -49,6 +49,10 @@ private:
     //std::string assetsPath;
     
     Scene* createSettingsScene();
+    
+    MainMenuSceneLogic *mainMenuSceneLogic;
+    SettingsSceneLogic *settingsSceneLogic;
+    FightSceneLogic *fightSceneLogic;
 };
 
 #endif /* _ARFIGHTER_H */

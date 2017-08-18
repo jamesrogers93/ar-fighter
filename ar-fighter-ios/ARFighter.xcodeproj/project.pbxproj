@@ -7,18 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A0B3D841F29C8BE008E3D8F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B3D831F29C8BE008E3D8F /* SettingsViewController.swift */; };
+		1A0B3D841F29C8BE008E3D8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B3D831F29C8BE008E3D8F /* ViewController.swift */; };
 		1A2A8FB11F24BD51005932B3 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */; };
 		1A2A8FB61F24BE89005932B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A8FB51F24BE89005932B3 /* main.m */; };
 		1A32F7C61EF901AD004E9BD0 /* assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
 		1A32F7C71EF901C6004E9BD0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
-		1A38B9A61EEFCC93009CDF0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9A51EEFCC93009CDF0D /* ViewController.swift */; };
 		1A38B9A91EEFCC93009CDF0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9A71EEFCC93009CDF0D /* Main.storyboard */; };
 		1A38B9AB1EEFCC93009CDF0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */; };
 		1A38B9AE1EEFCC93009CDF0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */; };
 		1A38B9B91EEFCC93009CDF0D /* ARFighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9B81EEFCC93009CDF0D /* ARFighterTests.swift */; };
 		1A38B9C41EEFCC93009CDF0D /* ARFighterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */; };
-		1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */; };
 		1A38BA2E1EF054CB009CDF0D /* libGameEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA291EF05433009CDF0D /* libGameEngine-ios.a */; };
 		1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA2B1EF05433009CDF0D /* libARFighter.a */; };
 		1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */; };
@@ -89,13 +87,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1A0B3D831F29C8BE008E3D8F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1A0B3D831F29C8BE008E3D8F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1A2A8FAF1F24BD51005932B3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		1A2A8FB51F24BE89005932B3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1A32F7C51EF901AD004E9BD0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		1A38B9A01EEFCC93009CDF0D /* ARFighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARFighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A38B9A51EEFCC93009CDF0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1A38B9A81EEFCC93009CDF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A38B9AD1EEFCC93009CDF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -106,7 +103,6 @@
 		1A38B9BF1EEFCC93009CDF0D /* ARFighterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARFighterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFighterUITests.swift; sourceTree = "<group>"; };
 		1A38B9C51EEFCC93009CDF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FightViewController.swift; sourceTree = "<group>"; };
 		1A38B9E01EEFE342009CDF0D /* libARFighter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libARFighter.a; path = ../build.iOS/lib/Debug/libARFighter.a; sourceTree = "<group>"; };
 		1A38B9FC1EEFFDF8009CDF0D /* libGameEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameEngine.a; path = ../build.iOS/lib/Debug/libGameEngine.a; sourceTree = "<group>"; };
 		1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARFighter-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -198,9 +194,7 @@
 				1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */,
 				1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */,
 				1A2A8FB51F24BE89005932B3 /* main.m */,
-				1A38B9A51EEFCC93009CDF0D /* ViewController.swift */,
-				1A0B3D831F29C8BE008E3D8F /* SettingsViewController.swift */,
-				1A38B9D11EEFCF09009CDF0D /* FightViewController.swift */,
+				1A0B3D831F29C8BE008E3D8F /* ViewController.swift */,
 				1A38B9A71EEFCC93009CDF0D /* Main.storyboard */,
 				1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */,
 				1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */,
@@ -444,10 +438,8 @@
 			files = (
 				1A2A8FB61F24BE89005932B3 /* main.m in Sources */,
 				1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */,
-				1A38B9A61EEFCC93009CDF0D /* ViewController.swift in Sources */,
-				1A38B9D21EEFCF09009CDF0D /* FightViewController.swift in Sources */,
 				1A2A8FB11F24BD51005932B3 /* AppDelegate.mm in Sources */,
-				1A0B3D841F29C8BE008E3D8F /* SettingsViewController.swift in Sources */,
+				1A0B3D841F29C8BE008E3D8F /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

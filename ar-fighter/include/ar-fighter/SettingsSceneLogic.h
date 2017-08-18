@@ -11,19 +11,24 @@ class SettingsSceneLogic : public SceneLogic
 {
 public:
     
+    enum class GameState
+    {
+        UNINITIALISED,
+        INITIALISED,
+        IDLE,
+        PLAY
+    };
+    GameState state;
+    
     Character *player;
     Character *opponent;
     
-    SettingsSceneLogic(Scene *scene) : SceneLogic(scene)
-    {
-        
-    }
+    // To house GUI stuff
+    GameObject *settingsUI;
     
-    void initialise();
+    SettingsSceneLogic(Scene *scene);
     
-    void update();
-    
-    void draw();
+    void playButton();
     
     void switchPlayerRight()
     {}
@@ -45,6 +50,12 @@ public:
     
     void hardDifficulty()
     {}
+    
+protected:
+    void initialise();
+    void deinitialise();
+    void update();
+    void draw();
 };
 
 #endif /* _SETTINGSSCENELOGIC_H */
