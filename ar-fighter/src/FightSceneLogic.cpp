@@ -52,6 +52,9 @@ FightSceneLogic::FightSceneLogic(Scene *scene)
     playCharacterInfoUI(NULL),
     playControlUI(NULL),
     pauseUI(NULL),
+    quitUI(NULL),
+    playerWonUI(NULL),
+    opponentWonUI(NULL),
     countdown3UI(NULL),
     countdown2UI(NULL),
     countdown1UI(NULL),
@@ -194,12 +197,18 @@ void FightSceneLogic::initialiseScene()
     this->playCharacterInfoUI = new GameObject("play-character-info-ui");
     this->playControlUI = new GameObject("play-control-ui");
     this->pauseUI = new GameObject("pause-ui");
+    this->quitUI = new GameObject("quit-ui");
+    this->playerWonUI = new GameObject("player-won-ui");
+    this->opponentWonUI = new GameObject("opponent-won-ui");
     
     mScene->addEntity(trackStartUI);
     mScene->addEntity(trackConfirmUI);
     mScene->addEntity(playCharacterInfoUI);
     mScene->addEntity(playControlUI);
     mScene->addEntity(pauseUI);
+    mScene->addEntity(quitUI);
+    mScene->addEntity(playerWonUI);
+    mScene->addEntity(opponentWonUI);
     
     
     
@@ -703,34 +712,6 @@ void FightSceneLogic::initialiseScene()
         pauseUI->addProperty(guiButton);
     }
     
-    // quit button
-    {
-        GUIProperty *guiButton = new GUIProperty("quit-control");
-        
-        guiButton->isTouchable = true;
-        std::function<void(void)> func = std::bind(&FightSceneLogic::quit, this);
-        guiButton->setCallbackOnTouchUp(func);
-        glm::vec2 bounds(500.0f, 100.f);
-        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
-        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) - (bounds.y) - 50.0f));
-        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
-        
-        Texture *texture = Texture::loadFromFile("textures/button_quit.png", true);
-        
-        if(texture != NULL)
-        {
-            GLTexture *glTexture = GLTexture::loadFromData(*texture);
-            
-            guiRectangle->setMapUp(glTexture);
-            guiRectangle->setMapDown(glTexture);
-            
-            delete texture;
-        }
-        
-        guiButton->addShape(guiRectangle);
-        pauseUI->addProperty(guiButton);
-    }
-    
     // Resume button
     {
         resumeButton = new GUIProperty("resume-control");
@@ -784,6 +765,91 @@ void FightSceneLogic::initialiseScene()
     }
     
     
+    
+    
+    // For quit UI
+    
+    // quit button
+    {
+        GUIProperty *guiButton = new GUIProperty("quit-control");
+        
+        guiButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&FightSceneLogic::quit, this);
+        guiButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(500.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) - (bounds.y) - 50.0f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_quit.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        quitUI->addProperty(guiButton);
+    }
+    
+    
+    // For player won ui
+    
+    // Win text
+    {
+        GUIProperty *guiButton = new GUIProperty("win-text");
+        
+        glm::vec2 bounds(874.0f, 137.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.5f, (float)System::screenHeight*0.75f));
+        
+        Texture *texture = Texture::loadFromFile("textures/win.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        playerWonUI->addProperty(guiButton);
+    }
+    
+    // For opponent won ui
+    
+    // Lose text
+    {
+        GUIProperty *guiButton = new GUIProperty("lose-text");
+        
+        glm::vec2 bounds(1065.0f, 137.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.5f, (float)System::screenHeight*0.75f));
+        
+        Texture *texture = Texture::loadFromFile("textures/lose.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        opponentWonUI->addProperty(guiButton);
+    }
+    
     // Prepare the tracking and playing state game objects
    // mScene->prepare(trackStartUI);
     //mScene->prepare(trackConfirmUI);
@@ -803,6 +869,9 @@ void FightSceneLogic::deinitialise()
     playCharacterInfoUI = NULL;
     playControlUI = NULL;
     pauseUI = NULL;
+    quitUI = NULL;
+    playerWonUI = NULL;
+    opponentWonUI = NULL;
     countdown3UI = NULL;
     countdown2UI = NULL;
     countdown1UI = NULL;
@@ -859,6 +928,9 @@ void FightSceneLogic::update()
         mScene->unPrepare(playControlUI);
         mScene->unPrepare(trackConfirmUI);
         mScene->unPrepare(pauseUI);
+        mScene->unPrepare(quitUI);
+        mScene->unPrepare(playerWonUI);
+        mScene->unPrepare(opponentWonUI);
         mScene->unPrepare(countdown3UI);
         mScene->unPrepare(countdown2UI);
         mScene->unPrepare(countdown1UI);
@@ -881,6 +953,7 @@ void FightSceneLogic::update()
     {
         // Enable these in scene
         mScene->prepare(pauseUI);
+        mScene->prepare(quitUI);
         
         // Disable these in scene
         //mScene->unPrepare(playCharacterInfoUI);
@@ -900,6 +973,7 @@ void FightSceneLogic::update()
         
         // Disable these in scene
         mScene->unPrepare(pauseUI);
+        mScene->unPrepare(quitUI);
         
         state = GameState::PLAYING;
     }
@@ -919,6 +993,36 @@ void FightSceneLogic::update()
         scene->initialise();
         SceneManager::getInstance().makeActiveScene("main-menu");
         return;
+    }
+    else if (state == GameState::PLAYER_WON)
+    {
+        // Enable these in scene
+        mScene->prepare(playerWonUI);
+        mScene->prepare(quitUI);
+        
+        // Disable these in scene
+        //mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(pauseUI);
+        mScene->unPrepare(playControlUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
+    }
+    else if (state == GameState::OPPONENT_WON)
+    {
+        // Enable these in scene
+        mScene->prepare(opponentWonUI);
+        mScene->prepare(quitUI);
+        
+        // Disable these in scene
+        //mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(pauseUI);
+        mScene->unPrepare(playControlUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
     }
     
     // Check to see if we're not tracking and not prompting user to track
@@ -1028,6 +1132,11 @@ void FightSceneLogic::playerPunched()
         
         opponent->damageDealt();
     }
+    
+    if(!player->isAlive())
+    {
+        state = GameState::OPPONENT_WON;
+    }
 }
 
 void FightSceneLogic::opponentPunched()
@@ -1043,6 +1152,11 @@ void FightSceneLogic::opponentPunched()
         opponentHealthBar->setProgression(opponent->getHealth() / opponent->getMaxHealth());
         
         player->damageDealt();
+    }
+    
+    if(!opponent->isAlive())
+    {
+        state = GameState::PLAYER_WON;
     }
 }
 
@@ -1083,7 +1197,7 @@ void FightSceneLogic::resume()
 
 void FightSceneLogic::quit()
 {
-    if(state == GameState::PAUSED)
+    if(state == GameState::PAUSED || state == GameState::OPPONENT_WON || state == GameState::PLAYER_WON)
     {
         std::cout << "QUIT!" << std::endl;
         state = GameState::QUIT;
@@ -1129,7 +1243,7 @@ void FightSceneLogic::blockButtonUp()
 
 void FightSceneLogic::trackStart()
 {
-    arHandler->startTracking();
+    arHandler->startTracking(glm::vec3(0.0f, 0.0f, 300.0f));
     
     state = GameState::PROMPT_TRACK_CONFIRM;
 }

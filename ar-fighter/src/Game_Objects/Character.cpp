@@ -42,13 +42,20 @@
 // Bullet
 #include <btBulletCollisionCommon.h>
 
+const float Character::MAX_HEALTH = 100.0f;
+const float Character::DAMAGE_INFLICT = 30.0f;
+
 Character::Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask, const glm::vec4 &colourTheme)
     : GameObject(name),
     mAnimator(NULL),
     state(IDLE),
     collisionMask(collisionMask),
     collidesWithMask(collidesWithMask),
-    mThemeColour(colourTheme)
+    mThemeColour(colourTheme),
+    maxHealth(MAX_HEALTH),
+    health(MAX_HEALTH),
+    damageInflict(DAMAGE_INFLICT),
+    canDealDamage(false)
 {
     /*physicsMeshMap =
     {

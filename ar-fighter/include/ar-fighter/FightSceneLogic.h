@@ -16,7 +16,7 @@ class FightSceneLogic : public SceneLogic
 {
 public:
     
-    enum class GameState { PROMPT_TRACKER, PROMPTING_TRACKER, STARTED_TRACKER, PROMPT_TRACK_CONFIRM, PROMPTING_TRACK_CONFIRM, PLAYING, PAUSING, PAUSED, RESUMING, QUIT};
+    enum class GameState { PROMPT_TRACKER, PROMPTING_TRACKER, STARTED_TRACKER, PROMPT_TRACK_CONFIRM, PROMPTING_TRACK_CONFIRM, PLAYING, PAUSING, PAUSED, RESUMING, QUIT, PLAYER_WON, OPPONENT_WON};
     GameState state;
     
     std::string playerName;
@@ -31,6 +31,9 @@ public:
     GameObject *playCharacterInfoUI;
     GameObject *playControlUI;
     GameObject *pauseUI;
+    GameObject *quitUI;
+    GameObject *playerWonUI;
+    GameObject *opponentWonUI;
     
     // Countdown GUI
     GameObject *countdown3UI;

@@ -22,6 +22,9 @@ class Character : public GameObject
 {
 public:
     
+    static const float MAX_HEALTH;
+    static const float DAMAGE_INFLICT;
+    
     enum CharacterState { IDLE, WALKING, PUNCHING};
     CharacterState state;
     
@@ -58,6 +61,7 @@ public:
     const float& getDamageInflict() { return damageInflict; }
     const bool& getCanDealDamage() { return canDealDamage; }
     const glm::vec4& getColourTheme() { return mThemeColour; }
+    const bool isAlive() { return health > 0.0f; }
     
     void takeDamage(const float &damage) { health -= damage; if( health < 0) health = 0; }
     void damageDealt() { canDealDamage = false; }
@@ -65,10 +69,10 @@ public:
 protected:
     
     // Player properties
-    float maxHealth = 100.0f;
-    float health = maxHealth;
-    float damageInflict = 1.0f;
-    bool canDealDamage = false;
+    float maxHealth;
+    float health;
+    float damageInflict;
+    bool canDealDamage;
     glm::vec4 mThemeColour;
     
     // Handles to the properties
