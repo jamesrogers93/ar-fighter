@@ -1,4 +1,5 @@
 
+include(include/ar-fighter/AI/CMakeLists.txt)
 include(include/ar-fighter/Game_Objects/CMakeLists.txt)
 
 list(APPEND AR_FIGHTER_INC

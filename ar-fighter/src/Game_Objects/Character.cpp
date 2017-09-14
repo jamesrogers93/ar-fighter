@@ -147,8 +147,15 @@ void Character::idle()
 
 void Character::punch()
 {
+    if(state == PUNCHING || state == BLOCKING)
+    {
+        return;
+    }
+        
     if(mAnimator != NULL)
     {
+        std::function<void(void)> callback = std::bind(&Character::actionCallback, this);
+        mAnimator->getAnimationController1()->setCallback(callback);
         mAnimator->getAnimationController1()->setAnimation(name + "_punch_1");
         mAnimator->getAnimationController1()->setLoop(false);
         mAnimator->getAnimationController1()->setSpeed(1.0f);
@@ -173,10 +180,32 @@ void Character::kick()
 
 void Character::block()
 {
+    if(state == PUNCHING || state == BLOCKING)
+    {
+        return;
+    }
+    
     if(mAnimator != NULL)
     {
+        std::function<void(void)> callback = std::bind(&Character::actionCallback, this);
+        mAnimator->getAnimationController1()->setCallback(callback);
+        mAnimator->getAnimationController1()->setAnimation(name + "_block");
+        mAnimator->getAnimationController1()->setLoop(false);
+        mAnimator->getAnimationController1()->setSpeed(1.0f);
+        mAnimator->getAnimationController1()->setReverse(false);
+        mAnimator->getAnimationController1()->resetElapsedTime();
+        mAnimator->getAnimationController1()->play();
         
+        mAnimator->getAnimationController2()->stop();
+        
+        state = BLOCKING;
+        canDealDamage = false;
     }
+}
+
+void Character::actionCallback()
+{
+    state = IDLE;
 }
 
 void Character::initialise()
@@ -249,6 +278,11 @@ void Character::initialise()
     animationImporterYBot3.join();
     animationImporterYBot4.join();
     
+    AnimationImporter animationImporterYBot5;
+    animationImporterYBot5.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_block.jmpAnimation");
+    
+    animationImporterYBot5.join();
+    
     //
     // ANIMATIONS
     //
@@ -269,6 +303,10 @@ void Character::initialise()
     if(!aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject()))
     {
         delete animationImporterYBot4.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot5.getImportedObject()->getName(), animationImporterYBot5.getImportedObject()))
+    {
+        delete animationImporterYBot5.getImportedObject();
     }
     //aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject());
     

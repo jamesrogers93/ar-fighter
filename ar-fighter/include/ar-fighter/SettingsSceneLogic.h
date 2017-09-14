@@ -23,6 +23,8 @@ public:
     Character *player;
     Character *opponent;
     
+    std::string difficulty;
+    
     // To house GUI stuff
     GameObject *settingsUI;
     
@@ -46,10 +48,14 @@ public:
     {}
     
     void mediumDifficulty()
-    {}
+    {
+        difficulty = "normal";
+    }
     
     void hardDifficulty()
-    {}
+    {
+        difficulty = "hard";
+    }
     
 protected:
     void initialise();

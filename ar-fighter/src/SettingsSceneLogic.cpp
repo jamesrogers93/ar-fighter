@@ -50,6 +50,7 @@ SettingsSceneLogic::SettingsSceneLogic(Scene *scene)
     state(GameState::UNINITIALISED),
     player(NULL),
     opponent(NULL),
+    difficulty("normal"),
     settingsUI(NULL)
 {
     
@@ -69,6 +70,15 @@ void SettingsSceneLogic::update()
         FightSceneLogic *fightSceneLogic = (FightSceneLogic*)scene->getSceneLogic();
         fightSceneLogic->playerName = player->getName();
         fightSceneLogic->opponentName = opponent->getName();
+        
+        if(difficulty == "normal")
+        {
+            fightSceneLogic->difficulty = FightSceneLogic::GameDifficulty::NORMAL;
+        }
+        else
+        {
+            fightSceneLogic->difficulty = FightSceneLogic::GameDifficulty::HARD;
+        }
         
         mScene->deinitialise();
         

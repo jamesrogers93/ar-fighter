@@ -50,6 +50,12 @@
 // Game Engine GUI Module
 #include <game-engine/Modules/GUI/GUI.h>
 
+// Game Engine AI Module
+#include <game-engine/Modules/AI/AI.h>
+
+// Game Engine Audio Module
+#include <game-engine/Modules/Audio/Audio.h>
+
 // Game Engine Scene
 #include <game-engine/Scene/SceneManager.h>
 #include <game-engine/Scene/Scene.h>
@@ -141,6 +147,8 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     engine->addCoreModule(&AnimationModule::getInstance());
     engine->addCoreModule(&Physics::getInstance());
     engine->addCoreModule(&GUI::getInstance());
+    engine->addCoreModule(&AI::getInstance());
+    engine->addCoreModule(&Audio::getInstance());
     
     // Configure the graphics module.
     Graphics::getInstance().initialise();
@@ -155,6 +163,12 @@ void ARFighter::initialise(const unsigned int &screenWidth, const unsigned int &
     
     // Configure GUI module
     GUI::getInstance().initialise();
+    
+    // Configure AI module
+    AI::getInstance().initialise();
+    
+    // Configure Audio module
+    Audio::getInstance().initialise();
     
     // Add some stuff to the engine
     //

@@ -25,7 +25,7 @@ public:
     static const float MAX_HEALTH;
     static const float DAMAGE_INFLICT;
     
-    enum CharacterState { IDLE, WALKING, PUNCHING};
+    enum CharacterState { IDLE, WALKING, PUNCHING, BLOCKING};
     CharacterState state;
     
     Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask, const glm::vec4 &colourTheme);
@@ -38,6 +38,8 @@ public:
     virtual void punch();
     virtual void kick();
     virtual void block();
+    
+    void actionCallback();
     
     virtual void beforeCollisionCallback(PhysicsProperty *obj);
     
@@ -55,6 +57,8 @@ public:
     
     void update();
     
+    void setOpponent(Character *opponent) { this->opponent = opponent; }
+    Character* getOpponent() { return this->opponent; }
     
     const float& getMaxHealth() { return maxHealth; }
     const float& getHealth() { return health; }
@@ -67,6 +71,8 @@ public:
     void damageDealt() { canDealDamage = false; }
     
 protected:
+    
+    Character *opponent;
     
     // Player properties
     float maxHealth;

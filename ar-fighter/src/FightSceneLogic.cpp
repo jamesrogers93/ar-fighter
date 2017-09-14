@@ -31,6 +31,10 @@
 #include <game-engine/Modules/GUI/GUIAnalog.h>
 #include <game-engine/Modules/GUI/GUIProgressBar.h>
 
+// Game Engine AI
+#include <game-engine/Modules/AI/AIFSM.h>
+#include <game-engine/Modules/AI/AIDT.h>
+
 #include "game-engine/GameObject.h"
 
 #include "ar-fighter/Game_Objects/Character.h"
@@ -40,6 +44,12 @@
 // Game Engine Util
 #include "game-engine/Util/TimeUtil.h"
 #include "game-engine/Util/TextureUtil.h"
+
+// Game AI
+#include "ar-fighter/AI/FSM/AIFSMStateCombat.h"
+#include "ar-fighter/AI/FSM/AIFSMStateLose.h"
+#include "ar-fighter/AI/FSM/AIFSMStateMoveToPlayer.h"
+#include "ar-fighter/AI/FSM/AIFSMStateWin.h"
 
 FightSceneLogic::FightSceneLogic(Scene *scene)
     :SceneLogic(scene),
@@ -117,6 +127,7 @@ void FightSceneLogic::initialiseScene()
         xBot->initialise();
         xBot->initialisePhysics();
         xBot->translate(150.0, 0.0, 0.0);
+        
         mScene->addEntity(xBot);
         xBot->idle();
         player = xBot;
@@ -146,10 +157,37 @@ void FightSceneLogic::initialiseScene()
         opponent = xBot;
     }
     
+    if(difficulty == GameDifficulty::NORMAL)
+    {
+        AIFSM *fsm = new AIFSM("opponent");
+        
+        AIFSMStateMoveToPlayer *state1  = new AIFSMStateMoveToPlayer(opponent);
+        AIFSMStateCombat *state2        = new AIFSMStateCombat(opponent);
+        AIFSMStateWin *state3           = new AIFSMStateWin(opponent);
+        AIFSMStateLose *state4          = new AIFSMStateLose(opponent);
+        
+        fsm->addState("move-to-player", state1);
+        fsm->addState("combat", state2);
+        fsm->addState("win", state3);
+        fsm->addState("lose", state4);
+        
+        fsm->setCurrentState("move-to-player");
+        
+        opponent->addProperty(fsm);
+    }
+    else
+    {
+        AIDT *ai = new AIDT("opponent");
+        opponent->addProperty(ai);
+    }
+    
     // Add callback functions to characters when punched
     
     player->setPunchedCallback(std::bind(&FightSceneLogic::playerPunched, this));
     opponent->setPunchedCallback(std::bind(&FightSceneLogic::opponentPunched, this));
+    
+    player->setOpponent(opponent);
+    opponent->setOpponent(player);
     
     // Here we will add other stuff to the scene
     
@@ -893,6 +931,12 @@ void FightSceneLogic::update()
     // Update Physics module
     Engine::getInstance().update(CoreModuleType::CM_PHYSICS, false);
     
+    // Update AI module
+    if(state == GameState::PLAYING)
+    {
+        Engine::getInstance().update(CoreModuleType::CM_AI, false);
+    }
+    
     if(state == GameState::PROMPT_TRACK_CONFIRM)
     {
         // Enable these in scene
@@ -1120,6 +1164,11 @@ void FightSceneLogic::countDown()
 
 void FightSceneLogic::playerPunched()
 {
+    if(player->state == Character::CharacterState::BLOCKING)
+    {
+        return;
+    }
+    
     std::cout << "Player punched!" << std::endl;
     
     if(opponent->getCanDealDamage())
@@ -1141,6 +1190,11 @@ void FightSceneLogic::playerPunched()
 
 void FightSceneLogic::opponentPunched()
 {
+    if(opponent->state == Character::CharacterState::BLOCKING)
+    {
+        return;
+    }
+    
     std::cout << "Opponent punched!" << std::endl;
     
     if(player->getCanDealDamage())

@@ -19,6 +19,9 @@ public:
     enum class GameState { PROMPT_TRACKER, PROMPTING_TRACKER, STARTED_TRACKER, PROMPT_TRACK_CONFIRM, PROMPTING_TRACK_CONFIRM, PLAYING, PAUSING, PAUSED, RESUMING, QUIT, PLAYER_WON, OPPONENT_WON};
     GameState state;
     
+    enum class GameDifficulty { NORMAL, HARD };
+    GameDifficulty difficulty;
+    
     std::string playerName;
     std::string opponentName;
     Character *player;
