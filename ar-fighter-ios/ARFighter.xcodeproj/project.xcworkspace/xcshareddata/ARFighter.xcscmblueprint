@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "31AEF846886046AD3A375696B7BE5FDBC85686CB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "CD02AD23789515AF5D416F876100FE38242DE7E4" : 9223372036854775807,
+    "31AEF846886046AD3A375696B7BE5FDBC85686CB" : 9223372036854775807,
+    "309C28369A468E0870EA46A625AF4C6FD65C7F80" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AC1AB5E7-ACE4-4ACE-9A9D-2608DF6798C5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "CD02AD23789515AF5D416F876100FE38242DE7E4" : "..\/..\/..\/..\/..\/..\/Desktop\/bullet3",
+    "31AEF846886046AD3A375696B7BE5FDBC85686CB" : "ar-fighter\/",
+    "309C28369A468E0870EA46A625AF4C6FD65C7F80" : "ar-fighter\/game-engine\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ARFighter",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ar-fighter-ios\/ARFighter.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jamesrogers93\/game-engine.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "309C28369A468E0870EA46A625AF4C6FD65C7F80"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jamesrogers93\/ar-fighter.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "31AEF846886046AD3A375696B7BE5FDBC85686CB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bulletphysics\/bullet3.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CD02AD23789515AF5D416F876100FE38242DE7E4"
+    }
+  ]
+}

@@ -31,43 +31,49 @@ else()
 endif()
 
 # Platform specific external libraries
-if(IOS OR ANDROID)
+if(IOS OR  ANDROID)
 	# Include OpenGLES
 	find_package(OpenGLES REQUIRED)
-	include_directories("${OPENGLES_INCLUDE_DIR}")
+	#include_directories("${OPENGLES_INCLUDE_DIR}")
 	list(APPEND ARFIGHTER_LIBRARIES
             ${OPENGLES_LIBRARIES}
-        )
+		)
+
 else()
 	# Include OpenGL
 	find_package(OpenGL REQUIRED)
 	include_directories("${OPENGL_INCLUDE_DIR}")
 	list(APPEND ARFIGHTER_LIBRARIES
     	    ${OPENGL_LIBRARY}
-        )
+		)
+		
+	# Include Bullet Physics
+	find_package (BULLET REQUIRED)
+	include_directories(${BULLET_INCLUDE_DIRS})
+	list(APPEND PLATFORM_LIBRARIES
+    	${BULLET_LIBRARIES}
+	)
 endif()
 
 # Include GLM (same for all platforms)
 find_package (glm REQUIRED)
 include_directories(${GLM_INCLUDE_DIRS})
 
+# AR Module Stuff (Only for IOS)
+if(IOS)
+	# Bullet Physics
+	include_directories("${CMAKE_CURRENT_LIST_DIR}/../game-engine/external/bullet3/src/")
+endif()
+
 # Make the ARFighter library
-add_library(ARFighter SHARED ${AR_FIGHTER_INC} ${AR_FIGHTER_SRC})
-
-# Link Libraries
-target_link_libraries(ARFighter gameEngine)
-target_link_libraries(ARFighter $(ARFIGHTER_LIBRARIES))
-
-# Group files
-build_groups("${AR_FIGHTER_INC}")
-build_groups("${AR_FIGHTER_SRC}")
-
-# Install
-install(TARGETS ARFighter DESTINATION ../lib/$(PLATFORM))
-install(FILES ${AR_FIGHTER_INC} DESTINATION include)
+if(STATIC)
+	add_library(ARFighter STATIC ${AR_FIGHTER_INC} ${AR_FIGHTER_SRC})
+else()
+	add_library(ARFighter SHARED ${AR_FIGHTER_INC} ${AR_FIGHTER_SRC})
+endif()
 
 # Macro to take the file directories of the files and add them to groups to maintain the folder structure in an IDE.
-macro(build_groups FILES_LIST)
+macro(build_groups_ARFighter FILES_LIST)
 	foreach(FILE ${FILES_LIST}) 
   		get_filename_component(PARENT_DIR "${FILE}" PATH)
 
@@ -76,7 +82,8 @@ macro(build_groups FILES_LIST)
   		string(REPLACE "/" "\\" GROUP "${GROUP}")
 
   		# group into "Source Files" and "Header Files"
-  		if ("${FILE}" MATCHES ".*\\.cpp")
+  		if ("${FILE}" MATCHES ".*\\.cpp"
+		  OR "${FILE}" MATCHES ".*\\.mm")
   	  		set(GROUP "Source Files\\${GROUP}")
   		elseif("${FILE}" MATCHES ".*\\.h")
   	  		set(GROUP "Header Files\\${GROUP}")
@@ -85,3 +92,15 @@ macro(build_groups FILES_LIST)
   		source_group("${GROUP}" FILES "${FILE}")
 	endforeach()
 endmacro()
+
+# Group files
+build_groups_ARFighter("${AR_FIGHTER_INC}")
+build_groups_ARFighter("${AR_FIGHTER_SRC}")
+
+# Install
+install(TARGETS ARFighter DESTINATION ../lib/$(PLATFORM))
+install(FILES ${AR_FIGHTER_INC} DESTINATION include)
+
+# Link Libraries
+target_link_libraries(ARFighter GameEngine)
+target_link_libraries(ARFighter $(ARFIGHTER_LIBRARIES))

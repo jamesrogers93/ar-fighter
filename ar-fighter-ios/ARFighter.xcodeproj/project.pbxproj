@@ -1,0 +1,761 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A0B3D841F29C8BE008E3D8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B3D831F29C8BE008E3D8F /* ViewController.swift */; };
+		1A2A8FB11F24BD51005932B3 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */; };
+		1A2A8FB61F24BE89005932B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A8FB51F24BE89005932B3 /* main.m */; };
+		1A32F7C61EF901AD004E9BD0 /* assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
+		1A32F7C71EF901C6004E9BD0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1A32F7C51EF901AD004E9BD0 /* assets */; };
+		1A38B9A91EEFCC93009CDF0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9A71EEFCC93009CDF0D /* Main.storyboard */; };
+		1A38B9AB1EEFCC93009CDF0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */; };
+		1A38B9AE1EEFCC93009CDF0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */; };
+		1A38B9B91EEFCC93009CDF0D /* ARFighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9B81EEFCC93009CDF0D /* ARFighterTests.swift */; };
+		1A38B9C41EEFCC93009CDF0D /* ARFighterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */; };
+		1A38BA2E1EF054CB009CDF0D /* libGameEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA291EF05433009CDF0D /* libGameEngine-ios.a */; };
+		1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A38BA2B1EF05433009CDF0D /* libARFighter.a */; };
+		1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */; };
+		1A988F421F05802D008CD438 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F411F05802D008CD438 /* CoreMotion.framework */; };
+		1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F3F1F057FE8008CD438 /* AVFoundation.framework */; };
+		1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A988F441F05851B008CD438 /* CoreMedia.framework */; };
+		1AB84F3A1F3DC7C700808FBD /* libBulletCollision_xcode4_x64_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB84EB21F3DB98500808FBD /* libBulletCollision_xcode4_x64_debug.a */; };
+		1AB84F3B1F3DC7C700808FBD /* libLinearMath_xcode4_x64_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB84EB41F3DB98500808FBD /* libLinearMath_xcode4_x64_debug.a */; };
+		1AE3ABF01F10FBA60010E2C0 /* libKudanCV-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1A38B9B51EEFCC93009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38B9981EEFCC93009CDF0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A38B99F1EEFCC93009CDF0D;
+			remoteInfo = ARFighter;
+		};
+		1A38B9C01EEFCC93009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38B9981EEFCC93009CDF0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A38B99F1EEFCC93009CDF0D;
+			remoteInfo = ARFighter;
+		};
+		1A38BA281EF05433009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9539879DA2F945FC89063565;
+			remoteInfo = GameEngine;
+		};
+		1A38BA2A1EF05433009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E6A769A6A024398A96F4C39;
+			remoteInfo = ARFighter;
+		};
+		1A38BA2C1EF054C3009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EBC3F99545F49E7841E4B8B;
+			remoteInfo = GameEngine;
+		};
+		1A38BA2F1EF054D9009CDF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F031675C18EE4ECF8171D2D9;
+			remoteInfo = ARFighter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1A3ADD311EF827DE00048E01 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				1A32F7C61EF901AD004E9BD0 /* assets in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1A0B3D831F29C8BE008E3D8F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1A2A8FAF1F24BD51005932B3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1A2A8FB51F24BE89005932B3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1A32F7C51EF901AD004E9BD0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		1A38B9A01EEFCC93009CDF0D /* ARFighter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARFighter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A38B9A81EEFCC93009CDF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1A38B9AD1EEFCC93009CDF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1A38B9AF1EEFCC93009CDF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A38B9B41EEFCC93009CDF0D /* ARFighterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARFighterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A38B9B81EEFCC93009CDF0D /* ARFighterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFighterTests.swift; sourceTree = "<group>"; };
+		1A38B9BA1EEFCC93009CDF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A38B9BF1EEFCC93009CDF0D /* ARFighterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARFighterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFighterUITests.swift; sourceTree = "<group>"; };
+		1A38B9C51EEFCC93009CDF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A38B9E01EEFE342009CDF0D /* libARFighter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libARFighter.a; path = ../build.iOS/lib/Debug/libARFighter.a; sourceTree = "<group>"; };
+		1A38B9FC1EEFFDF8009CDF0D /* libGameEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameEngine.a; path = ../build.iOS/lib/Debug/libGameEngine.a; sourceTree = "<group>"; };
+		1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARFighter-Bridging-Header.h"; sourceTree = "<group>"; };
+		1A38BA201EF05432009CDF0D /* Project.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Project.xcodeproj; path = ../build.iOS/Project.xcodeproj; sourceTree = "<group>"; };
+		1A5475F31F068E8F00086E59 /* ARFighter-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ARFighter-iOS.h"; sourceTree = "<group>"; };
+		1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "ARFighter-iOS.mm"; sourceTree = "<group>"; };
+		1A988F3D1F054030008CD438 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "ARFighter/KudanCV/libKudanCV-iOS.a"; sourceTree = "<group>"; };
+		1A988F3F1F057FE8008CD438 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1A988F411F05802D008CD438 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		1A988F441F05851B008CD438 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1AB84E9D1F3DB07B00808FBD /* libBulletCollision_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_x64_release.a; sourceTree = "<group>"; };
+		1AB84EA21F3DB09E00808FBD /* libBulletCollision_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_x64_debug.a; sourceTree = "<group>"; };
+		1AB84EA41F3DB23900808FBD /* libBulletCollision_xcode4_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_xcode4_x64_release.a; sourceTree = "<group>"; };
+		1AB84EA51F3DB23900808FBD /* libBulletDynamics_xcode4_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletDynamics_xcode4_x64_release.a; sourceTree = "<group>"; };
+		1AB84EA61F3DB23900808FBD /* libLinearMath_xcode4_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath_xcode4_x64_release.a; sourceTree = "<group>"; };
+		1AB84EAB1F3DB40100808FBD /* libBulletDynamics_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletDynamics_x64_release.a; sourceTree = "<group>"; };
+		1AB84EAC1F3DB40100808FBD /* libLinearMath_x64_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath_x64_release.a; sourceTree = "<group>"; };
+		1AB84EB21F3DB98500808FBD /* libBulletCollision_xcode4_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletCollision_xcode4_x64_debug.a; sourceTree = "<group>"; };
+		1AB84EB31F3DB98500808FBD /* libBulletDynamics_xcode4_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletDynamics_xcode4_x64_debug.a; sourceTree = "<group>"; };
+		1AB84EB41F3DB98500808FBD /* libLinearMath_xcode4_x64_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath_xcode4_x64_debug.a; sourceTree = "<group>"; };
+		1AE3ABE91F10F9AE0010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "../game-engine/external/KudanCV/libKudanCV-iOS.a"; sourceTree = "<group>"; };
+		1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKudanCV-iOS.a"; sourceTree = "<group>"; };
+		1AE3ABED1F10FA600010E2C0 /* libKudanCV-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKudanCV-iOS.a"; path = "../libKudanCV-iOS.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1A38B99D1EEFCC93009CDF0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AB84F3A1F3DC7C700808FBD /* libBulletCollision_xcode4_x64_debug.a in Frameworks */,
+				1AB84F3B1F3DC7C700808FBD /* libLinearMath_xcode4_x64_debug.a in Frameworks */,
+				1AE3ABF01F10FBA60010E2C0 /* libKudanCV-iOS.a in Frameworks */,
+				1A988F451F05851B008CD438 /* CoreMedia.framework in Frameworks */,
+				1A988F431F058058008CD438 /* AVFoundation.framework in Frameworks */,
+				1A988F421F05802D008CD438 /* CoreMotion.framework in Frameworks */,
+				1A38BA2E1EF054CB009CDF0D /* libGameEngine-ios.a in Frameworks */,
+				1A38BA311EF054DE009CDF0D /* libARFighter.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A38B9B11EEFCC93009CDF0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A38B9BC1EEFCC93009CDF0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A38B9971EEFCC93009CDF0D = {
+			isa = PBXGroup;
+			children = (
+				1A32F7C51EF901AD004E9BD0 /* assets */,
+				1A38B9A21EEFCC93009CDF0D /* ARFighter */,
+				1A38B9B71EEFCC93009CDF0D /* ARFighterTests */,
+				1A38B9C21EEFCC93009CDF0D /* ARFighterUITests */,
+				1A38B9A11EEFCC93009CDF0D /* Products */,
+				1A38B9DF1EEFE341009CDF0D /* Frameworks */,
+				1A38B9FA1EEFFB29009CDF0D /* Library */,
+			);
+			sourceTree = "<group>";
+		};
+		1A38B9A11EEFCC93009CDF0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A38B9A01EEFCC93009CDF0D /* ARFighter.app */,
+				1A38B9B41EEFCC93009CDF0D /* ARFighterTests.xctest */,
+				1A38B9BF1EEFCC93009CDF0D /* ARFighterUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1A38B9A21EEFCC93009CDF0D /* ARFighter */ = {
+			isa = PBXGroup;
+			children = (
+				1A3ADD291EF8181D00048E01 /* Assets */,
+				1A2A8FAF1F24BD51005932B3 /* AppDelegate.h */,
+				1A2A8FB01F24BD51005932B3 /* AppDelegate.mm */,
+				1A5475F31F068E8F00086E59 /* ARFighter-iOS.h */,
+				1A5475F41F068E8F00086E59 /* ARFighter-iOS.mm */,
+				1A38BA161EF00145009CDF0D /* ARFighter-Bridging-Header.h */,
+				1A2A8FB51F24BE89005932B3 /* main.m */,
+				1A0B3D831F29C8BE008E3D8F /* ViewController.swift */,
+				1A38B9A71EEFCC93009CDF0D /* Main.storyboard */,
+				1A38B9AA1EEFCC93009CDF0D /* Assets.xcassets */,
+				1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */,
+				1A38B9AF1EEFCC93009CDF0D /* Info.plist */,
+			);
+			path = ARFighter;
+			sourceTree = "<group>";
+		};
+		1A38B9B71EEFCC93009CDF0D /* ARFighterTests */ = {
+			isa = PBXGroup;
+			children = (
+				1A38B9B81EEFCC93009CDF0D /* ARFighterTests.swift */,
+				1A38B9BA1EEFCC93009CDF0D /* Info.plist */,
+			);
+			path = ARFighterTests;
+			sourceTree = "<group>";
+		};
+		1A38B9C21EEFCC93009CDF0D /* ARFighterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1A38B9C31EEFCC93009CDF0D /* ARFighterUITests.swift */,
+				1A38B9C51EEFCC93009CDF0D /* Info.plist */,
+			);
+			path = ARFighterUITests;
+			sourceTree = "<group>";
+		};
+		1A38B9DF1EEFE341009CDF0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1AB84EB21F3DB98500808FBD /* libBulletCollision_xcode4_x64_debug.a */,
+				1AB84EB31F3DB98500808FBD /* libBulletDynamics_xcode4_x64_debug.a */,
+				1AB84EB41F3DB98500808FBD /* libLinearMath_xcode4_x64_debug.a */,
+				1AB84EAB1F3DB40100808FBD /* libBulletDynamics_x64_release.a */,
+				1AB84EAC1F3DB40100808FBD /* libLinearMath_x64_release.a */,
+				1AB84EA41F3DB23900808FBD /* libBulletCollision_xcode4_x64_release.a */,
+				1AB84EA51F3DB23900808FBD /* libBulletDynamics_xcode4_x64_release.a */,
+				1AB84EA61F3DB23900808FBD /* libLinearMath_xcode4_x64_release.a */,
+				1AB84EA21F3DB09E00808FBD /* libBulletCollision_x64_debug.a */,
+				1AB84E9D1F3DB07B00808FBD /* libBulletCollision_x64_release.a */,
+				1AE3ABED1F10FA600010E2C0 /* libKudanCV-iOS.a */,
+				1AE3ABEB1F10FA390010E2C0 /* libKudanCV-iOS.a */,
+				1AE3ABE91F10F9AE0010E2C0 /* libKudanCV-iOS.a */,
+				1A988F441F05851B008CD438 /* CoreMedia.framework */,
+				1A988F411F05802D008CD438 /* CoreMotion.framework */,
+				1A988F3F1F057FE8008CD438 /* AVFoundation.framework */,
+				1A988F3D1F054030008CD438 /* libKudanCV-iOS.a */,
+				1A38B9FC1EEFFDF8009CDF0D /* libGameEngine.a */,
+				1A38B9E01EEFE342009CDF0D /* libARFighter.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A38B9FA1EEFFB29009CDF0D /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1A38BA201EF05432009CDF0D /* Project.xcodeproj */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		1A38BA211EF05432009CDF0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A38BA291EF05433009CDF0D /* libGameEngine-ios.a */,
+				1A38BA2B1EF05433009CDF0D /* libARFighter.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1A3ADD291EF8181D00048E01 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A38B99F1EEFCC93009CDF0D /* ARFighter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A38B9C81EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighter" */;
+			buildPhases = (
+				1A38B99C1EEFCC93009CDF0D /* Sources */,
+				1A38B99D1EEFCC93009CDF0D /* Frameworks */,
+				1A38B99E1EEFCC93009CDF0D /* Resources */,
+				1A3ADD311EF827DE00048E01 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1A38BA2D1EF054C3009CDF0D /* PBXTargetDependency */,
+				1A38BA301EF054D9009CDF0D /* PBXTargetDependency */,
+			);
+			name = ARFighter;
+			productName = ARFighter;
+			productReference = 1A38B9A01EEFCC93009CDF0D /* ARFighter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1A38B9B31EEFCC93009CDF0D /* ARFighterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A38B9CB1EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighterTests" */;
+			buildPhases = (
+				1A38B9B01EEFCC93009CDF0D /* Sources */,
+				1A38B9B11EEFCC93009CDF0D /* Frameworks */,
+				1A38B9B21EEFCC93009CDF0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1A38B9B61EEFCC93009CDF0D /* PBXTargetDependency */,
+			);
+			name = ARFighterTests;
+			productName = ARFighterTests;
+			productReference = 1A38B9B41EEFCC93009CDF0D /* ARFighterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1A38B9BE1EEFCC93009CDF0D /* ARFighterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A38B9CE1EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighterUITests" */;
+			buildPhases = (
+				1A38B9BB1EEFCC93009CDF0D /* Sources */,
+				1A38B9BC1EEFCC93009CDF0D /* Frameworks */,
+				1A38B9BD1EEFCC93009CDF0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1A38B9C11EEFCC93009CDF0D /* PBXTargetDependency */,
+			);
+			name = ARFighterUITests;
+			productName = ARFighterUITests;
+			productReference = 1A38B9BF1EEFCC93009CDF0D /* ARFighterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1A38B9981EEFCC93009CDF0D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "James Rogers";
+				TargetAttributes = {
+					1A38B99F1EEFCC93009CDF0D = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = B5LYDKFH6V;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					1A38B9B31EEFCC93009CDF0D = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = B5LYDKFH6V;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1A38B99F1EEFCC93009CDF0D;
+					};
+					1A38B9BE1EEFCC93009CDF0D = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = B5LYDKFH6V;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1A38B99F1EEFCC93009CDF0D;
+					};
+				};
+			};
+			buildConfigurationList = 1A38B99B1EEFCC93009CDF0D /* Build configuration list for PBXProject "ARFighter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1A38B9971EEFCC93009CDF0D;
+			productRefGroup = 1A38B9A11EEFCC93009CDF0D /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1A38BA211EF05432009CDF0D /* Products */;
+					ProjectRef = 1A38BA201EF05432009CDF0D /* Project.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1A38B99F1EEFCC93009CDF0D /* ARFighter */,
+				1A38B9B31EEFCC93009CDF0D /* ARFighterTests */,
+				1A38B9BE1EEFCC93009CDF0D /* ARFighterUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1A38BA291EF05433009CDF0D /* libGameEngine-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libGameEngine-ios.a";
+			remoteRef = 1A38BA281EF05433009CDF0D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A38BA2B1EF05433009CDF0D /* libARFighter.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libARFighter.a;
+			remoteRef = 1A38BA2A1EF05433009CDF0D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1A38B99E1EEFCC93009CDF0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A32F7C71EF901C6004E9BD0 /* assets in Resources */,
+				1A38B9AE1EEFCC93009CDF0D /* LaunchScreen.storyboard in Resources */,
+				1A38B9AB1EEFCC93009CDF0D /* Assets.xcassets in Resources */,
+				1A38B9A91EEFCC93009CDF0D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A38B9B21EEFCC93009CDF0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A38B9BD1EEFCC93009CDF0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A38B99C1EEFCC93009CDF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A2A8FB61F24BE89005932B3 /* main.m in Sources */,
+				1A5475F51F068E8F00086E59 /* ARFighter-iOS.mm in Sources */,
+				1A2A8FB11F24BD51005932B3 /* AppDelegate.mm in Sources */,
+				1A0B3D841F29C8BE008E3D8F /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A38B9B01EEFCC93009CDF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A38B9B91EEFCC93009CDF0D /* ARFighterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A38B9BB1EEFCC93009CDF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A38B9C41EEFCC93009CDF0D /* ARFighterUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1A38B9B61EEFCC93009CDF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A38B99F1EEFCC93009CDF0D /* ARFighter */;
+			targetProxy = 1A38B9B51EEFCC93009CDF0D /* PBXContainerItemProxy */;
+		};
+		1A38B9C11EEFCC93009CDF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A38B99F1EEFCC93009CDF0D /* ARFighter */;
+			targetProxy = 1A38B9C01EEFCC93009CDF0D /* PBXContainerItemProxy */;
+		};
+		1A38BA2D1EF054C3009CDF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GameEngine;
+			targetProxy = 1A38BA2C1EF054C3009CDF0D /* PBXContainerItemProxy */;
+		};
+		1A38BA301EF054D9009CDF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ARFighter;
+			targetProxy = 1A38BA2F1EF054D9009CDF0D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1A38B9A71EEFCC93009CDF0D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A38B9A81EEFCC93009CDF0D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1A38B9AC1EEFCC93009CDF0D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A38B9AD1EEFCC93009CDF0D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1A38B9C61EEFCC93009CDF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A38B9C71EEFCC93009CDF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1A38B9C91EEFCC93009CDF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				HEADER_SEARCH_PATHS = (
+					"../../ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/external/KudanCV",
+				);
+				INFOPLIST_FILE = ARFighter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARFighter/ARFighter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A38B9CA1EEFCC93009CDF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				HEADER_SEARCH_PATHS = (
+					"../../ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/ar-fighter/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/game-engine/include",
+					"/Users/James/Documents/University/Advanced_Computer_Science/Year_1/Dissertation/Application/ar-fighter/game-engine/external/KudanCV",
+				);
+				INFOPLIST_FILE = ARFighter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARFighter/ARFighter-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1A38B9CC1EEFCC93009CDF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				INFOPLIST_FILE = ARFighterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ARFighter.app/ARFighter";
+			};
+			name = Debug;
+		};
+		1A38B9CD1EEFCC93009CDF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				INFOPLIST_FILE = ARFighterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ARFighter.app/ARFighter";
+			};
+			name = Release;
+		};
+		1A38B9CF1EEFCC93009CDF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				INFOPLIST_FILE = ARFighterUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ARFighter;
+			};
+			name = Debug;
+		};
+		1A38B9D01EEFCC93009CDF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = B5LYDKFH6V;
+				INFOPLIST_FILE = ARFighterUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = JamesRogers.ARFighterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ARFighter;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A38B99B1EEFCC93009CDF0D /* Build configuration list for PBXProject "ARFighter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A38B9C61EEFCC93009CDF0D /* Debug */,
+				1A38B9C71EEFCC93009CDF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A38B9C81EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A38B9C91EEFCC93009CDF0D /* Debug */,
+				1A38B9CA1EEFCC93009CDF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A38B9CB1EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A38B9CC1EEFCC93009CDF0D /* Debug */,
+				1A38B9CD1EEFCC93009CDF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A38B9CE1EEFCC93009CDF0D /* Build configuration list for PBXNativeTarget "ARFighterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A38B9CF1EEFCC93009CDF0D /* Debug */,
+				1A38B9D01EEFCC93009CDF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1A38B9981EEFCC93009CDF0D /* Project object */;
+}

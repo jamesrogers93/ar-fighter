@@ -1,30 +1,58 @@
 #ifndef _ARFIGHTER_H
 #define _ARFIGHTER_H
 
+#include <string>
+
 // Game Engine
-#include <game-engine/Core/Engine/Engine.h>
+//#include <game-engine/Core/Engine/Engine.h>
+
+class SceneManager;
+class Scene;
+class MainMenuSceneLogic;
+class SettingsSceneLogic;
+class FightSceneLogic;
 
 class ARFighter
 {
 public:
     
-    ARFighter& getInstance()
+    static ARFighter& getInstance()
     {
         static ARFighter instance;
         
         return instance;
     }
     
-    void initalise();
-    void deinitalise();
+    void initialise(const unsigned int &screenWidth, const unsigned int &screenHeight, const std::string &assetsPath);
+    void deinitialise();
     
     void update();
     void draw();
     
+    void touchDown(const float &x, const float &y);
+    void touchMove(const float &x, const float &y);
+    void touchUp(const float &x, const float &y);
+    
+    //void setAssetsPath(const std::string &path) {   this->assetsPath = path;    }
+    
 private:
-    ARFighter(){}
-    ~ARFighter();
+    ARFighter()
+    {
+        sceneManager = 0;
+    }
+    ~ARFighter(){}
 
+    SceneManager *sceneManager;
+    
+    unsigned int screenWidth, screenHeight;
+    
+    //std::string assetsPath;
+    
+    Scene* createSettingsScene();
+    
+    MainMenuSceneLogic *mainMenuSceneLogic;
+    SettingsSceneLogic *settingsSceneLogic;
+    FightSceneLogic *fightSceneLogic;
 };
 
 #endif /* _ARFIGHTER_H */
