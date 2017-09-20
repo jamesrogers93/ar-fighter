@@ -27,6 +27,17 @@ public:
         if(character != NULL)
         {
             
+            if(!character->isAlive())
+            {
+                character->lose();
+                return "lose";
+            }
+            else if(!character->getOpponent()->isAlive())
+            {
+                character->win();
+                return "win";
+            }
+        
             float distance = glm::length(character->getPosition() - character->getOpponent()->getPosition());
             //character->getPosition();
             //character->getOpponent()->getPosition();

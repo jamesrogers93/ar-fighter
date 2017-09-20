@@ -25,54 +25,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
-            landmarkName = "FightSceneLogic::initialiseScene()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
-            landmarkName = "FightSceneLogic::initialiseScene()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "893"
-            endingLineNumber = "893"
-            landmarkName = "FightSceneLogic::initialiseScene()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ARFighter/FightViewController.swift"
             timestampString = "523876335.048871"
             startingColumnNumber = "9223372036854775807"
@@ -128,22 +80,6 @@
             startingLineNumber = "97"
             endingLineNumber = "97"
             landmarkName = "didReceiveMemoryWarning()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
-            landmarkName = "FightSceneLogic::initialiseScene()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -264,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "496"
-            endingLineNumber = "496"
+            startingLineNumber = "586"
+            endingLineNumber = "586"
             landmarkName = "Character::initialisePhysics()"
             landmarkType = "7">
          </BreakpointContent>
@@ -360,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526988093.879399"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "SettingsSceneLogic::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -376,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550035.993189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -504,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
+            startingLineNumber = "614"
+            endingLineNumber = "614"
             landmarkName = "Character::initialisePhysics()"
             landmarkType = "7">
          </BreakpointContent>
@@ -776,11 +712,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567">
+            startingLineNumber = "657"
+            endingLineNumber = "657">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -806,11 +742,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
             landmarkName = "Character::beforeCollisionCallback(PhysicsProperty *obj)"
             landmarkType = "7">
          </BreakpointContent>
@@ -822,11 +758,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "666"
-            endingLineNumber = "666">
+            startingLineNumber = "758"
+            endingLineNumber = "758">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -836,11 +772,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696">
+            startingLineNumber = "791"
+            endingLineNumber = "791">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -850,11 +786,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639">
+            startingLineNumber = "728"
+            endingLineNumber = "728">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1008,11 +944,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527028961.146671"
+            timestampString = "527596418.410239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1239"
-            endingLineNumber = "1239"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "FightSceneLogic::pause()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1024,11 +960,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527028961.146671"
+            timestampString = "527596418.410239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1245"
-            endingLineNumber = "1245"
+            startingLineNumber = "462"
+            endingLineNumber = "462"
             landmarkName = "FightSceneLogic::resume()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1040,11 +976,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527595893.373473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "999"
-            endingLineNumber = "999"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1535,11 +1471,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526988093.879399"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "SettingsSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1567,11 +1503,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550035.993189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1631,11 +1567,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526988093.879399"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
             landmarkName = "SettingsSceneLogic::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1647,11 +1583,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526988093.879399"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "SettingsSceneLogic::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1662,28 +1598,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "FightSceneLogic::initialiseScene()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526988093.879399"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "SettingsSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1695,11 +1615,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526988093.879399"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "SettingsSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1711,11 +1631,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526988093.879399"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "SettingsSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1727,11 +1647,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527595893.373473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1027"
-            endingLineNumber = "1027"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1759,11 +1679,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527595893.373473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1037"
-            endingLineNumber = "1037"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1775,39 +1695,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
-            landmarkName = "Character::initialise()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
-            landmarkName = "Character::initialise()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550035.993189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "359"
@@ -1823,11 +1711,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1839,11 +1727,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550903.946911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "Character::initialise()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
+            timestampString = "527550903.946911"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
+            landmarkName = "Character::initialise()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
+            timestampString = "527550903.946911"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1855,11 +1775,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527595893.373473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1032"
-            endingLineNumber = "1032"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1935,27 +1855,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527595893.373473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
-            landmarkName = "FightSceneLogic::initialiseScene()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1030"
-            endingLineNumber = "1030"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1967,11 +1871,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527595893.373473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1036"
-            endingLineNumber = "1036"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1999,11 +1903,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527028961.146671"
+            timestampString = "527596418.410239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1203"
-            endingLineNumber = "1203"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "FightSceneLogic::opponentPunched()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2015,11 +1919,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527595893.373473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1044"
-            endingLineNumber = "1044"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2031,11 +1935,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527028961.146671"
+            timestampString = "527596418.410239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1254"
-            endingLineNumber = "1254"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
             landmarkName = "FightSceneLogic::quit()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2046,28 +1950,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "526993665.1146"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "FightSceneLogic::initialiseScene()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "526993691.112792"
+            timestampString = "527594709.989615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "SettingsSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2079,44 +1967,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527028961.146671"
+            timestampString = "527589973.807127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1275"
-            endingLineNumber = "1275"
-            landmarkName = "FightSceneLogic::walkAnalogMove()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "935"
-            endingLineNumber = "935"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "FightSceneLogic::update()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527012114.722426"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "FightSceneLogic::initialiseScene()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2239,11 +2095,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/FightSceneLogic.cpp"
-            timestampString = "527023937.190572"
+            timestampString = "527589973.807127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "937"
-            endingLineNumber = "937"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "FightSceneLogic::update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2255,11 +2111,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateMoveToPlayer.h"
-            timestampString = "527023386.897342"
+            timestampString = "527551485.966418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2287,11 +2143,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateCombat.h"
-            timestampString = "527029311.908027"
+            timestampString = "527552242.964459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "update()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2303,12 +2159,204 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527028476.605262"
+            timestampString = "527550035.993189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "Character::initialise()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../game-engine/game-engine/src/Modules/Physics/Physics.cpp"
+            timestampString = "527540378.514102"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "Physics::update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
+            timestampString = "527595893.373473"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "FightSceneLogic::update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
+            timestampString = "527595893.373473"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "FightSceneLogic::update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/FightSceneLogic.cpp"
+            timestampString = "527596418.410239"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
+            landmarkName = "FightSceneLogic::playerPunched()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateCombat.h"
+            timestampString = "527552277.309887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateCombat.h"
+            timestampString = "527590418.534006"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateCombat.h"
+            timestampString = "527590419.497837"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateMoveToPlayer.h"
+            timestampString = "527590429.271059"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateMoveToPlayer.h"
+            timestampString = "527590430.218144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
+            timestampString = "527595487.815716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "Character::walk(const float &amp;x, const float &amp;z)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
+            timestampString = "527595493.233531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "Character::walk(const float &amp;x, const float &amp;z)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ar-fighter/include/ar-fighter/AI/FSM/AIFSMStateCombat.h"
+            timestampString = "527596181.912368"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "update()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

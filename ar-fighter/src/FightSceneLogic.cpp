@@ -104,6 +104,452 @@ void FightSceneLogic::initialiseGame()
     //opponent->rotateOW(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f);
 }
 
+void FightSceneLogic::update()
+{
+    // Update Animation module
+    Engine::getInstance().update(CoreModuleType::CM_ANIMATION, false);
+    
+    // Update Physics module
+    Engine::getInstance().update(CoreModuleType::CM_PHYSICS, false);
+    
+    // Update AI module
+    if(state == GameState::PLAYING)
+    {
+        if(!countDownFlag)
+        {
+            Engine::getInstance().update(CoreModuleType::CM_AI, false);
+        }
+        
+    }
+    
+    if(state == GameState::PROMPT_TRACK_CONFIRM)
+    {
+        // Enable these in scene
+        mScene->prepare(player);
+        mScene->prepare(opponent);
+        mScene->prepare(trackConfirmUI);
+            
+        // Disable these in scene
+        mScene->unPrepare(trackStartUI);
+            
+        state = GameState::PROMPTING_TRACK_CONFIRM;
+    }
+    else if(state == GameState::STARTED_TRACKER)
+    {
+        // Enable these in scene
+        mScene->prepare(playCharacterInfoUI);
+        mScene->prepare(playControlUI);
+        
+        // Disable these in scene
+        mScene->unPrepare(trackConfirmUI);
+        
+        state = GameState::PLAYING;
+    }
+    else if(state == GameState::PROMPT_TRACKER)
+    {
+        player->translateOW(-150.0f, 0.0f, 0.0f);
+        //player->rotateOW(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
+        
+        opponent->translateOW(150.0f, 0.0f, 0.0f);
+        
+        player->faceTarget(opponent->getPosition());
+        opponent->faceTarget(player->getPosition());
+        
+        // Enable these in scene
+        mScene->prepare(trackStartUI);
+        
+        // Disable these in scene
+        mScene->unPrepare(player);
+        mScene->unPrepare(opponent);
+        mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(playControlUI);
+        mScene->unPrepare(trackConfirmUI);
+        mScene->unPrepare(pauseUI);
+        mScene->unPrepare(quitUI);
+        mScene->unPrepare(playerWonUI);
+        mScene->unPrepare(opponentWonUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
+        
+        state = GameState::PROMPTING_TRACKER;
+    }
+    else if (state == GameState::PLAYING)
+    {
+        if(countDownFlag)
+        {
+            countDown();
+        }
+        else
+        {
+            gameplay();
+        }
+    }
+    else if (state == GameState::PAUSING)
+    {
+        player->state = Character::IDLE;
+        player->getAnimator()->getAnimationController1()->stop();
+        player->getAnimator()->getAnimationController2()->stop();
+        
+        opponent->state = Character::IDLE;
+        opponent->getAnimator()->getAnimationController1()->stop();
+        opponent->getAnimator()->getAnimationController2()->stop();
+        
+        // Enable these in scene
+        mScene->prepare(pauseUI);
+        mScene->prepare(quitUI);
+        
+        // Disable these in scene
+        //mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(playControlUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
+        
+        state = GameState::PAUSED;
+    }
+    else if (state == GameState::RESUMING)
+    {
+        // Enable these in scene
+        //mScene->prepare(playCharacterInfoUI);
+        mScene->prepare(playControlUI);
+        
+        // Disable these in scene
+        mScene->unPrepare(pauseUI);
+        mScene->unPrepare(quitUI);
+        
+        state = GameState::PLAYING;
+    }
+    else if(state == GameState::QUIT)
+    {
+        // Set up the next scene
+        Scene *scene = SceneManager::getInstance().getScene("main-menu");
+        
+        Physics *p = &Physics::getInstance();
+        mScene->deinitialise();
+        
+        //Graphics *g = &Graphics::getInstance();
+        //GUI *gu = &GUI::getInstance();
+        //AR *a = &AR::getInstance();
+        
+        
+        scene->initialise();
+        SceneManager::getInstance().makeActiveScene("main-menu");
+        return;
+    }
+    else if (state == GameState::PLAYER_WON)
+    {
+        
+        //player->win();
+        //opponent->lose();
+        
+        // Enable these in scene
+        mScene->prepare(playerWonUI);
+        mScene->prepare(quitUI);
+        
+        // Disable these in scene
+        //mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(pauseUI);
+        mScene->unPrepare(playControlUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
+    }
+    else if (state == GameState::OPPONENT_WON)
+    {
+        //opponent->win();
+        //player->lose();
+        
+        // Enable these in scene
+        mScene->prepare(opponentWonUI);
+        mScene->prepare(quitUI);
+        
+        // Disable these in scene
+        //mScene->unPrepare(playCharacterInfoUI);
+        mScene->unPrepare(pauseUI);
+        mScene->unPrepare(playControlUI);
+        mScene->unPrepare(countdown3UI);
+        mScene->unPrepare(countdown2UI);
+        mScene->unPrepare(countdown1UI);
+        mScene->unPrepare(countdownFightUI);
+    }
+    
+    // Check to see if we're not tracking and not prompting user to track
+    if( !arHandler->getTracker()->isTracking() && state != GameState::PROMPTING_TRACKER)
+    {
+        if(state == GameState::PLAYER_WON || state == GameState::OPPONENT_WON)
+        {
+            state = GameState::QUIT;
+        }
+        else
+            state = GameState::PROMPT_TRACKER;
+    }
+    
+}
+
+void FightSceneLogic::gameplay()
+{
+    player->faceTarget(opponent->getPosition());
+    opponent->faceTarget(player->getPosition());
+}
+
+void FightSceneLogic::countDown()
+{
+    // Prepare countdown
+    static bool ready = true;
+    if(ready)
+    {
+        
+    }
+    
+    // Double buffer update flag
+    static bool update1 = true;
+    static bool update2 = false;
+
+    
+    if(timeElapsed > 4.0)
+    {
+        countDownFlag = false;
+        mScene->unPrepare(countdownFightUI);
+    }
+    else if(timeElapsed > 3.0)
+    {
+        // Prepare fight gui
+        if(update2)
+        {
+            std::cout << "Fight!" << std::endl;
+            
+            mScene->prepare(countdownFightUI);
+            mScene->unPrepare(countdown1UI);
+            
+            update2 = false;
+            update1 = true;
+        }
+    }
+    else if(timeElapsed > 2.0)
+    {
+        // Prepare 1 gui
+        if(update1)
+        {
+            std::cout << "1" << std::endl;
+            
+            mScene->prepare(countdown1UI);
+            mScene->unPrepare(countdown2UI);
+            
+            update1 = false;
+            update2 = true;
+        }
+    }
+    else if(timeElapsed > 1.0)
+    {
+        // Prepare 2 gui
+        if(update2)
+        {
+            std::cout << "2" << std::endl;
+            
+            mScene->prepare(countdown2UI);
+            mScene->unPrepare(countdown3UI);
+            
+            update2 = false;
+            update1 = true;
+        }
+    }
+    else
+    {
+        // Prepare 3 gui
+        if(update1)
+        {
+            std::cout << "3" << std::endl;
+            
+            mScene->prepare(countdown3UI);
+            
+            update1 = false;
+            update2 = true;
+        }
+    }
+    
+    timeElapsed += timeSinceLastUpdate;
+    
+}
+
+void FightSceneLogic::playerPunched()
+{
+    if(player->state == Character::CharacterState::BLOCKING)
+    {
+        return;
+    }
+    
+    std::cout << "Player punched!" << std::endl;
+    
+    if(opponent->getCanDealDamage())
+    {
+        // Update health
+        player->takeDamage(opponent->getDamageInflict());
+    
+        // Update health progress bar
+        playerHealthBar->setProgression(player->getHealth() / player->getMaxHealth());
+        
+        opponent->damageDealt();
+    }
+    
+    if(!player->isAlive())
+    {
+        state = GameState::OPPONENT_WON;
+        player->lose();
+        opponent->win();
+    }
+}
+
+void FightSceneLogic::opponentPunched()
+{
+    if(opponent->state == Character::CharacterState::BLOCKING)
+    {
+        return;
+    }
+    
+    std::cout << "Opponent punched!" << std::endl;
+    
+    if(player->getCanDealDamage())
+    {
+        // Update health
+        opponent->takeDamage(player->getDamageInflict());
+    
+        // Update health progress bar
+        opponentHealthBar->setProgression(opponent->getHealth() / opponent->getMaxHealth());
+        
+        player->damageDealt();
+    }
+    
+    if(!opponent->isAlive())
+    {
+        state = GameState::PLAYER_WON;
+        player->win();
+        opponent->lose();
+    }
+}
+
+void FightSceneLogic::draw()
+{
+    jmpGLClearColour(0.65, 0.65, 0.65, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    Engine *engine = &Engine::getInstance();
+    
+    // Update AR first
+    engine->update(CoreModuleType::CM_AR);
+    
+    // Update Graphics second
+    engine->update(CoreModuleType::CM_GRAPHICS);
+    
+    // Update the GUI
+    engine->update(CoreModuleType::CM_GUI);
+}
+
+void FightSceneLogic::pause()
+{
+    if(state == GameState::PLAYING)
+    {
+        std::cout << "Paused!" << std::endl;
+        state = GameState::PAUSING;
+    }
+}
+
+void FightSceneLogic::resume()
+{
+    if(state == GameState::PAUSED)
+    {
+        std::cout << "Resuming!" << std::endl;
+        state = GameState::RESUMING;
+    }
+}
+
+void FightSceneLogic::quit()
+{
+    if(state == GameState::PAUSED || state == GameState::OPPONENT_WON || state == GameState::PLAYER_WON)
+    {
+        std::cout << "QUIT!" << std::endl;
+        state = GameState::QUIT;
+    }
+}
+
+void FightSceneLogic::retrack()
+{
+    if(state == GameState::PAUSED)
+    {
+        state = GameState::PROMPT_TRACKER;
+    }
+}
+
+void FightSceneLogic::walkAnalogMove()
+{
+    // Get the offset
+    if(!countDownFlag)
+    {
+        glm::vec2 offset = playerWalkController->getOffset();
+        
+        // Call the player walk function with the analog offset
+        player->walk(-offset.x, offset.y);
+    }
+}
+
+void FightSceneLogic::walkAnalogUp()
+{
+    // Get the offset
+    if(!countDownFlag)
+    {
+        player->idle();
+    }
+}
+
+void FightSceneLogic::punchButtonUp()
+{
+    // Get the offset
+    if(!countDownFlag)
+    {
+        player->punch();
+    }
+}
+
+void FightSceneLogic::kickButtonUp()
+{
+    // Get the offset
+    if(!countDownFlag)
+    {
+        player->kick();
+    }
+}
+
+void FightSceneLogic::blockButtonUp()
+{
+    // Get the offset
+    if(!countDownFlag)
+    {
+        player->block();
+    }
+}
+
+void FightSceneLogic::trackStart()
+{
+    arHandler->startTracking(glm::vec3(0.0f, 0.0f, 300.0f));
+    
+    state = GameState::PROMPT_TRACK_CONFIRM;
+}
+
+void FightSceneLogic::trackConfirmYes()
+{
+    state = GameState::STARTED_TRACKER;
+}
+
+void FightSceneLogic::trackConfirmNo()
+{
+    arHandler->stopTracking();
+    
+    state = GameState::PROMPT_TRACKER;
+}
+
 void FightSceneLogic::initialiseScene()
 {
     unsigned short playerMask = 1;
@@ -157,28 +603,29 @@ void FightSceneLogic::initialiseScene()
         opponent = xBot;
     }
     
+    AIFSM *fsm = new AIFSM("opponent");
+    
+    AIFSMStateMoveToPlayer *state1  = new AIFSMStateMoveToPlayer(opponent);
+    AIFSMStateCombat *state2        = new AIFSMStateCombat(opponent);
+    AIFSMStateWin *state3           = new AIFSMStateWin(opponent);
+    AIFSMStateLose *state4          = new AIFSMStateLose(opponent);
+    
+    fsm->addState("move-to-player", state1);
+    fsm->addState("combat", state2);
+    fsm->addState("win", state3);
+    fsm->addState("lose", state4);
+    
+    fsm->setCurrentState("move-to-player");
+    
+    opponent->addProperty(fsm);
+    
     if(difficulty == GameDifficulty::NORMAL)
     {
-        AIFSM *fsm = new AIFSM("opponent");
-        
-        AIFSMStateMoveToPlayer *state1  = new AIFSMStateMoveToPlayer(opponent);
-        AIFSMStateCombat *state2        = new AIFSMStateCombat(opponent);
-        AIFSMStateWin *state3           = new AIFSMStateWin(opponent);
-        AIFSMStateLose *state4          = new AIFSMStateLose(opponent);
-        
-        fsm->addState("move-to-player", state1);
-        fsm->addState("combat", state2);
-        fsm->addState("win", state3);
-        fsm->addState("lose", state4);
-        
-        fsm->setCurrentState("move-to-player");
-        
-        opponent->addProperty(fsm);
+        opponent->setDifficulty(30);
     }
     else
     {
-        AIDT *ai = new AIDT("opponent");
-        opponent->addProperty(ai);
+        opponent->setDifficulty(5);
     }
     
     // Add callback functions to characters when punched
@@ -188,6 +635,9 @@ void FightSceneLogic::initialiseScene()
     
     player->setOpponent(opponent);
     opponent->setOpponent(player);
+    
+    player->setSpeed(2.0f);
+    opponent->setSpeed(2.0f);
     
     // Here we will add other stuff to the scene
     
@@ -263,7 +713,7 @@ void FightSceneLogic::initialiseScene()
     // Button to start AR tracking
     {
         GUIProperty *aRTrackButton = new GUIProperty("ar-track-button");
-    
+        
         aRTrackButton->isTouchable = true;
         std::function<void(void)> arCallbackFunc = std::bind(&FightSceneLogic::trackStart, this);
         aRTrackButton->setCallbackOnTouchUp(arCallbackFunc);
@@ -273,17 +723,17 @@ void FightSceneLogic::initialiseScene()
         //guiRectangle->setColourUp(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
         guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
         Texture *texture = Texture::loadFromFile("textures/button_track.png", true);
-    
+        
         if(texture != NULL)
         {
             GLTexture *glTexture = GLTexture::loadFromData(*texture);
-        
+            
             guiRectangle->setMapUp(glTexture);
             guiRectangle->setMapDown(glTexture);
-        
+            
             delete texture;
         }
-    
+        
         aRTrackButton->addShape(guiRectangle);
         trackStartUI->addProperty(aRTrackButton);
     }
@@ -313,6 +763,30 @@ void FightSceneLogic::initialiseScene()
     }
     
     ///// For trackConfirmUI
+    
+    // Confirm text
+    {
+        GUIProperty *guiButton = new GUIProperty("confirm-text");
+        
+        glm::vec2 bounds(433.0f, 55.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth - 275.0f), 200.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/confirm.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        trackConfirmUI->addProperty(guiButton);
+    }
     
     // AR Track confirm yes button
     {
@@ -374,7 +848,7 @@ void FightSceneLogic::initialiseScene()
     
     {
         
-    
+        
         // Portraits are 15% width
         float portrait = (float)System::screenWidth * 0.15f;
         
@@ -413,7 +887,7 @@ void FightSceneLogic::initialiseScene()
             
             playerPortrait->addShape(guiRectangle);
             playCharacterInfoUI->addProperty(playerPortrait);
-        
+            
         }
         
         // Player health bar
@@ -423,10 +897,10 @@ void FightSceneLogic::initialiseScene()
                                                  glm::vec2(barWidth, barHeight),
                                                  glm::vec2(
                                                            paddingSides + portrait + barPosition,
-                                                            top - (barHeight/2.0f)
+                                                           top - (barHeight/2.0f)
                                                            )
                                                  );
-
+            
             playerHealthBar->setColourUp(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), player->getColourTheme());
             playerHealthBar->setProgression(1.0f);
             
@@ -479,7 +953,7 @@ void FightSceneLogic::initialiseScene()
             
             playCharacterInfoUI->addProperty(opponentHealthBar);
         }
-
+        
     }
     
     // Analog to control player movement
@@ -527,32 +1001,32 @@ void FightSceneLogic::initialiseScene()
     }
     
     // Player kick button
-    {
-        GUIProperty *guiButton = new GUIProperty("player-kick-control");
-        
-        guiButton->isTouchable = true;
-        std::function<void(void)> func = std::bind(&FightSceneLogic::kickButtonUp, this);
-        guiButton->setCallbackOnTouchUp(func);
-        glm::vec2 bounds(200.0f, 100.f);
-        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
-        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth - 400.0f), 100.0f));
-        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
-        
-        Texture *texture = Texture::loadFromFile("textures/button_kick.png", true);
-        
-        if(texture != NULL)
-        {
-            GLTexture *glTexture = GLTexture::loadFromData(*texture);
-            
-            guiRectangle->setMapUp(glTexture);
-            guiRectangle->setMapDown(glTexture);
-            
-            delete texture;
-        }
-        
-        guiButton->addShape(guiRectangle);
-        playControlUI->addProperty(guiButton);
-    }
+    /*{
+     GUIProperty *guiButton = new GUIProperty("player-kick-control");
+     
+     guiButton->isTouchable = true;
+     std::function<void(void)> func = std::bind(&FightSceneLogic::kickButtonUp, this);
+     guiButton->setCallbackOnTouchUp(func);
+     glm::vec2 bounds(200.0f, 100.f);
+     GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+     guiRectangle->translateOW(glm::vec2(((float)System::screenWidth - 400.0f), 100.0f));
+     guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+     
+     Texture *texture = Texture::loadFromFile("textures/button_kick.png", true);
+     
+     if(texture != NULL)
+     {
+     GLTexture *glTexture = GLTexture::loadFromData(*texture);
+     
+     guiRectangle->setMapUp(glTexture);
+     guiRectangle->setMapDown(glTexture);
+     
+     delete texture;
+     }
+     
+     guiButton->addShape(guiRectangle);
+     playControlUI->addProperty(guiButton);
+     }*/
     
     // Player block button
     {
@@ -889,7 +1363,7 @@ void FightSceneLogic::initialiseScene()
     }
     
     // Prepare the tracking and playing state game objects
-   // mScene->prepare(trackStartUI);
+    // mScene->prepare(trackStartUI);
     //mScene->prepare(trackConfirmUI);
     //mScene->prepare(playCharacterInfoUI);
     //mScene->prepare(playControlUI);
@@ -921,395 +1395,4 @@ void FightSceneLogic::deinitialise()
     opponentPortrait = NULL;
     pauseButton = NULL;
     resumeButton = NULL;
-}
-
-void FightSceneLogic::update()
-{
-    // Update Animation module
-    Engine::getInstance().update(CoreModuleType::CM_ANIMATION, false);
-    
-    // Update Physics module
-    Engine::getInstance().update(CoreModuleType::CM_PHYSICS, false);
-    
-    // Update AI module
-    if(state == GameState::PLAYING)
-    {
-        Engine::getInstance().update(CoreModuleType::CM_AI, false);
-    }
-    
-    if(state == GameState::PROMPT_TRACK_CONFIRM)
-    {
-        // Enable these in scene
-        mScene->prepare(player);
-        mScene->prepare(opponent);
-        mScene->prepare(trackConfirmUI);
-            
-        // Disable these in scene
-        mScene->unPrepare(trackStartUI);
-            
-        state = GameState::PROMPTING_TRACK_CONFIRM;
-    }
-    else if(state == GameState::STARTED_TRACKER)
-    {
-        // Enable these in scene
-        mScene->prepare(playCharacterInfoUI);
-        mScene->prepare(playControlUI);
-        
-        // Disable these in scene
-        mScene->unPrepare(trackConfirmUI);
-        
-        state = GameState::PLAYING;
-    }
-    else if(state == GameState::PROMPT_TRACKER)
-    {
-        // Enable these in scene
-        mScene->prepare(trackStartUI);
-        
-        // Disable these in scene
-        mScene->unPrepare(player);
-        mScene->unPrepare(opponent);
-        mScene->unPrepare(playCharacterInfoUI);
-        mScene->unPrepare(playControlUI);
-        mScene->unPrepare(trackConfirmUI);
-        mScene->unPrepare(pauseUI);
-        mScene->unPrepare(quitUI);
-        mScene->unPrepare(playerWonUI);
-        mScene->unPrepare(opponentWonUI);
-        mScene->unPrepare(countdown3UI);
-        mScene->unPrepare(countdown2UI);
-        mScene->unPrepare(countdown1UI);
-        mScene->unPrepare(countdownFightUI);
-        
-        state = GameState::PROMPTING_TRACKER;
-    }
-    else if (state == GameState::PLAYING)
-    {
-        if(countDownFlag)
-        {
-            countDown();
-        }
-        else
-        {
-            gameplay();
-        }
-    }
-    else if (state == GameState::PAUSING)
-    {
-        // Enable these in scene
-        mScene->prepare(pauseUI);
-        mScene->prepare(quitUI);
-        
-        // Disable these in scene
-        //mScene->unPrepare(playCharacterInfoUI);
-        mScene->unPrepare(playControlUI);
-        mScene->unPrepare(countdown3UI);
-        mScene->unPrepare(countdown2UI);
-        mScene->unPrepare(countdown1UI);
-        mScene->unPrepare(countdownFightUI);
-        
-        state = GameState::PAUSED;
-    }
-    else if (state == GameState::RESUMING)
-    {
-        // Enable these in scene
-        //mScene->prepare(playCharacterInfoUI);
-        mScene->prepare(playControlUI);
-        
-        // Disable these in scene
-        mScene->unPrepare(pauseUI);
-        mScene->unPrepare(quitUI);
-        
-        state = GameState::PLAYING;
-    }
-    else if(state == GameState::QUIT)
-    {
-        // Set up the next scene
-        Scene *scene = SceneManager::getInstance().getScene("main-menu");
-        
-        Physics *p = &Physics::getInstance();
-        mScene->deinitialise();
-        
-        //Graphics *g = &Graphics::getInstance();
-        //GUI *gu = &GUI::getInstance();
-        //AR *a = &AR::getInstance();
-        
-        
-        scene->initialise();
-        SceneManager::getInstance().makeActiveScene("main-menu");
-        return;
-    }
-    else if (state == GameState::PLAYER_WON)
-    {
-        // Enable these in scene
-        mScene->prepare(playerWonUI);
-        mScene->prepare(quitUI);
-        
-        // Disable these in scene
-        //mScene->unPrepare(playCharacterInfoUI);
-        mScene->unPrepare(pauseUI);
-        mScene->unPrepare(playControlUI);
-        mScene->unPrepare(countdown3UI);
-        mScene->unPrepare(countdown2UI);
-        mScene->unPrepare(countdown1UI);
-        mScene->unPrepare(countdownFightUI);
-    }
-    else if (state == GameState::OPPONENT_WON)
-    {
-        // Enable these in scene
-        mScene->prepare(opponentWonUI);
-        mScene->prepare(quitUI);
-        
-        // Disable these in scene
-        //mScene->unPrepare(playCharacterInfoUI);
-        mScene->unPrepare(pauseUI);
-        mScene->unPrepare(playControlUI);
-        mScene->unPrepare(countdown3UI);
-        mScene->unPrepare(countdown2UI);
-        mScene->unPrepare(countdown1UI);
-        mScene->unPrepare(countdownFightUI);
-    }
-    
-    // Check to see if we're not tracking and not prompting user to track
-    if( !arHandler->getTracker()->isTracking() && state != GameState::PROMPTING_TRACKER)
-    {
-        state = GameState::PROMPT_TRACKER;
-    }
-    
-}
-
-void FightSceneLogic::gameplay()
-{
-    player->faceTarget(opponent->getPosition());
-    opponent->faceTarget(player->getPosition());
-}
-
-void FightSceneLogic::countDown()
-{
-    // Prepare countdown
-    static bool ready = true;
-    if(ready)
-    {
-        
-    }
-    
-    // Double buffer update flag
-    static bool update1 = true;
-    static bool update2 = false;
-
-    
-    if(timeElapsed > 4.0)
-    {
-        countDownFlag = false;
-        mScene->unPrepare(countdownFightUI);
-    }
-    else if(timeElapsed > 3.0)
-    {
-        // Prepare fight gui
-        if(update2)
-        {
-            std::cout << "Fight!" << std::endl;
-            
-            mScene->prepare(countdownFightUI);
-            mScene->unPrepare(countdown1UI);
-            
-            update2 = false;
-            update1 = true;
-        }
-    }
-    else if(timeElapsed > 2.0)
-    {
-        // Prepare 1 gui
-        if(update1)
-        {
-            std::cout << "1" << std::endl;
-            
-            mScene->prepare(countdown1UI);
-            mScene->unPrepare(countdown2UI);
-            
-            update1 = false;
-            update2 = true;
-        }
-    }
-    else if(timeElapsed > 1.0)
-    {
-        // Prepare 2 gui
-        if(update2)
-        {
-            std::cout << "2" << std::endl;
-            
-            mScene->prepare(countdown2UI);
-            mScene->unPrepare(countdown3UI);
-            
-            update2 = false;
-            update1 = true;
-        }
-    }
-    else
-    {
-        // Prepare 3 gui
-        if(update1)
-        {
-            std::cout << "3" << std::endl;
-            
-            mScene->prepare(countdown3UI);
-            
-            update1 = false;
-            update2 = true;
-        }
-    }
-    
-    timeElapsed += timeSinceLastUpdate;
-    
-}
-
-void FightSceneLogic::playerPunched()
-{
-    if(player->state == Character::CharacterState::BLOCKING)
-    {
-        return;
-    }
-    
-    std::cout << "Player punched!" << std::endl;
-    
-    if(opponent->getCanDealDamage())
-    {
-        // Update health
-        player->takeDamage(opponent->getDamageInflict());
-    
-        // Update health progress bar
-        playerHealthBar->setProgression(player->getHealth() / player->getMaxHealth());
-        
-        opponent->damageDealt();
-    }
-    
-    if(!player->isAlive())
-    {
-        state = GameState::OPPONENT_WON;
-    }
-}
-
-void FightSceneLogic::opponentPunched()
-{
-    if(opponent->state == Character::CharacterState::BLOCKING)
-    {
-        return;
-    }
-    
-    std::cout << "Opponent punched!" << std::endl;
-    
-    if(player->getCanDealDamage())
-    {
-        // Update health
-        opponent->takeDamage(player->getDamageInflict());
-    
-        // Update health progress bar
-        opponentHealthBar->setProgression(opponent->getHealth() / opponent->getMaxHealth());
-        
-        player->damageDealt();
-    }
-    
-    if(!opponent->isAlive())
-    {
-        state = GameState::PLAYER_WON;
-    }
-}
-
-void FightSceneLogic::draw()
-{
-    jmpGLClearColour(0.65, 0.65, 0.65, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    Engine *engine = &Engine::getInstance();
-    
-    // Update AR first
-    engine->update(CoreModuleType::CM_AR);
-    
-    // Update Graphics second
-    engine->update(CoreModuleType::CM_GRAPHICS);
-    
-    // Update the GUI
-    engine->update(CoreModuleType::CM_GUI);
-}
-
-void FightSceneLogic::pause()
-{
-    if(state == GameState::PLAYING)
-    {
-        std::cout << "Paused!" << std::endl;
-        state = GameState::PAUSING;
-    }
-}
-
-void FightSceneLogic::resume()
-{
-    if(state == GameState::PAUSED)
-    {
-        std::cout << "Resuming!" << std::endl;
-        state = GameState::RESUMING;
-    }
-}
-
-void FightSceneLogic::quit()
-{
-    if(state == GameState::PAUSED || state == GameState::OPPONENT_WON || state == GameState::PLAYER_WON)
-    {
-        std::cout << "QUIT!" << std::endl;
-        state = GameState::QUIT;
-    }
-}
-
-void FightSceneLogic::retrack()
-{
-    if(state == GameState::PAUSED)
-    {
-        state = GameState::PROMPT_TRACKER;
-    }
-}
-
-void FightSceneLogic::walkAnalogMove()
-{
-    // Get the offset
-    glm::vec2 offset = playerWalkController->getOffset();
-    
-    // Call the player walk function with the analog offset
-    player->walk(-offset.x, offset.y);
-}
-
-void FightSceneLogic::walkAnalogUp()
-{
-    player->idle();
-}
-
-void FightSceneLogic::punchButtonUp()
-{
-    player->punch();
-}
-
-void FightSceneLogic::kickButtonUp()
-{
-    player->kick();
-}
-
-void FightSceneLogic::blockButtonUp()
-{
-    player->block();
-}
-
-void FightSceneLogic::trackStart()
-{
-    arHandler->startTracking(glm::vec3(0.0f, 0.0f, 300.0f));
-    
-    state = GameState::PROMPT_TRACK_CONFIRM;
-}
-
-void FightSceneLogic::trackConfirmYes()
-{
-    state = GameState::STARTED_TRACKER;
-}
-
-void FightSceneLogic::trackConfirmNo()
-{
-    arHandler->stopTracking();
-    
-    state = GameState::PROMPT_TRACKER;
 }

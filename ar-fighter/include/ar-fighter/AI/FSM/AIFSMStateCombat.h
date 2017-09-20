@@ -20,6 +20,18 @@ public:
         if(character != NULL)
         {
             
+            if(!character->isAlive())
+            {
+                character->lose();
+                return "lose";
+            }
+            else if(!character->getOpponent()->isAlive())
+            {
+                character->win();
+                return "win";
+            }
+            
+            
             float distance = glm::length(character->getPosition() - character->getOpponent()->getPosition());
             //character->getPosition();
             //character->getOpponent()->getPosition();
@@ -27,12 +39,23 @@ public:
             if(distance > 150)
             {
                 return "move-to-player";
-            } else if(character->getOpponent()->state == Character::CharacterState::PUNCHING)
-            {
-                character->block();
             } else
             {
-                character->punch();
+                static int currentLoop = 0;
+                currentLoop++;
+                
+                if(currentLoop > character->getDifficulty())
+                {
+                    currentLoop = 0;
+                    
+                    if(character->getOpponent()->state == Character::CharacterState::PUNCHING)
+                    {
+                        character->block();
+                    } else
+                    {
+                        character->punch();
+                    }
+                }
             }
         }
         

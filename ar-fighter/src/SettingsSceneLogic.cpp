@@ -51,7 +51,8 @@ SettingsSceneLogic::SettingsSceneLogic(Scene *scene)
     player(NULL),
     opponent(NULL),
     difficulty("normal"),
-    settingsUI(NULL)
+    settingsUI(NULL),
+    highlightPtr(NULL)
 {
     
 }
@@ -138,7 +139,7 @@ void SettingsSceneLogic::initialise()
         guiButton->isTouchable = true;
         std::function<void(void)> func = std::bind(&SettingsSceneLogic::playButton, this);
         guiButton->setCallbackOnTouchUp(func);
-        glm::vec2 bounds(200.0f, 100.f);
+        glm::vec2 bounds(500.0f, 100.f);
         GUIRectangle *guiRectangle = new GUIRectangle(bounds);
         guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), 100.0f));
         guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
@@ -155,6 +156,89 @@ void SettingsSceneLogic::initialise()
             delete texture;
         }
         
+        guiButton->addShape(guiRectangle);
+        settingsUI->addProperty(guiButton);
+    }
+    
+    // Easy button
+    {
+        GUIProperty *guiButton = new GUIProperty("easy-difficulty");
+        
+        guiButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&SettingsSceneLogic::easyDifficulty, this);
+        guiButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(200.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) + 100.0f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_easy.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        settingsUI->addProperty(guiButton);
+    }
+    
+    // Hard button
+    {
+        GUIProperty *guiButton = new GUIProperty("hard-difficulty");
+        
+        guiButton->isTouchable = true;
+        std::function<void(void)> func = std::bind(&SettingsSceneLogic::hardDifficulty, this);
+        guiButton->setCallbackOnTouchUp(func);
+        glm::vec2 bounds(200.0f, 100.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) - 100.0f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_hard.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        settingsUI->addProperty(guiButton);
+    }
+    
+    // highlight button
+    {
+        GUIProperty *guiButton = new GUIProperty("highlight-difficulty");
+        
+        guiButton->isTouchable = false;
+        glm::vec2 bounds(210.0f, 110.f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) + 100.0f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/button_highlight.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        highlightPtr = guiRectangle;
         guiButton->addShape(guiRectangle);
         settingsUI->addProperty(guiButton);
     }
@@ -275,3 +359,24 @@ void SettingsSceneLogic::playButton()
     
     /**/
 }
+
+void SettingsSceneLogic::easyDifficulty()
+{
+    difficulty = "normal";
+    
+    if(highlightPtr != NULL)
+    {
+        highlightPtr->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) + 100.0f));
+    }
+}
+
+void SettingsSceneLogic::hardDifficulty()
+{
+    difficulty = "hard";
+    
+    if(highlightPtr != NULL)
+    {
+        highlightPtr->translateOW(glm::vec2(((float)System::screenWidth * 0.5f), ((float)System::screenHeight * 0.5f) - 100.0f));
+    }
+}
+

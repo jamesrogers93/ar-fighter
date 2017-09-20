@@ -14,7 +14,7 @@ public:
     
     const std::string update()
     {
-        
+        return "win";
     }
 };
 

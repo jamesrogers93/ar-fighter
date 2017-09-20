@@ -64,6 +64,8 @@ Character::Character(const std::string &name, unsigned short collisionMask, unsi
         {name + "_lefthand", leftHandPhysicsMeshProperty},
         {name + "_righthand", rightHandPhysicsMeshProperty}
     };*/
+    physicsMeshesInitialsed = false;
+    speed = 1.0f;
 }
 
 void Character::walk(const float &x, const float &z)
@@ -77,7 +79,7 @@ void Character::walk(const float &x, const float &z)
         bool zReverse = z < 0.0;
         
         // We will use this as the speed of the animation
-        float length = glm::length(glm::vec2(x, z));
+        float length = glm::length(glm::vec2(x, z)) * speed;;
         
         // Now we need to workout the alphas
         // Normalise alphas to sum of 1
@@ -156,9 +158,9 @@ void Character::punch()
     {
         std::function<void(void)> callback = std::bind(&Character::actionCallback, this);
         mAnimator->getAnimationController1()->setCallback(callback);
-        mAnimator->getAnimationController1()->setAnimation(name + "_punch_1");
+        mAnimator->getAnimationController1()->setAnimation(name + "_punch_4");
         mAnimator->getAnimationController1()->setLoop(false);
-        mAnimator->getAnimationController1()->setSpeed(1.0f);
+        mAnimator->getAnimationController1()->setSpeed(2.0f);
         mAnimator->getAnimationController1()->setReverse(false);
         mAnimator->getAnimationController1()->resetElapsedTime();
         mAnimator->getAnimationController1()->play();
@@ -191,7 +193,7 @@ void Character::block()
         mAnimator->getAnimationController1()->setCallback(callback);
         mAnimator->getAnimationController1()->setAnimation(name + "_block");
         mAnimator->getAnimationController1()->setLoop(false);
-        mAnimator->getAnimationController1()->setSpeed(1.0f);
+        mAnimator->getAnimationController1()->setSpeed(2.0f);
         mAnimator->getAnimationController1()->setReverse(false);
         mAnimator->getAnimationController1()->resetElapsedTime();
         mAnimator->getAnimationController1()->play();
@@ -200,6 +202,40 @@ void Character::block()
         
         state = BLOCKING;
         canDealDamage = false;
+    }
+}
+
+void Character::win()
+{
+    if(mAnimator != NULL)
+    {
+        mAnimator->getAnimationController1()->setAnimation(name + "_win");
+        mAnimator->getAnimationController1()->setLoop(false);
+        mAnimator->getAnimationController1()->setSpeed(1.0f);
+        mAnimator->getAnimationController1()->setReverse(false);
+        mAnimator->getAnimationController1()->resetElapsedTime();
+        mAnimator->getAnimationController1()->play();
+        
+        mAnimator->getAnimationController2()->stop();
+        
+        state = WIN;
+    }
+}
+
+void Character::lose()
+{
+    if(mAnimator != NULL)
+    {
+        mAnimator->getAnimationController1()->setAnimation(name + "_die");
+        mAnimator->getAnimationController1()->setLoop(false);
+        mAnimator->getAnimationController1()->setSpeed(1.0f);
+        mAnimator->getAnimationController1()->setReverse(false);
+        mAnimator->getAnimationController1()->resetElapsedTime();
+        mAnimator->getAnimationController1()->play();
+        
+        mAnimator->getAnimationController2()->stop();
+        
+        state = LOSE;
     }
 }
 
@@ -269,19 +305,52 @@ void Character::initialise()
     animationImporterYBot1.join();
     animationImporterYBot2.join();
     
+    
+    
     AnimationImporter animationImporterYBot3;
     animationImporterYBot3.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_neutral_idle.jmpAnimation");
     
+    animationImporterYBot3.join();
+    
+    
+    
     AnimationImporter animationImporterYBot4;
     animationImporterYBot4.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_punch_1.jmpAnimation");
-
-    animationImporterYBot3.join();
-    animationImporterYBot4.join();
     
     AnimationImporter animationImporterYBot5;
-    animationImporterYBot5.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_block.jmpAnimation");
-    
+    animationImporterYBot5.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_punch_2.jmpAnimation");
+
+    animationImporterYBot4.join();
     animationImporterYBot5.join();
+    
+    
+    
+    AnimationImporter animationImporterYBot6;
+    animationImporterYBot6.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_punch_3.jmpAnimation");
+    
+    AnimationImporter animationImporterYBot7;
+    animationImporterYBot7.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_punch_4.jmpAnimation");
+    
+    animationImporterYBot6.join();
+    animationImporterYBot7.join();
+    
+    
+    
+    AnimationImporter animationImporterYBot8;
+    animationImporterYBot8.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_block.jmpAnimation");
+    
+    AnimationImporter animationImporterYBot9;
+    animationImporterYBot9.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_win.jmpAnimation");
+    
+    animationImporterYBot8.join();
+    animationImporterYBot9.join();
+    
+    
+    AnimationImporter animationImporterYBot10;
+    animationImporterYBot10.ImportAsynchronously(System::assetsPath + "animations/" + name + "/" + name + "_die.jmpAnimation");
+    
+    animationImporterYBot10.join();
+    
     
     //
     // ANIMATIONS
@@ -307,6 +376,26 @@ void Character::initialise()
     if(!aModule->addAnimation(animationImporterYBot5.getImportedObject()->getName(), animationImporterYBot5.getImportedObject()))
     {
         delete animationImporterYBot5.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot6.getImportedObject()->getName(), animationImporterYBot6.getImportedObject()))
+    {
+        delete animationImporterYBot6.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot7.getImportedObject()->getName(), animationImporterYBot7.getImportedObject()))
+    {
+        delete animationImporterYBot7.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot8.getImportedObject()->getName(), animationImporterYBot8.getImportedObject()))
+    {
+        delete animationImporterYBot8.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot9.getImportedObject()->getName(), animationImporterYBot9.getImportedObject()))
+    {
+        delete animationImporterYBot9.getImportedObject();
+    }
+    if(!aModule->addAnimation(animationImporterYBot10.getImportedObject()->getName(), animationImporterYBot10.getImportedObject()))
+    {
+        delete animationImporterYBot10.getImportedObject();
     }
     //aModule->addAnimation(animationImporterYBot4.getImportedObject()->getName(), animationImporterYBot4.getImportedObject());
     
@@ -409,11 +498,11 @@ void Character::initialisePhysics()
     // Get hips entity
     JointEntity* hipsParent = (JointEntity*)getDescendant(name + "_hips");
     GameObject *hips = new GameObject(name + "_hips_physics");
-    hips->scale(glm::vec3(40.0f));
+    hips->scale(glm::vec3(20.0f));
     hipsParent->addChild(hips);
     
     // Create and configure physics
-    PhysicsShape *bodyShape = new PhysicsSphere(40.0f);
+    PhysicsShape *bodyShape = new PhysicsSphere(20.0f);
     PhysicsProperty *bodyPhysicsProperty = new PhysicsProperty(name + "_body", bodyShape);
     bodyPhysicsProperty->setCollisionCallback(bodyCallback);
     bodyPhysicsProperty->setBeforeCollisionTestCallback(beforeCollisionCallback);
@@ -423,13 +512,14 @@ void Character::initialisePhysics()
     hips->addProperty(bodyPhysicsProperty);
     
     // Create and configure graphical mesh
-    bodyPhysicsMeshProperty = new MeshProperty(name + "_body");
+    //physicsMeshesInitialsed = true;
+    /*bodyPhysicsMeshProperty = new MeshProperty(name + "_body");
     bodyPhysicsMeshProperty->setMaterialKey("no_collision");
     bodyPhysicsMeshProperty->setMeshKey("sphere");
     bodyPhysicsMeshProperty->setShaderKey("basic");
     bodyPhysicsMeshProperty->setDrawMode(GL_LINES);
     hips->addProperty(bodyPhysicsMeshProperty);
-    physicsMeshMap[name + "_body"] = bodyPhysicsMeshProperty;
+    physicsMeshMap[name + "_body"] = bodyPhysicsMeshProperty;*/
     
     // HEAD
     // Get head entity
@@ -450,13 +540,13 @@ void Character::initialisePhysics()
     head->addProperty(headPhysicsProperty);
     
     // Create and configure graphical mesh
-    headPhysicsMeshProperty = new MeshProperty(name + "_head");
+    /*headPhysicsMeshProperty = new MeshProperty(name + "_head");
     headPhysicsMeshProperty->setMaterialKey("no_collision");
     headPhysicsMeshProperty->setMeshKey("sphere");
     headPhysicsMeshProperty->setShaderKey("basic");
     headPhysicsMeshProperty->setDrawMode(GL_LINES);
     head->addProperty(headPhysicsMeshProperty);
-    physicsMeshMap[name + "_head"] = headPhysicsMeshProperty;
+    physicsMeshMap[name + "_head"] = headPhysicsMeshProperty;*/
     
     // Torso
     // Get spine entity
@@ -477,13 +567,13 @@ void Character::initialisePhysics()
     torso->addProperty(torsoPhysicsProperty);
     
     // Create and configure graphical mesh
-    torsoPhysicsMeshProperty = new MeshProperty(name + "_torso");
+    /*torsoPhysicsMeshProperty = new MeshProperty(name + "_torso");
     torsoPhysicsMeshProperty->setMaterialKey("no_collision");
     torsoPhysicsMeshProperty->setMeshKey("sphere");
     torsoPhysicsMeshProperty->setShaderKey("basic");
     torsoPhysicsMeshProperty->setDrawMode(GL_LINES);
     torso->addProperty(torsoPhysicsMeshProperty);
-    physicsMeshMap[name + "_torso"] = torsoPhysicsMeshProperty;
+    physicsMeshMap[name + "_torso"] = torsoPhysicsMeshProperty;*/
     
     // LEFT HAND
     // Get left hand entity
@@ -505,13 +595,13 @@ void Character::initialisePhysics()
     leftHand->addProperty(leftHandPhysicsProperty);
     
     // Create and configure graphical mesh
-    leftHandPhysicsMeshProperty = new MeshProperty(name + "_lefthand");
+    /*leftHandPhysicsMeshProperty = new MeshProperty(name + "_lefthand");
     leftHandPhysicsMeshProperty->setMaterialKey("no_collision");
     leftHandPhysicsMeshProperty->setMeshKey("sphere");
     leftHandPhysicsMeshProperty->setShaderKey("basic");
     leftHandPhysicsMeshProperty->setDrawMode(GL_LINES);
     leftHand->addProperty(leftHandPhysicsMeshProperty);
-    physicsMeshMap[name + "_lefthand"] = leftHandPhysicsMeshProperty;
+    physicsMeshMap[name + "_lefthand"] = leftHandPhysicsMeshProperty;*/
     
     // RIGHT HAND
     // Get right hand entity
@@ -533,13 +623,13 @@ void Character::initialisePhysics()
     rightHand->addProperty(rightHandPhysicsProperty);
     
     // Create and configure graphical mesh
-    rightHandPhysicsMeshProperty = new MeshProperty(name + "_righthand");
+    /*rightHandPhysicsMeshProperty = new MeshProperty(name + "_righthand");
     rightHandPhysicsMeshProperty->setMaterialKey("no_collision");
     rightHandPhysicsMeshProperty->setMeshKey("sphere");
     rightHandPhysicsMeshProperty->setShaderKey("basic");
     rightHandPhysicsMeshProperty->setDrawMode(GL_LINES);
     rightHand->addProperty(rightHandPhysicsMeshProperty);
-    physicsMeshMap[name + "_righthand"] = rightHandPhysicsMeshProperty;
+    physicsMeshMap[name + "_righthand"] = rightHandPhysicsMeshProperty;*/
     
     // Create the materials needed and add them to the graphics module
     Material *noCollisionMaterial = new Material("no_collision", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), 1.0f);
@@ -567,14 +657,17 @@ void Character::update()
 
 void Character::beforeCollisionCallback(PhysicsProperty *obj)
 {
-    auto it = physicsMeshMap.find(obj->getName());
-    
-    if(it != physicsMeshMap.end())
+    if(physicsMeshesInitialsed)
     {
-        if(it->second != NULL)
+        auto it = physicsMeshMap.find(obj->getName());
+    
+        if(it != physicsMeshMap.end())
         {
-            it->second->setMaterialKey("no_collision");
-            it->second->linkMaterialPtr();
+            if(it->second != NULL)
+            {
+                it->second->setMaterialKey("no_collision");
+                it->second->linkMaterialPtr();
+            }
         }
     }
     
@@ -596,44 +689,40 @@ void Character::bodyCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB
     std::cout << "Body collided!" << std::endl;
     
     // Resolve the collision
-    MeshProperty *meshProp;
-    bool which = false;
+    double ptdist = cp->getDistance();
+    translateLocalAxis(0.0, 0.0, ptdist * 0.5f);
     
-    auto it = physicsMeshMap.find(obA->getName());
-    if(it != physicsMeshMap.end())
+    
+    if(physicsMeshesInitialsed)
     {
-        if(it->second != NULL)
+        MeshProperty *meshProp;
+        bool which = false;
+    
+        auto it = physicsMeshMap.find(obA->getName());
+        if(it != physicsMeshMap.end())
         {
-            meshProp = it->second;
-            which = true;
+            if(it->second != NULL)
+            {
+                meshProp = it->second;
+                which = true;
+            }
         }
-    }
     
-    it = physicsMeshMap.find(obB->getName());
-    if(it != physicsMeshMap.end())
-    {
-        if(it->second != NULL)
+        it = physicsMeshMap.find(obB->getName());
+        if(it != physicsMeshMap.end())
         {
-            meshProp = it->second;
-            which = false;
+            if(it->second != NULL)
+            {
+                meshProp = it->second;
+                which = false;
+            }
         }
-    }
     
-    if(meshProp != NULL)
-    {
-        meshProp->setMaterialKey("yes_collision");
-        meshProp->linkMaterialPtr();
-        
-        //btVector3 ptA = cp->getPositionWorldOnA();
-        //btVector3 ptB = cp->getPositionWorldOnB();
-        double ptdist = cp->getDistance();
-        
-        std::cout << ptdist << std::endl;
-        
-        //glm::vec3 A = glm::vec3(ptA.x(), ptA.y(), ptA.z());
-        //glm::vec3 B = glm::vec3(ptB.x(), ptB.y(), ptB.z());
-        
-        translateLocalAxis(0.0, 0.0, ptdist * 0.5f);
+        if(meshProp != NULL)
+        {
+            meshProp->setMaterialKey("yes_collision");
+            meshProp->linkMaterialPtr();
+        }
     }
 }
 
@@ -641,25 +730,28 @@ void Character::headCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB
 {
     std::cout << "Head collided!" << std::endl;
  
-    auto it = physicsMeshMap.find(obA->getName());
-    
-    if(it != physicsMeshMap.end())
+    if(physicsMeshesInitialsed)
     {
-        if(it->second != NULL)
+        auto it = physicsMeshMap.find(obA->getName());
+    
+        if(it != physicsMeshMap.end())
         {
-            it->second->setMaterialKey("yes_collision");
-            it->second->linkMaterialPtr();
+            if(it->second != NULL)
+            {
+                it->second->setMaterialKey("yes_collision");
+                it->second->linkMaterialPtr();
+            }
         }
-    }
     
-    it = physicsMeshMap.find(obB->getName());
+        it = physicsMeshMap.find(obB->getName());
     
-    if(it != physicsMeshMap.end())
-    {
-        if(it->second != NULL)
+        if(it != physicsMeshMap.end())
         {
-            it->second->setMaterialKey("yes_collision");
-            it->second->linkMaterialPtr();
+            if(it->second != NULL)
+            {
+                it->second->setMaterialKey("yes_collision");
+                it->second->linkMaterialPtr();
+            }
         }
     }
 }
@@ -668,55 +760,61 @@ void Character::torsoCollisionCallback(PhysicsProperty *obA, PhysicsProperty *ob
 {
     std::cout << "Torso collided!" << std::endl;
     
-    auto it = physicsMeshMap.find(obA->getName());
-    
-    if(it != physicsMeshMap.end())
+    if(physicsMeshesInitialsed)
     {
-        if(it->second != NULL)
+        auto it = physicsMeshMap.find(obA->getName());
+    
+        if(it != physicsMeshMap.end())
         {
-            it->second->setMaterialKey("yes_collision");
-            it->second->linkMaterialPtr();
+            if(it->second != NULL)
+            {
+                it->second->setMaterialKey("yes_collision");
+                it->second->linkMaterialPtr();
+            }
         }
-    }
     
-    it = physicsMeshMap.find(obB->getName());
+        it = physicsMeshMap.find(obB->getName());
     
-    if(it != physicsMeshMap.end())
-    {
-        if(it->second != NULL)
+        if(it != physicsMeshMap.end())
         {
-            it->second->setMaterialKey("yes_collision");
-            it->second->linkMaterialPtr();
+            if(it->second != NULL)
+            {
+                it->second->setMaterialKey("yes_collision");
+                it->second->linkMaterialPtr();
+            }
         }
     }
     
     // execute punched callback
-    punchCallback();
+    punchedCallback();
 }
 
 void Character::fistCollisionCallback(PhysicsProperty *obA, PhysicsProperty *obB, btManifoldPoint* contactPoint)
 {
     std::cout << "Fist collided!" << std::endl;
     
-    auto it = physicsMeshMap.find(obA->getName());
-    
-    if(it != physicsMeshMap.end())
+    if(physicsMeshesInitialsed)
     {
-        if(it->second != NULL)
+        auto it = physicsMeshMap.find(obA->getName());
+    
+        if(it != physicsMeshMap.end())
         {
-            it->second->setMaterialKey("yes_collision");
-            it->second->linkMaterialPtr();
+            if(it->second != NULL)
+            {
+                it->second->setMaterialKey("yes_collision");
+                it->second->linkMaterialPtr();
+            }
         }
-    }
     
-    it = physicsMeshMap.find(obB->getName());
+        it = physicsMeshMap.find(obB->getName());
     
-    if(it != physicsMeshMap.end())
-    {
-        if(it->second != NULL)
+        if(it != physicsMeshMap.end())
         {
-            it->second->setMaterialKey("yes_collision");
-            it->second->linkMaterialPtr();
+            if(it->second != NULL)
+            {
+                it->second->setMaterialKey("yes_collision");
+                it->second->linkMaterialPtr();
+            }
         }
     }
 }

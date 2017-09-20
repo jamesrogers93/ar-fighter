@@ -7,6 +7,8 @@
 
 #include "ar-fighter/Game_Objects/Character.h"
 
+class GUIRectangle;
+
 class SettingsSceneLogic : public SceneLogic
 {
 public:
@@ -27,6 +29,7 @@ public:
     
     // To house GUI stuff
     GameObject *settingsUI;
+    GUIRectangle *highlightPtr;
     
     SettingsSceneLogic(Scene *scene);
     
@@ -44,18 +47,8 @@ public:
     void switchOpponentLeft()
     {}
     
-    void easyDifficulty()
-    {}
-    
-    void mediumDifficulty()
-    {
-        difficulty = "normal";
-    }
-    
-    void hardDifficulty()
-    {
-        difficulty = "hard";
-    }
+    void easyDifficulty();
+    void hardDifficulty();
     
 protected:
     void initialise();

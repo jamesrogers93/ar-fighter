@@ -25,7 +25,7 @@ public:
     static const float MAX_HEALTH;
     static const float DAMAGE_INFLICT;
     
-    enum CharacterState { IDLE, WALKING, PUNCHING, BLOCKING};
+    enum CharacterState { IDLE, WALKING, PUNCHING, BLOCKING, WIN, LOSE};
     CharacterState state;
     
     Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask, const glm::vec4 &colourTheme);
@@ -38,6 +38,8 @@ public:
     virtual void punch();
     virtual void kick();
     virtual void block();
+    virtual void win();
+    virtual void lose();
     
     void actionCallback();
     
@@ -53,7 +55,7 @@ public:
     
     
     void setPunchedCallback(std::function<void()> func) { mPunchedCallback = func; }
-    void punchCallback() { mPunchedCallback(); }
+    void punchedCallback() { mPunchedCallback(); }
     
     void update();
     
@@ -67,6 +69,10 @@ public:
     const glm::vec4& getColourTheme() { return mThemeColour; }
     const bool isAlive() { return health > 0.0f; }
     
+    void setSpeed(const float &speed) { this->speed = speed; }
+    void setDifficulty(const int difficulty) { this->difficulty = difficulty; }
+    int getDifficulty() { return difficulty; }
+    
     void takeDamage(const float &damage) { health -= damage; if( health < 0) health = 0; }
     void damageDealt() { canDealDamage = false; }
     
@@ -79,7 +85,9 @@ protected:
     float health;
     float damageInflict;
     bool canDealDamage;
+    float speed;
     glm::vec4 mThemeColour;
+    int difficulty;
     
     // Handles to the properties
     AnimatorProperty *mAnimator;
@@ -89,6 +97,7 @@ protected:
     MeshProperty *leftHandPhysicsMeshProperty;
     MeshProperty *bodyPhysicsMeshProperty;
     
+    bool physicsMeshesInitialsed;
     
     unsigned short collisionMask;
     unsigned short collidesWithMask;
