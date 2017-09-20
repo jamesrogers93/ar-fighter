@@ -1,15 +1,15 @@
 #include "ar-fighter/SettingsSceneLogic.h"
 
-#include "game-engine/Scene/Scene.h"
-#include "game-engine/Scene/SceneManager.h"
+#include "game-engine/Core/Main/Scene.h"
+#include "game-engine/Core/Main/SceneManager.h"
 
 // Game Engine Core
 #include "game-engine/Core/GL/GL.h"
 
 // Game Engine Device
-#include <game-engine/Device/System.h>
+#include <game-engine/Peripherals/System.h>
 
-#include <game-engine/Modules/CoreModule.h>
+#include <game-engine/Core/Main/CoreModule.h>
 
 // Game Engine Graphics
 #include <game-engine/Modules/Graphics/Graphics.h>
@@ -33,8 +33,8 @@
 #include <game-engine/Modules/GUI/GUIRectangle.h>
 
 // Game Engine Importers
-#include <game-engine/Entity/EntityImporter.h>
-#include <game-engine/Entity/PropertyImporter.h>
+#include <game-engine/Core/Main/EntityImporter.h>
+#include <game-engine/Core/Main/PropertyImporter.h>
 #include <game-engine/Modules/Graphics/MaterialImporter.h>
 #include <game-engine/Modules/Graphics/MeshImporter.h>
 
@@ -115,6 +115,7 @@ void SettingsSceneLogic::initialise()
     // YBot
     YBot *yBot = new YBot(playerMask, opponentMask);
     yBot->initialise();
+    //yBot->translate(-150.0, 0.0, 0.0);
     yBot->translate(-100.0, 0.0, 0.0);
     mScene->addEntity(yBot);
     yBot->idle();
@@ -123,6 +124,7 @@ void SettingsSceneLogic::initialise()
     // X_Bot
     XBot *xBot = new XBot(opponentMask, playerMask);
     xBot->initialise();
+    //xBot->translate(150.0, 0.0, 0.0);
     xBot->translate(100.0, 0.0, 0.0);
     mScene->addEntity(xBot);
     xBot->idle();
@@ -248,8 +250,10 @@ void SettingsSceneLogic::initialise()
         GUIProperty *guiButton = new GUIProperty("settings-text");
         
         glm::vec2 bounds(965.0f, 137.0f);
+        //glm::vec2 bounds(482.5f, 68.5f);
         GUIRectangle *guiRectangle = new GUIRectangle(bounds);
         guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.5f, (float)System::screenHeight-150.0f));
+        //guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.5f, (float)System::screenHeight-50.0f));
         
         Texture *texture = Texture::loadFromFile("textures/settings.png", true);
         
@@ -272,8 +276,10 @@ void SettingsSceneLogic::initialise()
         GUIProperty *guiButton = new GUIProperty("player-text");
         
         glm::vec2 bounds(404.0f, 70.0f);
+        //glm::vec2 bounds(292.0f, 35.0f);
         GUIRectangle *guiRectangle = new GUIRectangle(bounds);
         guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.25f, (float)System::screenHeight-350.0f));
+        //guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.25f, (float)System::screenHeight-150.0f));
         
         Texture *texture = Texture::loadFromFile("textures/player.png", true);
         
@@ -296,8 +302,10 @@ void SettingsSceneLogic::initialise()
         GUIProperty *guiButton = new GUIProperty("opponent-text");
         
         glm::vec2 bounds(533.0f, 70.0f);
+        //glm::vec2 bounds(266.5f, 35.0f);
         GUIRectangle *guiRectangle = new GUIRectangle(bounds);
         guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.75f, (float)System::screenHeight-350.0f));
+        //guiRectangle->translateOW(glm::vec2((float)System::screenWidth*0.75f, (float)System::screenHeight-150.0f));
         
         Texture *texture = Texture::loadFromFile("textures/opponent.png", true);
         

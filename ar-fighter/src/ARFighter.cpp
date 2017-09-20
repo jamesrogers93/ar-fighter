@@ -5,21 +5,21 @@
 #include <utility>
 
 // Game Engine Defines
-#include <game-engine/Defines/OpenGL.h>
+#include <game-engine/Core/GL/OpenGL.h>
 
 // Game Engine Core
-#include <game-engine/Core/Engine/Engine.h>
+#include <game-engine/Core/Main/Engine.h>
 #include <game-engine/Core/GL/GL.h>
 
 
 // Game Engine Device
-#include <game-engine/Device/System.h>
-#include <game-engine/Device/CameraCapture.h>
-#include <game-engine/Device/Gyroscope.h>
+#include <game-engine/Peripherals/System.h>
+#include <game-engine/Peripherals/CameraCapture.h>
+#include <game-engine/Peripherals/Gyroscope.h>
 #include <game-engine/Core/GL/GLContext.h>
 
 // Game Engine Graphics
-#include <game-engine/Modules/CoreModule.h>
+#include <game-engine/Core/Main/CoreModule.h>
 #include <game-engine/Modules/Graphics/Graphics.h>
 #include <game-engine/Modules/Graphics/GraphicsRead.h>
 #include <game-engine/Modules/Graphics/MeshProperty.h>
@@ -57,12 +57,12 @@
 #include <game-engine/Modules/Audio/Audio.h>
 
 // Game Engine Scene
-#include <game-engine/Scene/SceneManager.h>
-#include <game-engine/Scene/Scene.h>
+#include <game-engine/Core/Main/SceneManager.h>
+#include <game-engine/Core/Main/Scene.h>
 
 // Game Engine Importers
-#include <game-engine/Entity/EntityImporter.h>
-#include <game-engine/Entity/PropertyImporter.h>
+#include <game-engine/Core/Main/EntityImporter.h>
+#include <game-engine/Core/Main/PropertyImporter.h>
 #include <game-engine/Modules/Graphics/MaterialImporter.h>
 #include <game-engine/Modules/Graphics/MeshImporter.h>
 

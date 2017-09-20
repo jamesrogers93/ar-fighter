@@ -5,11 +5,11 @@
 #include "game-engine/Core/GL/GLTexture.h"
 
 // Game Engine Device
-#include <game-engine/Device/System.h>
+#include <game-engine/Peripherals/System.h>
 
 // Game Engine Scene
-#include "game-engine/Scene/Scene.h"
-#include "game-engine/Scene/SceneManager.h"
+#include "game-engine/Core/Main/Scene.h"
+#include "game-engine/Core/Main/SceneManager.h"
 
 // Game Engine Graphics
 #include <game-engine/Modules/Graphics/Graphics.h>
@@ -42,8 +42,8 @@
 #include "ar-fighter/Game_Objects/X_Bot.h"
 
 // Game Engine Util
-#include "game-engine/Util/TimeUtil.h"
-#include "game-engine/Util/TextureUtil.h"
+#include "game-engine/Core/Utilities/TimeUtil.h"
+#include "game-engine/Core/Utilities/TextureUtil.h"
 
 // Game AI
 #include "ar-fighter/AI/FSM/AIFSMStateCombat.h"
@@ -664,6 +664,7 @@ void FightSceneLogic::initialiseScene()
     //
     
     CameraEntity *camEntity = new CameraEntity("glCamera", CameraEntity::perspectiveMatrix(System::screenWidth, System::screenHeight, 47.0));
+    //CameraEntity *camEntity = new CameraEntity("glCamera", CameraEntity::perspectiveMatrix(System::screenWidth, System::screenHeight, 38.0f));
     //camEntity->translate(0.0, 100.0, 300.0);
     camEntity->initialise();
     Graphics::getInstance().setActiveCameraEntity("glCamera");

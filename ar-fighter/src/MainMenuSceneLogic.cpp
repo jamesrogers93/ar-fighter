@@ -4,7 +4,7 @@
 #include "game-engine/Core/GL/GL.h"
 
 // Game Engine Device
-#include <game-engine/Device/System.h>
+#include <game-engine/Peripherals/System.h>
 
 // Game Engine GUI
 #include <game-engine/Modules/GUI/GUI.h>
@@ -12,8 +12,8 @@
 #include <game-engine/Modules/GUI/GUIRectangle.h>
 
 // Game Engine Scene
-#include <game-engine/Scene/Scene.h>
-#include <game-engine/Scene/SceneManager.h>
+#include <game-engine/Core/Main/Scene.h>
+#include <game-engine/Core/Main/SceneManager.h>
 
 #include <game-engine/GameObject.h>
 

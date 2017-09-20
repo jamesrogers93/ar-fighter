@@ -1,9 +1,9 @@
 #ifndef _FIGHTSCENELOGIC_H
 #define _FIGHTSCENELOGIC_H
 
-#include "game-engine/Scene/SceneLogic.h"
+#include "game-engine/Core/Main/SceneLogic.h"
 
-#include "game-engine/Core/Engine/Engine.h"
+#include "game-engine/Core/Main/Engine.h"
 
 class Character;
 class AREntity;

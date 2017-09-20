@@ -50,7 +50,7 @@
     _instance->deinitialise();
 }
 
-#import "game-engine/Util/TimeUtil.h"
+#import "game-engine/Core/Utilities/TimeUtil.h"
 
 - (void) update: (double)deltaTime
 {

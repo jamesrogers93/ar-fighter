@@ -1,12 +1,12 @@
 #include "ar-fighter/Game_Objects/X_Bot.h"
 
 // Game Engine Core
-#include "game-engine/Core/Engine/Engine.h"
+#include "game-engine/Core/Main/Engine.h"
 
 // Game Engine Device
-#include <game-engine/Device/System.h>
+#include <game-engine/Peripherals/System.h>
 
-#include <game-engine/Modules/CoreModule.h>
+#include <game-engine/Core/Main/CoreModule.h>
 
 // Game Engine Graphics
 #include <game-engine/Modules/Graphics/Graphics.h>
@@ -20,8 +20,8 @@
 #include <game-engine/Modules/Animation/Animation.h>
 
 // Game Engine Importers
-#include <game-engine/Entity/EntityImporter.h>
-#include <game-engine/Entity/PropertyImporter.h>
+#include <game-engine/Core/Main/EntityImporter.h>
+#include <game-engine/Core/Main/PropertyImporter.h>
 #include <game-engine/Modules/Graphics/MaterialImporter.h>
 #include <game-engine/Modules/Graphics/MeshImporter.h>
 #include <game-engine/Modules/Animation/AnimationImporter.h>

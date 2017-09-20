@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
+            startingLineNumber = "591"
+            endingLineNumber = "591"
             landmarkName = "Character::initialisePhysics()"
             landmarkType = "7">
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -440,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
+            startingLineNumber = "619"
+            endingLineNumber = "619"
             landmarkName = "Character::initialisePhysics()"
             landmarkType = "7">
          </BreakpointContent>
@@ -712,11 +712,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "661"
-            endingLineNumber = "661">
+            startingLineNumber = "662"
+            endingLineNumber = "662">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -742,11 +742,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "662"
-            endingLineNumber = "662"
+            startingLineNumber = "663"
+            endingLineNumber = "663"
             landmarkName = "Character::beforeCollisionCallback(PhysicsProperty *obj)"
             landmarkType = "7">
          </BreakpointContent>
@@ -758,11 +758,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "762"
-            endingLineNumber = "762">
+            startingLineNumber = "763"
+            endingLineNumber = "763">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -772,11 +772,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "795"
-            endingLineNumber = "795">
+            startingLineNumber = "796"
+            endingLineNumber = "796">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -786,11 +786,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "732"
-            endingLineNumber = "732">
+            startingLineNumber = "733"
+            endingLineNumber = "733">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1503,11 +1503,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1567,11 +1567,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "527594709.989615"
+            timestampString = "527609035.237638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "SettingsSceneLogic::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1583,11 +1583,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/SettingsSceneLogic.cpp"
-            timestampString = "527594709.989615"
+            timestampString = "527609035.237638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "SettingsSceneLogic::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1695,11 +1695,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1711,11 +1711,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1727,11 +1727,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "452"
-            endingLineNumber = "452"
+            startingLineNumber = "453"
+            endingLineNumber = "453"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1743,11 +1743,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1759,11 +1759,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2159,11 +2159,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527599084.384913"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "Character::initialise()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2319,11 +2319,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527595487.815716"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "Character::walk(const float &amp;x, const float &amp;z)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2335,11 +2335,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ar-fighter/src/Game_Objects/Character.cpp"
-            timestampString = "527595493.233531"
+            timestampString = "527613937.159401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "Character::walk(const float &amp;x, const float &amp;z)"
             landmarkType = "7">
          </BreakpointContent>
