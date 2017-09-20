@@ -112,6 +112,7 @@ void FightSceneLogic::update()
     // Update Physics module
     Engine::getInstance().update(CoreModuleType::CM_PHYSICS, false);
     
+    
     // Update AI module
     if(state == GameState::PLAYING)
     {
@@ -120,6 +121,17 @@ void FightSceneLogic::update()
             Engine::getInstance().update(CoreModuleType::CM_AI, false);
         }
         
+    }
+    
+    // Check to see if we're not tracking and not prompting user to track
+    if( !arHandler->getTracker()->isTracking() && state != GameState::PROMPTING_TRACKER)
+    {
+        if(state == GameState::PLAYER_WON || state == GameState::OPPONENT_WON)
+        {
+            state = GameState::QUIT;
+        }
+        else
+            state = GameState::PROMPT_TRACKER;
     }
     
     if(state == GameState::PROMPT_TRACK_CONFIRM)
@@ -275,17 +287,6 @@ void FightSceneLogic::update()
         mScene->unPrepare(countdown2UI);
         mScene->unPrepare(countdown1UI);
         mScene->unPrepare(countdownFightUI);
-    }
-    
-    // Check to see if we're not tracking and not prompting user to track
-    if( !arHandler->getTracker()->isTracking() && state != GameState::PROMPTING_TRACKER)
-    {
-        if(state == GameState::PLAYER_WON || state == GameState::OPPONENT_WON)
-        {
-            state = GameState::QUIT;
-        }
-        else
-            state = GameState::PROMPT_TRACKER;
     }
     
 }

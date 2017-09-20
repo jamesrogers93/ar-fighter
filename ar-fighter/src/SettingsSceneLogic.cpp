@@ -115,7 +115,7 @@ void SettingsSceneLogic::initialise()
     // YBot
     YBot *yBot = new YBot(playerMask, opponentMask);
     yBot->initialise();
-    yBot->translate(-150.0, 0.0, 0.0);
+    yBot->translate(-100.0, 0.0, 0.0);
     mScene->addEntity(yBot);
     yBot->idle();
     player = yBot;
@@ -123,7 +123,7 @@ void SettingsSceneLogic::initialise()
     // X_Bot
     XBot *xBot = new XBot(opponentMask, playerMask);
     xBot->initialise();
-    xBot->translate(150.0, 0.0, 0.0);
+    xBot->translate(100.0, 0.0, 0.0);
     mScene->addEntity(xBot);
     xBot->idle();
     opponent = xBot;
@@ -332,7 +332,7 @@ void SettingsSceneLogic::initialise()
     
     // Also need to add a camera entity to the scene
     CameraEntity *camEntity = new CameraEntity("glCamera", CameraEntity::perspectiveMatrix(System::screenWidth, System::screenHeight, 47.0));
-    camEntity->translate(0.0, 100.0, 300.0);
+    camEntity->translate(0.0, 120.0, 350.0);
     camEntity->initialise();
     Graphics::getInstance().setActiveCameraEntity("glCamera");
     //arEntity->addChild(camEntity);

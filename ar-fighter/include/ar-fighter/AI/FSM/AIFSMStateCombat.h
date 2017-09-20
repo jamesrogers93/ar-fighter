@@ -36,7 +36,7 @@ public:
             //character->getPosition();
             //character->getOpponent()->getPosition();
             
-            if(distance > 150)
+            if(distance > 100)
             {
                 return "move-to-player";
             } else

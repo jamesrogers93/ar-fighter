@@ -25,6 +25,33 @@ void MainMenuSceneLogic::initialise()
     
     GameObject *UI = new GameObject("main-menu-ui");
     
+    
+    // Text
+    {
+        GUIProperty *guiButton = new GUIProperty("main-text");
+        
+        guiButton->isTouchable = false;
+        glm::vec2 bounds(1132.0f, 137.0f);
+        GUIRectangle *guiRectangle = new GUIRectangle(bounds);
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth * 0.5f, (float)System::screenHeight * 0.75f));
+        guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
+        
+        Texture *texture = Texture::loadFromFile("textures/ar-fighter.png", true);
+        
+        if(texture != NULL)
+        {
+            GLTexture *glTexture = GLTexture::loadFromData(*texture);
+            
+            guiRectangle->setMapUp(glTexture);
+            guiRectangle->setMapDown(glTexture);
+            
+            delete texture;
+        }
+        
+        guiButton->addShape(guiRectangle);
+        UI->addProperty(guiButton);
+    }
+    
     // Play button
     {
         GUIProperty *guiButton = new GUIProperty("start-button");
@@ -34,7 +61,7 @@ void MainMenuSceneLogic::initialise()
         guiButton->setCallbackOnTouchUp(func);
         glm::vec2 bounds(500.0f, 100.f);
         GUIRectangle *guiRectangle = new GUIRectangle(bounds);
-        guiRectangle->translateOW(glm::vec2((float)System::screenWidth * 0.5f, (float)System::screenHeight * 0.5f));
+        guiRectangle->translateOW(glm::vec2((float)System::screenWidth * 0.5f, (float)System::screenHeight * 0.25f));
         guiRectangle->setColourDown(glm::vec4(-0.2f, -0.2f, -0.2f, 0.0f));
         
         Texture *texture = Texture::loadFromFile("textures/button_start.png", true);

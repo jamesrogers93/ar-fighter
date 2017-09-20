@@ -43,7 +43,7 @@
 #include <btBulletCollisionCommon.h>
 
 const float Character::MAX_HEALTH = 100.0f;
-const float Character::DAMAGE_INFLICT = 30.0f;
+const float Character::DAMAGE_INFLICT = 15.0f;
 
 Character::Character(const std::string &name, unsigned short collisionMask, unsigned short collidesWithMask, const glm::vec4 &colourTheme)
     : GameObject(name),
@@ -156,9 +156,13 @@ void Character::punch()
         
     if(mAnimator != NULL)
     {
+        // Use randon punch
+        int random = rand() % 4 + 1;
+        
+        
         std::function<void(void)> callback = std::bind(&Character::actionCallback, this);
         mAnimator->getAnimationController1()->setCallback(callback);
-        mAnimator->getAnimationController1()->setAnimation(name + "_punch_4");
+        mAnimator->getAnimationController1()->setAnimation(name + "_punch_" + std::to_string(random));
         mAnimator->getAnimationController1()->setLoop(false);
         mAnimator->getAnimationController1()->setSpeed(2.0f);
         mAnimator->getAnimationController1()->setReverse(false);
